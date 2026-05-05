@@ -9,6 +9,8 @@ if ($menu == 'bienvenida') {
         include 'views/iniciarsesion/iniciarsesion.php';
     } elseif ($opc == 'registro') {
         include 'views/iniciarsesion/registrousuario.php';
+    } elseif ($opc == 'validar') {
+        include 'validar_usuario.php';
     }
 
 } elseif ($menu == 'panel') {
@@ -19,17 +21,13 @@ if ($menu == 'bienvenida') {
 } elseif ($menu == 'mascotas') {
     if ($opc == 'registro') {
         include 'views/mascotas/registro-canino.php';
-    } 
-
-    elseif ($opc == 'info') {
+    } elseif ($opc == 'info') {
         include 'views/mascotas/perro-info.php';
     } elseif ($opc == 'qr') {
         include 'views/mascotas/generar-qr.php';
     } elseif ($opc == 'galeria') { 
         include 'views/mascotas/galeria-manchas.php';
-    }
-
-    elseif ($opc == 'huesos-info') {
+    } elseif ($opc == 'huesos-info') {
         include 'views/mascotas/huesos-info.php';
     } elseif ($opc == 'huesos-qr') {
         include 'views/mascotas/huesos-qr.php';
@@ -42,13 +40,11 @@ if ($menu == 'bienvenida') {
         include 'views/servicios/historial-manchas.php';
     } elseif ($opc == 'agendam') {
         include 'views/servicios/citas-manchas.php';
-    }
-    elseif ($opc == 'huesos-historial') {
+    } elseif ($opc == 'huesos-historial') {
         include 'views/servicios/huesos-historial.php';
     } elseif ($opc == 'huesos-agenda') {
         include 'views/servicios/huesos-citas.php';
-    } 
-    elseif ($opc == 'agendag') {
+    } elseif ($opc == 'agendag') {
         include 'views/servicios/agenda.php';
     } elseif ($opc == 'recordatorios') {
         include 'views/servicios/recordatorios.php';
@@ -63,11 +59,18 @@ if ($menu == 'bienvenida') {
 } elseif ($menu == 'personal') {
     if ($opc == 'perfil') {
         include 'views/informacionpersonal/perfil.php';
+    } elseif ($opc == 'editar-perfil') {
+        include 'views/informacionpersonal/editar-perfil.php'; 
+    } elseif ($opc == 'actualizar') {
+        include 'views/bd/crudusuarios/actualizar_usuario.php'; 
+    } elseif ($opc == 'eliminar') {
+        include 'views/bd/crudusuarios/eliminar_usuario.php';
     }
+
 } elseif ($menu == 'per') {
     if ($opc == 'perfil') {
         include 'views/informacionpersonal/perfil.php';
-    } elseif ($menu == 'per'){
+    } elseif ($opc == 'per') {
         include 'views/bienvenida.php';
     }
 } 
