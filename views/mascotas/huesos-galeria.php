@@ -93,7 +93,7 @@
     <li class="nav-item"><a href="index.php?menu=servicios&opc=huesos-historial" class="nav-link">Historial medico</a></li>
     <li class="nav-item"><a href="index.php?menu=servicios&opc=huesos-agenda" class="nav-link">Citas</a></li>
     <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-qr" class="nav-link">Qr</a></li>
-    <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-galeria" class="nav-link">Galeria de fotos</a></li>
+    <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-galeria" class="nav-link active">Galeria de fotos</a></li>
   </ul>
 </div>
 

@@ -1,66 +1,46 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once 'views/bd/conexion.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id        = $_POST['id'];
-    $nombre    = $_POST['nombre'];
-    $paterno   = $_POST['paterno'];
-    $materno   = $_POST['materno'];
-    $telefono  = $_POST['telefono'];
-    $direccion = $_POST['direccion'];
-    $correo    = $_POST['correo'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id_usuario = $_SESSION['id_usuario'];
+    $nombre    = trim($_POST['nombre']);
+    $paterno   = trim($_POST['paterno']);
+    $materno   = trim($_POST['materno']);
+    $telefono  = trim($_POST['telefono']);
+    $direccion = trim($_POST['direccion']);
 
-    $foto_nombre = null;
-
+    $query_foto = "";
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $fileTmpPath   = $_FILES['foto']['tmp_name'];
-        $fileName      = $_FILES['foto']['name'];
-        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        // Usamos time() para que el nombre sea siempre diferente
+        $nombre_archivo = "user_" . $id_usuario . "_" . time() . "." . $ext;
+        $ruta_destino = "public/img/" . $nombre_archivo;
 
-        $allowedExtensions = ['jpg', 'jpeg', 'png'];
-        if (in_array($fileExtension, $allowedExtensions)) {
-            $newFileName = 'user_' . $id . '.' . $fileExtension;
-            $uploadFileDir = '../../public/img/';
-
-            if (!is_dir($uploadFileDir)) {
-                mkdir($uploadFileDir, 0755, true);
-            }
-
-            $dest_path = $uploadFileDir . $newFileName;
-
-            if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $foto_nombre = $newFileName;
-            }
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
+            $query_foto = ", FotoUS = '$nombre_archivo'";
+            // ✅ CRITICO: Actualiza la foto en la sesión
+            $_SESSION['foto'] = $nombre_archivo; 
         }
     }
 
-    // Actualizamos la base de datos utilizando la columna correcta: id_usuario
-    if ($foto_nombre) {
-        $sql = "UPDATE usuarios SET 
-                nombre = '$nombre', 
-                apellido_paterno = '$paterno', 
-                apellido_materno = '$materno', 
-                telefono = '$telefono', 
-                direccion = '$direccion', 
-                correo_electronico = '$correo',
-                foto = '$foto_nombre'
-                WHERE id_usuario = $id";
-    } else {
-        $sql = "UPDATE usuarios SET 
-                nombre = '$nombre', 
-                apellido_paterno = '$paterno', 
-                apellido_materno = '$materno', 
-                telefono = '$telefono', 
-                direccion = '$direccion', 
-                correo_electronico = '$correo'
-                WHERE id_usuario = $id";
-    }
+    $sql = "UPDATE usuarios SET 
+            nombre = '$nombre', 
+            apellido_paterno = '$paterno', 
+            apellido_materno = '$materno', 
+            telefono = '$telefono', 
+            direccion = '$direccion'
+            $query_foto 
+            WHERE id_usuario = '$id_usuario'";
 
     if (mysqli_query($conexion, $sql)) {
-        header("Location: index.php?menu=personal&opc=perfil");
-        exit();
+        $_SESSION['nombre'] = $nombre;
+        $_SESSION['apellido'] = $paterno;
+        header("Location: index.php?menu=personal&opc=perfil&update=success");
     } else {
-        echo "Error al actualizar información: " . mysqli_error($conexion);
+        header("Location: index.php?menu=personal&opc=perfil&update=error");
     }
+    exit();
 }
-?>
