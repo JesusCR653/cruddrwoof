@@ -16,7 +16,6 @@
         .br-sideleft { background-color: #1d2127; }
         .br-menu-sub .nav-link.active { color: #17a2b8 !important; font-weight: 700; }
         
-        /* Estilo para las fotos de la galería */
         .img-gallery {
             height: 200px;
             object-fit: cover;

@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hora    = $_POST['hora'];
     $motivo  = mysqli_real_escape_string($conexion, $_POST['motivo_cita']);
 
-    // ✅ Consulta usando los nombres de drwoof_db
     $sql = "UPDATE citas SET 
             fecha = '$fecha', 
             hora = '$hora', 

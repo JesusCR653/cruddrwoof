@@ -5,10 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include 'views/bd/conexion.php';
 
-// ID de usuario desde la sesión
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
-// 1. Consulta para los datos del usuario (Header)
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
@@ -18,7 +16,6 @@ $foto_perfil = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuar
                 ? $usuario['FotoUS'] . '?v=' . time() 
                 : 'logo.png';
 
-// 2. Consulta de citas ajustada a drwoof_db (image_2bba19.png)
 $query_citas = "SELECT c.id_cita, c.fecha, c.hora, c.motivo_cita, can.nombre as nombre_mascota 
                 FROM citas c 
                 INNER JOIN caninos can ON c.id_canino = can.id_canino 
@@ -181,11 +178,9 @@ $result_citas = mysqli_query($conexion, $query_citas);
       </div>
     </div>
 
-    <!-- MODAL EDITAR CITA -->
     <div id="modalEditarCita" class="modal fade">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content tx-size-sm">
-                <!-- ✅ RUTA ACTUALIZADA A editar-cita -->
                 <form action="index.php?menu=servicios&opc=editar-cita" method="POST">
                     <input type="hidden" name="id_cita" id="edit_id_cita">
                     <div class="modal-header pd-x-20">

@@ -1,7 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Configuración de conexión
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 if (file_exists($ruta_conexion)) {
     include_once $ruta_conexion;
@@ -9,12 +8,10 @@ if (file_exists($ruta_conexion)) {
     include_once 'views/bd/conexion.php';
 }
 
-// ID de usuario dinámico para el nombre y foto
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 $query_user = mysqli_query($conexion, "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'");
 $usuario = mysqli_fetch_assoc($query_user);
 
-// Carga dinámica de datos de perfil
 $nombre_completo = trim(($usuario['nombre'] ?? 'Usuario') . ' ' . ($usuario['apellido_paterno'] ?? ''));
 $foto_user = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario['FotoUS'])) 
              ? $usuario['FotoUS'] . '?v=' . time() 

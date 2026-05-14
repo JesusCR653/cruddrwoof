@@ -2,7 +2,6 @@
 error_reporting(0);
 header('Content-Type: application/json; charset=utf-8');
 
-// ── Conexión ─────────────────────────────────────────────────────────────────
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 
 if (file_exists($ruta_conexion)) {
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// ── Datos del formulario ─────────────────────────────────────────────────────
 $nombre    = trim($_POST['nombre']    ?? '');
 $paterno   = trim($_POST['paterno']   ?? '');
 $materno   = trim($_POST['materno']   ?? '');
@@ -36,12 +34,10 @@ if (empty($nombre) || empty($correo) || empty($password)) {
     exit();
 }
 
-// ── Manejo de foto ───────────────────────────────────────────────────────────
-$FotoUS = 'logo.png'; // valor por defecto si no sube foto
+$FotoUS = 'logo.png';
 
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
 
-    // Validar que sea imagen real
     $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     $tipoReal        = mime_content_type($_FILES['foto']['tmp_name']);
 
@@ -50,17 +46,14 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         exit();
     }
 
-    // Tamaño máximo: 3 MB
     if ($_FILES['foto']['size'] > 3 * 1024 * 1024) {
         echo json_encode(["status" => "error", "message" => "La imagen no debe superar los 3 MB."]);
         exit();
     }
 
-    // Generar nombre único y mover al servidor
     $ext        = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
     $nombreFoto = 'usr_' . uniqid() . '.' . $ext;
 
-    // Carpeta destino: public/img/ dentro del proyecto
     $carpetaDestino = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/public/img/';
 
     if (!is_dir($carpetaDestino)) {
@@ -68,15 +61,13 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     }
 
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $carpetaDestino . $nombreFoto)) {
-        $FotoUS = $nombreFoto; // guardamos solo el nombre en la BD
+        $FotoUS = $nombreFoto;
     } else {
         echo json_encode(["status" => "error", "message" => "No se pudo guardar la imagen en el servidor."]);
         exit();
     }
 }
 
-// ── Insertar en BD con foto ───────────────────────────────────────────────────
-// La columna de foto en tu tabla usuarios es: FotoUS
 $stmt = $conexion->prepare(
     "INSERT INTO usuarios (nombre, apellido_paterno, apellido_materno, telefono, direccion, correo_electronico, contrasena, FotoUS)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
@@ -92,7 +83,7 @@ if ($stmt) {
         echo json_encode([
             "status"  => "success",
             "message" => "¡Cuenta creada con éxito! Bienvenido a DR. WOOF",
-            "foto"    => $FotoUS   // opcional: para debug o mostrar preview
+            "foto"    => $FotoUS
         ]);
     } else {
         echo json_encode(["status" => "error", "message" => "Error al registrar: " . $stmt->error]);

@@ -1,7 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Configuración de conexión
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 if (file_exists($ruta_conexion)) {
     include_once $ruta_conexion;
@@ -9,7 +8,6 @@ if (file_exists($ruta_conexion)) {
     include_once 'views/bd/conexion.php';
 }
 
-// ID de usuario e información para el Header (Nombre y FotoUS)
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 $query_user = mysqli_query($conexion, "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'");
 $usuario = mysqli_fetch_assoc($query_user);
@@ -19,7 +17,6 @@ $foto_user = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario
              ? $usuario['FotoUS'] . '?v=' . time() 
              : 'logo.png';
 
-// Traer mascotas del usuario para el select (Asegúrate que la columna sea id_caninos o id_canino según tu BD)
 $mascotas = mysqli_query($conexion, "SELECT id_canino as id_canino, nombre FROM caninos WHERE id_usuario = '$id_usuario'");
 ?>
 <!DOCTYPE html>

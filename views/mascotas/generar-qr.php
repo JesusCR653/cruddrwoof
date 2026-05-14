@@ -5,17 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once 'views/bd/conexion.php';
 
-// ID de usuario desde la sesión
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
-// Consulta para obtener los datos actualizados del usuario (Nombre y Foto)
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
 
 $nombre_completo = trim(($usuario['nombre'] ?? 'Usuario') . ' ' . ($usuario['apellido_paterno'] ?? ''));
 
-// Lógica de la foto de perfil con anti-caché (Columna FotoUS)
 $foto_db = $usuario['FotoUS'] ?? ''; 
 $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
                ? $foto_db . '?v=' . time() 

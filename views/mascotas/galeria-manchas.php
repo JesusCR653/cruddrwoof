@@ -5,11 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once 'views/bd/conexion.php';
 
-// ID de usuario e ID de mascota desde la URL
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 $id_canino  = $_GET['id'] ?? 0;
 
-// 1. Consulta para los datos del usuario (Header) basado en drwoof_db.usuarios
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
@@ -19,7 +17,6 @@ $foto_user = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario
              ? $usuario['FotoUS'] . '?v=' . time() 
              : 'logo.png';
 
-// 2. Consulta para los datos de la mascota (Título y Validación)
 $query_dog = "SELECT nombre FROM caninos WHERE id_canino = '$id_canino' AND id_usuario = '$id_usuario'";
 $result_dog = mysqli_query($conexion, $query_dog);
 $perro = mysqli_fetch_assoc($result_dog);
@@ -29,7 +26,6 @@ if (!$perro) {
     exit();
 }
 
-// 3. Consulta de la tabla GALERIA según image_2df4cc.png
 $query_galeria = "SELECT * FROM galeria WHERE id_canino = '$id_canino' ORDER BY fecha_foto DESC";
 $resultado_galeria = mysqli_query($conexion, $query_galeria);
 ?>
@@ -149,7 +145,6 @@ $resultado_galeria = mysqli_query($conexion, $query_galeria);
           <h4 class="tx-gray-800 mg-b-5">Galería: <?php echo $perro['nombre']; ?></h4>
           <p class="mg-b-0">Recuerdos fotográficos de tu mascota.</p>
         </div>
-        <!-- ✅ BOTÓN VERDE DE CÁMARA CONFIGURADO -->
         <button class="btn btn-green-woof btn-with-icon" onclick="$('#uploadModal').modal('show')">
           <div class="ht-40">
             <span class="icon wd-40"><i class="fa fa-camera"></i></span>
@@ -165,13 +160,11 @@ $resultado_galeria = mysqli_query($conexion, $query_galeria);
             <?php while($foto = mysqli_fetch_assoc($resultado_galeria)): ?>
               <div class="col-sm-6 col-md-4 col-lg-3 mg-b-20">
                 <div class="card shadow-base bd-0 card-gallery">
-                  <!-- Acciones sobre la card -->
                   <div class="gallery-actions">
                     <button class="btn btn-warning btn-icon btn-sm rounded-circle" 
                             onclick="abrirEditar('<?php echo $foto['id_foto']; ?>', '<?php echo addslashes($foto['titulo_foto']); ?>', '<?php echo addslashes($foto['notas_proceso']); ?>')">
                         <i class="fa fa-edit text-white"></i>
                     </button>
-                    <!-- ✅ ELIMINAR: Redirige al controlador central index.php -->
                     <a href="index.php?menu=mascotas&opc=eliminar-foto&id_foto=<?php echo $foto['id_foto']; ?>&id_canino=<?php echo $id_canino; ?>" 
                        class="btn btn-danger btn-icon btn-sm rounded-circle" 
                        onclick="return confirm('¿Eliminar esta foto?')">
@@ -201,7 +194,6 @@ $resultado_galeria = mysqli_query($conexion, $query_galeria);
       </div>
     </div>
 
-    <!-- ✅ MODAL SUBIR: action apunta al controlador central index.php -->
     <div id="uploadModal" class="modal fade">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content tx-size-sm">
@@ -238,7 +230,6 @@ $resultado_galeria = mysqli_query($conexion, $query_galeria);
       </div>
     </div>
 
-    <!-- ✅ MODAL EDITAR: action apunta al controlador central index.php -->
     <div id="editModal" class="modal fade">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content tx-size-sm">

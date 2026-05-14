@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'views/bd/conexion.php';
 
-// ── ACTUALIZAR ──────────────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id              = (int)$_POST['id_canino'];
     $nombre          = trim($_POST['nombre']);
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tratamiento     = trim($_POST['tratamiento']);
     $fotoActual      = $_POST['foto_actual'];
 
-    // Manejo de foto (opcional al editar)
     $fotoCan = $fotoActual;
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $ext        = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
@@ -30,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $destino)) {
-            // Borrar foto anterior si no es la por defecto
             if ($fotoActual !== 'sin_foto.png' && file_exists('public/img/caninos/' . $fotoActual)) {
                 unlink('public/img/caninos/' . $fotoActual);
             }
@@ -62,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── MOSTRAR FORMULARIO ───────────────────────────────────────────────────────
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if ($id === 0) {
     header('Location: index.php?menu=mascotas&opc=listado');

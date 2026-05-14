@@ -1,7 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Variable de sesión estandarizada
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
@@ -11,7 +10,6 @@ if (file_exists($ruta_conexion)) {
     include_once 'views/bd/conexion.php';
 }
 
-// 1. Consulta para los datos del usuario (Header y Menu dinámico)
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
@@ -21,7 +19,6 @@ $foto_user = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario
              ? $usuario['FotoUS'] . '?v=' . time() 
              : 'logo.png';
 
-// 2. Consulta de comentarios
 $result = mysqli_query($conexion, "SELECT * FROM comentarios WHERE id_usuario = '$id_usuario' ORDER BY fecha_registro DESC");
 ?>
 <!DOCTYPE html>

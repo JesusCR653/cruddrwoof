@@ -3,27 +3,21 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Conexión a la base de datos (Ruta relativa)
 include 'views/bd/conexion.php';
 
-// ID de usuario desde la sesión
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
-// Consulta para obtener las mascotas del usuario en sesión
 $query = "SELECT * FROM caninos WHERE id_usuario = '$id_usuario'";
 $resultado = mysqli_query($conexion, $query);
 
-// ✅ Consulta añadida para traer la foto del dueño en tiempo real
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
 
-// Variables de nombres basadas en tu BD por consistencia
 $nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
 $apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
 $nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
 
-// Lógica exacta guiada de tu código para obtener la foto real desde FotoUS
 $foto_db = $usuario['FotoUS'] ?? ''; 
 $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
                ? $foto_db . '?v=' . time() 

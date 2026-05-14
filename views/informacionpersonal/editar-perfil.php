@@ -5,18 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once 'views/bd/conexion.php';
 
-// ID de usuario desde la sesión
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
-// Consulta según image_2e83b2.png (drwoof_db.usuarios)
 $query = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result = mysqli_query($conexion, $query);
 $usuario = mysqli_fetch_assoc($result);
 
-// Variables dinámicas basadas en las columnas de tu BD
 $nombre_completo = trim(($usuario['nombre'] ?? 'Usuario') . ' ' . ($usuario['apellido_paterno'] ?? ''));
 
-// ✅ Nombre de columna FotoUS con truco anti-caché para refresco instantáneo
 $foto_db = $usuario['FotoUS'] ?? ''; 
 $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
                ? $foto_db . '?v=' . time() 

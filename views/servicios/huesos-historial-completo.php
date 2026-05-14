@@ -15,7 +15,6 @@
         .br-menu-sub { display: block !important; }
         .br-sideleft { background-color: #1d2127; }
         
-        /* Solo el active de Huesos brillará aquí */
         .br-menu-sub .nav-link.active {
             color: #17a2b8 !important;
             font-weight: 700;

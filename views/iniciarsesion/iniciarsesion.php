@@ -60,7 +60,6 @@
     </div>
 
 
-    <!-- ===================== MODAL DE ERROR ===================== -->
     <div id="modalError" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
       <div style="background:#fff; border-radius:12px; width:400px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
         

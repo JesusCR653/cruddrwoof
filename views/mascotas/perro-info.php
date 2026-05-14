@@ -5,15 +5,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include 'views/bd/conexion.php';
 
-// Aseguramos que el ID sea el de la columna id_caninos
 $id_canino  = $_GET['id'] ?? 0;
 $id_usuario = $_SESSION['id_usuario'];
 
-// Consulta usando los nombres de tu base de datos drwoof_db
 $query     = "SELECT * FROM caninos WHERE id_canino = '$id_canino' AND id_usuario = '$id_usuario'";
 $resultado = mysqli_query($conexion, $query);
 
-// Usamos minúscula: $perro
 $perro = mysqli_fetch_assoc($resultado);
 
 if (!$perro) {

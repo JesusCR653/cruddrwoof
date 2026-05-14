@@ -5,10 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include 'views/bd/conexion.php';
 
-// ID de usuario desde la sesión
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
-// 1. Consulta para los datos del usuario (Header)
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
@@ -18,13 +16,11 @@ $foto_perfil = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuar
                 ? $usuario['FotoUS'] . '?v=' . time() 
                 : 'logo.png'; 
 
-// 2. Obtener la mascota actual (si se pasa por ID en la URL)
 $id_canino_url = $_GET['id'] ?? 0;
 $query_dog = "SELECT nombre FROM caninos WHERE id_canino = '$id_canino_url' AND id_usuario = '$id_usuario'";
 $res_dog = mysqli_query($conexion, $query_dog);
 $perro = mysqli_fetch_assoc($res_dog);
 
-// 3. Si no hay una mascota específica, traer todas las del usuario para un select (opcional)
 $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos WHERE id_usuario = '$id_usuario'");
 ?>
 <!DOCTYPE html>
@@ -132,7 +128,6 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
             Nueva Cita <?php echo $perro ? "para " . $perro['nombre'] : ""; ?>
           </h6>
           
-          <!-- ✅ FORMULARIO CONFIGURADO PARA GUARDAR -->
           <form action="index.php?menu=servicios&opc=guardar-cita" method="POST">
             <div class="form-layout form-layout-1">
                 <div class="row mg-b-25 justify-content-center">
@@ -170,17 +165,14 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
                     <div class="col-lg-10 mg-t-20">
                         <div class="form-group mg-b-0">
                             <label class="form-control-label">Motivo de la cita: <span class="tx-danger">*</span></label>
-                            <!-- ✅ name="motivo_cita" según image_2c9b78.png -->
                             <textarea rows="3" class="form-control" name="motivo_cita" placeholder="Ej: Refuerzo de vacuna triple o revisión de crecimiento" required></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-layout-footer mg-t-30">
-                    <!-- Botón Agendar (Submit) -->
                     <button type="submit" class="btn btn-success pd-x-40 tx-uppercase tx-bold tx-11">Agendar</button>
                     
-                    <!-- Botón Lista de Citas -->
                     <button type="button" class="btn btn-info pd-x-40 tx-uppercase tx-bold tx-11 mg-l-5" onclick="location.href='index.php?menu=servicios&opc=listado_citas'">Lista de citas</button>
                     
                     <button type="button" class="btn btn-secondary pd-x-40 tx-uppercase tx-bold tx-11 mg-l-5" onclick="history.back()">Regresar</button>

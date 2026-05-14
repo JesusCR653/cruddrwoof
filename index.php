@@ -4,10 +4,8 @@ session_start();
 $menu = $_GET['menu'] ?? 'bienvenida';
 $opc  = $_GET['opc']  ?? 'index';
 
-// Páginas que NO requieren sesión iniciada
 $paginas_publicas = ['bienvenida', 'sesion'];
 
-// Si el menú no es público y no hay sesión, redirigir al login
 if (!in_array($menu, $paginas_publicas) && !isset($_SESSION['id_usuario'])) {
     header("Location: index.php?menu=sesion&opc=index");
     exit();
@@ -47,23 +45,20 @@ if ($menu == 'bienvenida') {
         include 'views/mascotas/listado_mascotas.php';
     } elseif ($opc == 'cartillamanchas') {
         include 'views/mascotas/cartilla-manchas.php';
-    } 
-    // --- CRUD MASCOTAS ---
-    elseif ($opc == 'guardar') {
+    } elseif ($opc == 'guardar') {
         include 'views/bd/crudmascotas/guardar.php';
     } elseif ($opc == 'editar') {
         include 'views/bd/crudmascotas/editar.php';
     } elseif ($opc == 'eliminar') {
         include 'views/bd/crudmascotas/eliminar.php';
-    }
-    // --- CRUD GALERÍA ---
-    elseif ($opc == 'subir-galeria') {
+    } elseif ($opc == 'subir-galeria') {
         include 'views/bd/crudgaleria/guardarfoto.php';
     } elseif ($opc == 'editar-foto') {
         include 'views/bd/crudgaleria/editarfoto.php';
     } elseif ($opc == 'eliminar-foto') {
         include 'views/bd/crudgaleria/eliminarfoto.php';
     }
+    
 
 } elseif ($menu == 'servicios') {
     if ($opc == 'historial') {
@@ -82,15 +77,14 @@ if ($menu == 'bienvenida') {
         include 'views/servicios/comentarios.php';
     } elseif ($opc == 'mis-comentarios') {
         include 'views/servicios/lista-comentarios.php';
-    }
-    // --- ✅ CRUD CITAS - Nombres de archivos verificados ---
-    elseif ($opc == 'guardar-cita') {
+    } elseif ($opc == 'guardar-cita') {
         include 'views/bd/crudcitas/guardarcita.php';
     } elseif ($opc == 'editar-cita') {
         include 'views/bd/crudcitas/editarcita.php';
     } elseif ($opc == 'eliminar-cita') {
         include 'views/bd/crudcitas/eliminarcita.php';
     }
+
 
 } elseif ($menu == 'personal') {
     if ($opc == 'perfil') {

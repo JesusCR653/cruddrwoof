@@ -15,13 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query_foto = "";
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-        // Usamos time() para que el nombre sea siempre diferente
         $nombre_archivo = "user_" . $id_usuario . "_" . time() . "." . $ext;
         $ruta_destino = "public/img/" . $nombre_archivo;
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
             $query_foto = ", FotoUS = '$nombre_archivo'";
-            // ✅ CRITICO: Actualiza la foto en la sesión
             $_SESSION['foto'] = $nombre_archivo; 
         }
     }

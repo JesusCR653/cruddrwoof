@@ -1,7 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Configuración de conexión y datos del usuario
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 if (file_exists($ruta_conexion)) {
     include_once $ruta_conexion;
@@ -9,7 +8,6 @@ if (file_exists($ruta_conexion)) {
     include_once 'views/bd/conexion.php';
 }
 
-// ID de usuario dinámico para el nombre y foto
 $id_usuario = $_SESSION['id_usuario'] ?? 4;
 $query_user = mysqli_query($conexion, "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'");
 $usuario = mysqli_fetch_assoc($query_user);
@@ -19,7 +17,6 @@ $foto_user = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario
              ? $usuario['FotoUS'] . '?v=' . time() 
              : 'logo.png';
 
-// --- SE MANTIENE TODA TU LÓGICA ORIGINAL DEL CALENDARIO ---
 $mes = isset($_GET['mes']) ? (int)$_GET['mes'] : (int)date('m');
 $anio = isset($_GET['anio']) ? (int)$_GET['anio'] : (int)date('Y');
 
@@ -33,7 +30,6 @@ $nombres_meses = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','A
 $primer_dia_mes = "$anio-$mes-01";
 $ultimo_dia_mes = date('Y-m-t', strtotime($primer_dia_mes));
 
-// ✅ CORRECCIÓN LÍNEA 41: Se cambió c.id_caninos por c.id_canino
 $result = mysqli_query($conexion, "
     SELECT r.id_recordatorio, r.fecha, r.hora, r.motivo, r.repetir, c.nombre AS nombre_canino
     FROM recordatorios r

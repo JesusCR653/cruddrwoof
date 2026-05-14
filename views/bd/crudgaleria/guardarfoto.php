@@ -1,5 +1,4 @@
 <?php
-// views/bd/crudgaleria/guardarfoto.php
 include_once 'views/bd/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    // ✅ REDIRECCIÓN: Regresa a la galería de la mascota específica
     echo "<script>window.location.href='index.php?menu=mascotas&opc=galeria&id=$id_canino';</script>";
     exit();
 }
