@@ -5,6 +5,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Conexión a la base de datos
 include 'views/bd/conexion.php';
+
+// ID de usuario desde la sesión
+$id_usuario = $_SESSION['id_usuario'] ?? 4;
+
+// Consulta exacta basada en tu base de datos para traer los datos reales del usuario logueado
+$query = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
+$result = mysqli_query($conexion, $query);
+$usuario = mysqli_fetch_assoc($result);
+
+// Variables de nombres basadas en tu BD por si acaso
+$nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
+$apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
+$nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
+
+// ✅ Lógica exacta guiada de tu código para obtener la foto real desde FotoUS
+$foto_db = $usuario['FotoUS'] ?? ''; 
+$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
+               ? $foto_db . '?v=' . time() 
+               : 'logo.png'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -100,9 +119,8 @@ include 'views/bd/conexion.php';
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <!-- ✅ Nombre dinámico desde la sesión -->
-              <span class="logged-name"><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
-              <img src="public/img/logo.png" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+              <span class="logged-name"><?php echo $nombre_completo; ?></span>
+              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
@@ -117,7 +135,7 @@ include 'views/bd/conexion.php';
 
     <div class="br-mainpanel">
       <div class="pd-30 text-center mg-t-40">
-        <h4 class="tx-gray-800 mg-b-5">¡Bienvenidos, <?php echo $_SESSION['nombre']; ?>!</h4>
+        <h4 class="tx-gray-800 mg-b-5">¡Bienvenidos, <?php echo $nombre_usuario; ?>!</h4>
         <p class="mg-b-0">Bienvenido de nuevo al centro de control de DR. WOOF</p>
       </div>
 

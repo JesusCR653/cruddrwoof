@@ -7,11 +7,27 @@ if (session_status() === PHP_SESSION_NONE) {
 include 'views/bd/conexion.php';
 
 // ID de usuario desde la sesión
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['id_usuario'] ?? 4;
 
 // Consulta para obtener las mascotas del usuario en sesión
 $query = "SELECT * FROM caninos WHERE id_usuario = '$id_usuario'";
 $resultado = mysqli_query($conexion, $query);
+
+// ✅ Consulta añadida para traer la foto del dueño en tiempo real
+$query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
+$result_user = mysqli_query($conexion, $query_user);
+$usuario = mysqli_fetch_assoc($result_user);
+
+// Variables de nombres basadas en tu BD por consistencia
+$nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
+$apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
+$nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
+
+// Lógica exacta guiada de tu código para obtener la foto real desde FotoUS
+$foto_db = $usuario['FotoUS'] ?? ''; 
+$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
+               ? $foto_db . '?v=' . time() 
+               : 'logo.png'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -101,9 +117,8 @@ $resultado = mysqli_query($conexion, $query);
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <!-- ✅ Nombre dinámico desde la sesión -->
-              <span class="logged-name"><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
-              <img src="public/img/logo.png" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+              <span class="logged-name"><?php echo $nombre_completo; ?></span>
+              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
