@@ -1,12 +1,29 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-$menu = $_GET['menu'] ?? 'bienvenida';
-$opc  = $_GET['opc']  ?? 'index';
+$menu = "bienvenida";
+if (isset($_GET['menu'])) {
+    $menu = $_GET['menu'];
+}
 
-$paginas_publicas = ['bienvenida', 'sesion'];
+$opc = "index";
+if (isset($_GET['opc'])) {
+    $opc = $_GET['opc'];
+}
 
-if (!in_array($menu, $paginas_publicas) && !isset($_SESSION['id_usuario'])) {
+$paginas_publicas = array('bienvenida', 'sesion');
+
+$es_publica = false;
+for ($i = 0; $i < count($paginas_publicas); $i++) {
+    if ($menu == $paginas_publicas[$i]) {
+        $es_publica = true;
+        break;
+    }
+}
+
+if ($es_publica == false && isset($_SESSION['id_usuario']) == false) {
     header("Location: index.php?menu=sesion&opc=index");
     exit();
 }
@@ -14,88 +31,88 @@ if (!in_array($menu, $paginas_publicas) && !isset($_SESSION['id_usuario'])) {
 if ($menu == 'bienvenida') {
     include 'views/bienvenida.php';
 
-} elseif ($menu == 'sesion') {
+} else if ($menu == 'sesion') {
     if ($opc == 'index') {
         include 'views/iniciarsesion/iniciarsesion.php';
-    } elseif ($opc == 'registro') {
+    } else if ($opc == 'registro') {
         include 'views/iniciarsesion/registrousuario.php';
-    } elseif ($opc == 'validar') {
+    } else if ($opc == 'validar') {
         include 'views/iniciarsesion/validar_sesion.php';
-    } elseif ($opc == 'cerrar') {
+    } else if ($opc == 'cerrar') {
         session_destroy();
         header("Location: index.php?menu=bienvenida");
         exit();
     }
 
-} elseif ($menu == 'panel') {
+} else if ($menu == 'panel') {
     if ($opc == 'bienvenida') {
         include 'views/panel/bienvenida/index.php';
     }
 
-} elseif ($menu == 'mascotas') {
+} else if ($menu == 'mascotas') {
     if ($opc == 'registro') {
         include 'views/mascotas/registro-canino.php';
-    } elseif ($opc == 'info') {
+    } else if ($opc == 'info') {
         include 'views/mascotas/perro-info.php';
-    } elseif ($opc == 'qr') {
+    } else if ($opc == 'qr') {
         include 'views/mascotas/generar-qr.php';
-    } elseif ($opc == 'galeria') {
+    } else if ($opc == 'galeria') {
         include 'views/mascotas/galeria-manchas.php';
-    } elseif ($opc == 'listado') {
+    } else if ($opc == 'listado') {
         include 'views/mascotas/listado_mascotas.php';
-    } elseif ($opc == 'cartillamanchas') {
+    } else if ($opc == 'cartillamanchas') {
         include 'views/mascotas/cartilla-manchas.php';
-    } elseif ($opc == 'guardar') {
+    } else if ($opc == 'guardar') {
         include 'views/bd/crudmascotas/guardar.php';
-    } elseif ($opc == 'editar') {
+    } else if ($opc == 'editar') {
         include 'views/bd/crudmascotas/editar.php';
-    } elseif ($opc == 'eliminar') {
+    } else if ($opc == 'eliminar') {
         include 'views/bd/crudmascotas/eliminar.php';
-    } elseif ($opc == 'subir-galeria') {
+    } else if ($opc == 'subir-galeria') {
         include 'views/bd/crudgaleria/guardarfoto.php';
-    } elseif ($opc == 'editar-foto') {
+    } else if ($opc == 'editar-foto') {
         include 'views/bd/crudgaleria/editarfoto.php';
-    } elseif ($opc == 'eliminar-foto') {
+    } else if ($opc == 'eliminar-foto') {
         include 'views/bd/crudgaleria/eliminarfoto.php';
     }
-    
 
-} elseif ($menu == 'servicios') {
+} else if ($menu == 'servicios') {
     if ($opc == 'historial') {
         include 'views/servicios/historial-manchas.php';
-    } elseif ($opc == 'agendam') {
+    } else if ($opc == 'agendam') {
         include 'views/servicios/citas-manchas.php';
-    } elseif ($opc == 'agendag') {
+    } else if ($opc == 'agendag') {
         include 'views/servicios/agenda.php';
-    }elseif ($opc == 'histom') {
+    } else if ($opc == 'histom') {
         include 'views/servicios/historial-completo-manchas.php';
-    } elseif ($opc == 'listado_citas') {
+    } else if ($opc == 'listado_citas') {
         include 'views/servicios/listado_citas.php';
-    } elseif ($opc == 'recordatorios') {
+    } else if ($opc == 'recordatorios') {
         include 'views/servicios/recordatorios.php';
-    } elseif ($opc == 'listarecordatorios') {
+    } else if ($opc == 'listarecordatorios') {
         include 'views/servicios/lista-recordatorios.php';
-    } elseif ($opc == 'comentarios') {
+    } else if ($opc == 'comentarios') {
         include 'views/servicios/comentarios.php';
-    } elseif ($opc == 'mis-comentarios') {
+    } else if ($opc == 'mis-comentarios') {
         include 'views/servicios/lista-comentarios.php';
-    } elseif ($opc == 'guardar-cita') {
+    } else if ($opc == 'guardar-cita') {
         include 'views/bd/crudcitas/guardarcita.php';
-    } elseif ($opc == 'editar-cita') {
+    } else if ($opc == 'editar-cita') {
         include 'views/bd/crudcitas/editarcita.php';
-    } elseif ($opc == 'eliminar-cita') {
+    } else if ($opc == 'eliminar-cita') {
         include 'views/bd/crudcitas/eliminarcita.php';
+    } else if ($opc == 'mantenimiento') {
+        include 'views/mantenimiento/respaldo.php';
     }
 
-
-} elseif ($menu == 'personal') {
+} else if ($menu == 'personal') {
     if ($opc == 'perfil') {
         include 'views/informacionpersonal/perfil.php';
-    } elseif ($opc == 'editar-perfil') {
+    } else if ($opc == 'editar-perfil') {
         include 'views/informacionpersonal/editar-perfil.php';
-    } elseif ($opc == 'actualizar') {
+    } else if ($opc == 'actualizar') {
         include 'views/bd/crudusuarios/actualizar_usuario.php';
-    } elseif ($opc == 'eliminar') {
+    } else if ($opc == 'eliminar') {
         include 'views/bd/crudusuarios/eliminar_usuario.php';
     }
 }
