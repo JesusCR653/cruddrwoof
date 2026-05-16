@@ -5,6 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 include 'views/bd/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // RECOGER EL NUEVO CAMPO DEL SELECT
+    $tipo_mascota     = $_POST['tipo_mascota'] ?? 'Otro';
+    
     $nombre           = trim($_POST['nombre']);
     $sexo             = $_POST['sexo'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
@@ -31,13 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $sql = "INSERT INTO caninos (nombre, raza, edad, sexo, fotoCan, Color, peso, fecha_nacimiento, alergias, Tratamiento, id_usuario)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // AJUSTADO: Se añade la columna tipo_mascota al final de la consulta SQL
+    $sql = "INSERT INTO caninos (nombre, raza, edad, sexo, fotoCan, Color, peso, fecha_nacimiento, alergias, Tratamiento, id_usuario, tipo_mascota)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($sql);
     
     if ($stmt) {
-        $tipos = 'ssisssssssi';
+        // AJUSTADO: Se agrega una 's' al final de la cadena por ser un VARCHAR (tipo_mascota)
+        $tipos = 'ssisssssssis';
         
         $stmt->bind_param($tipos, 
             $nombre,          
@@ -50,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fecha_nacimiento, 
             $alergias,         
             $tratamiento,      
-            $id_usuario        
+            $id_usuario,
+            $tipo_mascota // Enviamos la variable al parámetro del query
         );
 
         if ($stmt->execute()) {
@@ -62,9 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         header('Location: index.php?menu=mascotas&opc=registro&error=1');
     }
-    $conn->close();
+    
+    // CORRECCIÓN: Se cambia $conn por tu variable real $conexion
+    $conexion->close();
     exit;
 } else {
     header('Location: index.php?menu=mascotas&opc=registro');
     exit;
 }
+?>

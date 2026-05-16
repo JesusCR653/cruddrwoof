@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 include 'views/bd/conexion.php';
 
 if (isset($_SESSION['id_usuario'])) {
@@ -165,7 +166,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
           <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
           <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
@@ -183,6 +184,12 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
         <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
         </a>
+        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+  <div class="br-menu-item">
+    <i class="icon ion-ios-gear-outline tx-24"></i>
+    <span class="menu-item-label">Mantenimiento</span>
+  </div>
+</a>
       </div>
     </div>
 
@@ -230,8 +237,8 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                     <tr>
                         <th class="wd-5p text-center">ID</th>
                         <th class="wd-15p">Mascota</th>
-                        <th class="wd-15p">Raza</th>
-                        <th class="wd-50p text-center">Opciones de Servicio</th>
+                        <th class="wd-10p text-center">Tipo</th> <th class="wd-15p">Raza</th>
+                        <th class="wd-40p text-center">Opciones de Servicio</th>
                         <th class="wd-15p text-center">Gestión</th>
                     </tr>
                 </thead>
@@ -241,6 +248,9 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                         <tr class="tx-inverse bg-white text-center">
                             <td class="valign-middle font-weight-bold"><?php echo $row['id_canino']; ?></td>
                             <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($row['nombre']); ?></strong></td>
+                            
+                            <td class="valign-middle font-weight-bold" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['tipo_mascota'] ?? 'Otro'); ?></td>
+                            
                             <td class="valign-middle text-left"><?php echo htmlspecialchars($row['raza']); ?></td>
                             <td class="valign-middle text-center">
                                 <div class="btn-group" role="group">
@@ -258,7 +268,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="5" class="text-center pd-y-40 text-muted font-weight-bold">No tienes mascotas registradas aún.</td></tr>
+                        <tr><td colspan="6" class="text-center pd-y-40 text-muted font-weight-bold">No tienes mascotas registradas aún.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

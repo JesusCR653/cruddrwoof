@@ -196,7 +196,7 @@ if ($perro == false) {
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
           <div class="br-menu-item">
             <i class="icon ion-ios-plus-outline tx-24"></i>
-            <span class="menu-item-label">Registro Canino</span>
+            <span class="menu-item-label">Registro de mascota</span>
           </div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
@@ -227,6 +227,12 @@ if ($perro == false) {
             <span class="menu-item-label">Comentarios</span>
           </div>
         </a>
+        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+  <div class="br-menu-item">
+    <i class="icon ion-ios-gear-outline tx-24"></i>
+    <span class="menu-item-label">Mantenimiento</span>
+  </div>
+</a>
       </div>
     </div>
 
@@ -270,13 +276,21 @@ if ($perro == false) {
             <div class="col-md-8">
               <div class="form-layout form-layout-1">
                 <div class="row mg-b-25">
+                  
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <label class="form-control-label">Nombre del canino:</label>
+                      <label class="form-control-label">Tipo de Mascota:</label>
+                      <input class="form-control" type="text" value="<?php echo htmlspecialchars($perro['tipo_mascota'] ?? 'Otro'); ?>" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Nombre de la mascota:</label>
                       <input class="form-control tx-bold tx-inverse" type="text" value="<?php echo $perro['nombre']; ?>" readonly>
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 mg-t-20">
                     <div class="form-group">
                       <label class="form-control-label">Raza:</label>
                       <input class="form-control" type="text" value="<?php echo $perro['raza']; ?>" readonly>

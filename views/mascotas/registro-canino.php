@@ -43,7 +43,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>DR. WOOF - Registro Canino</title>
+    <title>DR. WOOF - Registro de Mascota</title>
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
@@ -168,7 +168,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
           <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
@@ -186,6 +186,12 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
         <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
         </a>
+        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+  <div class="br-menu-item">
+    <i class="icon ion-ios-gear-outline tx-24"></i>
+    <span class="menu-item-label">Mantenimiento</span>
+  </div>
+</a>
       </div>
     </div>
 
@@ -197,7 +203,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
       </div>
 
       <div class="header-welcome-centered">
-          <h6>REGISTRO DE CANINO</h6>
+          <h6>REGISTRO DE MASCOTA</h6>
       </div>
 
       <div class="br-header-right">
@@ -240,6 +246,19 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                 
                 <div class="col-md-4">
                   <div class="form-group">
+                    <select name="tipo_mascota" class="form-control form-control-custom" required>
+                      <option value="" disabled selected hidden>Tipo de Mascota</option>
+                      <option value="Perro">Perro</option>
+                      <option value="Gato">Gato</option>
+                      <option value="Ave">Ave</option>
+                      <option value="Reptil">Reptil</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
                     <input name="nombre" class="form-control form-control-custom" type="text" placeholder="Nombre" required>
                   </div>
                 </div>
@@ -252,12 +271,12 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                     </select>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <input name="fecha_nacimiento" id="fecha_nac" class="form-control form-control-custom" type="text" placeholder="Fecha de nacimiento" required>
                   </div>
                 </div>
-
                 <div class="col-md-4">
                   <div class="form-group">
                     <input name="raza" class="form-control form-control-custom" type="text" placeholder="Raza" required>
@@ -268,12 +287,12 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                     <input name="color" class="form-control form-control-custom" type="text" placeholder="Color" required>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <input name="alergias" class="form-control form-control-custom" type="text" placeholder="Alergias">
                   </div>
                 </div>
-
                 <div class="col-md-4">
                   <div class="form-group">
                     <input name="edad" class="form-control form-control-custom" type="number" placeholder="Edad" required>
@@ -284,6 +303,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
                     <input name="peso" class="form-control form-control-custom" type="text" placeholder="Peso" required>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <input name="tratamiento" class="form-control form-control-custom" type="text" placeholder="Tratamiento">

@@ -216,7 +216,7 @@ if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
           <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>

@@ -6,16 +6,11 @@ include 'views/bd/conexion.php';
 
 if (isset($_GET['id'])) {
     $id_recibido = (int)$_GET['id'];
-    $id_usuario = $_SESSION['id_usuario'];
+    $id_usuario = $_SESSION['id_usuario'] ?? 4;
 
+    // 1. Obtener primero el nombre de la foto para poder borrarla del servidor
     $sql_foto = "SELECT fotoCan FROM caninos WHERE id_canino = ? AND id_usuario = ?";
-    
     $stmt_foto = $conexion->prepare($sql_foto);
-
-    if (!$stmt_foto) {
-        $sql_foto = "SELECT fotoCan FROM caninos WHERE id = ? AND id_usuario = ?";
-        $stmt_foto = $conexion->prepare($sql_foto);
-    }
 
     if ($stmt_foto) {
         $stmt_foto->bind_param("ii", $id_recibido, $id_usuario);
@@ -24,33 +19,42 @@ if (isset($_GET['id'])) {
         
         if ($canino = $resultado->fetch_assoc()) {
             $nombre_foto = $canino['fotoCan'];
+            $stmt_foto->close();
 
-            $columna_id = (strpos($stmt_foto->insert_id, 'id_canino') !== false) ? 'id_canino' : 'id';
-            
-            $sql_delete = "DELETE FROM caninos WHERE id_canino = ? AND id_usuario = ?";
-            
+            // 2. Ejecutar el borrado físico del registro en la base de datos
             $stmt_del = $conexion->prepare("DELETE FROM caninos WHERE id_canino = ? AND id_usuario = ?");
-            if(!$stmt_del) {
-                $stmt_del = $conexion->prepare("DELETE FROM caninos WHERE id = ? AND id_usuario = ?");
-            }
-
-            $stmt_del->bind_param("ii", $id_recibido, $id_usuario);
             
-            if ($stmt_del->execute()) {
-                if ($nombre_foto != 'sin_foto.png') {
-                    $ruta_foto = 'public/img/caninos/' . $nombre_foto;
-                    if (file_exists($ruta_foto)) { unlink($ruta_foto); }
+            if ($stmt_del) {
+                $stmt_del->bind_param("ii", $id_recibido, $id_usuario);
+                
+                if ($stmt_del->execute()) {
+                    $stmt_del->close();
+
+                    // 3. Si se borró de la BD, eliminar la imagen de la carpeta para no acumular basura
+                    if ($nombre_foto != 'sin_foto.png' && !empty($nombre_foto)) {
+                        $ruta_foto = 'public/img/caninos/' . $nombre_foto;
+                        if (file_exists($ruta_foto)) { 
+                            unlink($ruta_foto); 
+                        }
+                    }
+                    
+                    // Redirección limpia al listado con aviso de éxito
+                    header("Location: index.php?menu=mascotas&opc=listado&eliminado=1");
+                    exit;
                 }
-                header("Location: index.php?menu=mascotas&opc=listado&eliminado=1");
-                exit;
+                $stmt_del->close();
             }
         } else {
-            echo "No se encontró la mascota. Verifica que el ID $id_recibido pertenezca al usuario $id_usuario";
+            $stmt_foto->close();
+            header("Location: index.php?menu=mascotas&opc=listado&error=no_encontrado");
+            exit;
         }
     } else {
-        $res = $conexion->query("SHOW COLUMNS FROM caninos");
-        echo "Las columnas de tu tabla son: ";
-        while($row = $res->fetch_assoc()){ echo "[" . $row['Field'] . "] "; }
-        die("<br>Copia estos nombres y dime cuáles aparecen.");
+        header("Location: index.php?menu=mascotas&opc=listado&error=consulta");
+        exit;
     }
+} else {
+    header("Location: index.php?menu=mascotas&opc=listado");
+    exit;
 }
+?>

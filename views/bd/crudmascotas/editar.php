@@ -28,6 +28,10 @@ if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = (int)$_POST['id_canino'];
+    
+    // RECOGER EL NUEVO CAMPO AGREGADO
+    $tipo_mascota = $_POST['tipo_mascota'] ?? 'Otro';
+    
     $nombre = $_POST['nombre'];
     $sexo = $_POST['sexo'];
     $fecha_nacimiento = $_POST['fecha_nacimiento'];
@@ -59,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // ACTUALIZADO: Se agrega la modificación de la columna tipo_mascota
     $sql = "UPDATE caninos SET 
             nombre='$nombre', 
             raza='$raza', 
@@ -69,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             peso='$peso',
             fecha_nacimiento='$fecha_nacimiento', 
             alergias='$alergias', 
-            Tratamiento='$tratamiento' 
+            Tratamiento='$tratamiento',
+            tipo_mascota='$tipo_mascota' 
             WHERE id_canino=$id";
 
     $ejecutar = mysqli_query($conexion, $sql);
@@ -94,7 +100,7 @@ if ($id == 0) {
 }
 
 $query_mascota = mysqli_query($conexion, "SELECT * FROM caninos WHERE id_canino = $id");
-$mascota = mysqli_fetch_assoc($query_query_mascota ?? $query_mascota);
+$mascota = mysqli_fetch_assoc($query_mascota);
 
 if (!$mascota) {
     header('Location: index.php?menu=mascotas&opc=listado&error=404');
@@ -106,7 +112,7 @@ if (!$mascota) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>DR. WOOF - Editar Canino</title>
+    <title>DR. WOOF - Editar Mascota</title>
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
@@ -268,7 +274,7 @@ if (!$mascota) {
       </div>
 
       <div class="header-welcome-centered">
-          <h6>EDITAR CANINO</h6>
+          <h6>EDITAR MASCOTA</h6>
       </div>
 
       <div class="br-header-right">
@@ -313,6 +319,19 @@ if (!$mascota) {
 
                 <div class="col-md-4">
                   <div class="form-group">
+                    <label class="form-control-label-custom">Tipo de Mascota:</label>
+                    <select name="tipo_mascota" class="form-control form-control-custom" required>
+                      <option value="Perro"  <?php if(($mascota['tipo_mascota'] ?? '') == 'Perro') echo 'selected'; ?>>Perro</option>
+                      <option value="Gato"  <?php if(($mascota['tipo_mascota'] ?? '') == 'Gato') echo 'selected'; ?>>Gato</option>
+                      <option value="Ave"   <?php if(($mascota['tipo_mascota'] ?? '') == 'Ave') echo 'selected'; ?>>Ave</option>
+                      <option value="Reptil"<?php if(($mascota['tipo_mascota'] ?? '') == 'Reptil') echo 'selected'; ?>>Reptil</option>
+                      <option value="Otro"  <?php if(($mascota['tipo_mascota'] ?? '') == 'Otro') echo 'selected'; ?>>Otro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
                     <label class="form-control-label-custom">Nombre del canino:</label>
                     <input name="nombre" class="form-control form-control-custom" type="text" placeholder="Nombre"
                            value="<?php echo $mascota['nombre']; ?>" required>
@@ -327,6 +346,7 @@ if (!$mascota) {
                     </select>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-control-label-custom">Fecha de nacimiento:</label>
@@ -334,7 +354,6 @@ if (!$mascota) {
                            value="<?php echo $mascota['fecha_nacimiento']; ?>" required>
                   </div>
                 </div>
-
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-control-label-custom">Raza:</label>
@@ -349,6 +368,7 @@ if (!$mascota) {
                            value="<?php echo $mascota['Color']; ?>" required>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-control-label-custom">Alergias:</label>
@@ -356,7 +376,6 @@ if (!$mascota) {
                            value="<?php echo $mascota['alergias']; ?>">
                   </div>
                 </div>
-
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-control-label-custom">Edad:</label>
@@ -371,6 +390,7 @@ if (!$mascota) {
                            value="<?php echo $mascota['peso']; ?>" required>
                   </div>
                 </div>
+
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-control-label-custom">Tratamiento:</label>
@@ -381,7 +401,7 @@ if (!$mascota) {
 
                 <div class="col-md-6 text-center mg-t-10 mg-b-20">
                   <div class="form-group">
-                    <label class="form-control-label-custom">Foto del canino:</label>
+                    <label class="form-control-label-custom">Foto de la mascota:</label>
                     <?php if ($mascota['fotoCan'] != "" && $mascota['fotoCan'] != 'sin_foto.png'): ?>
                       <img src="public/img/caninos/<?php echo $mascota['fotoCan']; ?>"
                            alt="Foto actual" class="preview-foto" id="fotoPreview">

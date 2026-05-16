@@ -176,7 +176,7 @@ $dias_en_mes = (int)date('t', strtotime($primer_dia_mes));
           <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
@@ -194,6 +194,12 @@ $dias_en_mes = (int)date('t', strtotime($primer_dia_mes));
         <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
           <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
         </a>
+        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+  <div class="br-menu-item">
+    <i class="icon ion-ios-gear-outline tx-24"></i>
+    <span class="menu-item-label">Mantenimiento</span>
+  </div>
+</a>
       </div>
     </div>
 
