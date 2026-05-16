@@ -50,7 +50,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        /* --- ESTILOS ADAPTADOS AL SISTEMA --- */
         .br-sideleft { background-color: #2c4ea3 !important; }
         .br-header { background-color: #1e3a8a !important; border: none !important; }
         .br-logo { background-color: #1e3a8a !important; border: none !important; }
@@ -74,7 +73,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             margin-top: 0 !important;
         }
 
-        /* --- CONTENEDORES ÓVALOS GRISES Y TEXTOS --- */
         .title-section-custom {
             color: #1e3a8a !important;
             font-weight: bold;
@@ -100,7 +98,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             color: #555555 !important;
         }
 
-        /* --- BOTONES Y SELECTORES ESTILIZADOS --- */
         .form-control-custom-file {
             background-color: #ffffff !important;
             color: #333333 !important;
@@ -272,7 +269,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <script src="public/js/bracket.js"></script>
 
     <script>
-        // EJECUCIÓN DEL RESPALDO VÍA PHP
         var btnRespaldar = document.getElementById("btnRespaldar");
         btnRespaldar.onclick = function() {
             if (confirm("¿Deseas descargar el respaldo de la base de datos?") == false) {
@@ -281,7 +277,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             window.location.href = "views/bd/crudmantenimiento/procesar_respaldo.php";
         };
 
-        // EJECUCIÓN DE LA RESTAURACIÓN AJAX
         var btnRestaurar = document.getElementById("btnRestaurar");
         btnRestaurar.onclick = function() {
             var archivoInput = document.getElementById("archivo_sql");
@@ -313,7 +308,6 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             ajax.send(datos);
         };
 
-        // EVENTO DEL BOTÓN REGRESAR
         var btnSalir = document.getElementById("btnSalirMantenimiento");
         btnSalir.onclick = function() {
             window.history.back();
