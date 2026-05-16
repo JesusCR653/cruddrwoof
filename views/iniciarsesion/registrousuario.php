@@ -1,20 +1,26 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include_once 'views/bd/conexion.php';
 
-$id_usuario = $_SESSION['id_usuario'] ?? 4;
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
 
 $query = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result = mysqli_query($conexion, $query);
 $usuario = mysqli_fetch_assoc($result);
 
-$foto_db = $usuario['FotoUS'] ?? ''; 
-$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
-               ? $foto_db . '?v=' . time() 
-               : 'logo.png'; 
+$foto_db = $usuario['FotoUS']; 
+if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
+    $foto_perfil = $foto_db . '?v=' . time();
+} else {
+    $foto_perfil = 'logo.png';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,101 +31,214 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
 
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/css/bracket.css">
+    <link class="rtl-prevent" rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        .pswm-req { font-size: 11px; margin-top: 5px; color: #868e96; list-style: none; padding-left: 0; }
-        .pswm-req li { display: inline-block; margin-right: 15px; }
-        .pswm-req i { margin-right: 4px; font-size: 13px; }
-        .req-valido { color: #23bf08 !important; font-weight: bold; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        
+        body {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
+        }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 40px !important;
+            padding: 50px 40px !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            width: 100%;
+            max-width: 950px;
+            margin: 40px auto;
+        }
+
+        .title-display-center {
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            color: #1e3a8a !important;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-control-custom {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 25px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            height: auto !important;
+            text-align: center;
+        }
+        .form-control-custom::placeholder {
+            color: #444444;
+            opacity: 1;
+        }
+        .form-control-custom:focus {
+            background-color: #cfcfcf !important;
+            outline: none;
+        }
+
+        .input-file-hidden {
+            display: none;
+        }
+
+        .pswm-req {
+            font-size: 12px;
+            margin-top: 10px;
+            color: #666666;
+            list-style: none;
+            padding-left: 0;
+            text-align: center;
+        }
+        .pswm-req li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .pswm-req i {
+            margin-right: 4px;
+        }
+        .req-valido {
+            color: #92bc5c !important;
+            font-weight: bold;
+        }
+
+        .btn-custom-registrar {
+            background-color: #92bc5c !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 40px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-custom-foto {
+            background-color: #1e3a8a !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 30px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 180px;
+            cursor: pointer;
+        }
+        .btn-custom-cancelar {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 40px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+        }
     </style>
 </head>
 
-<body class="bg-br-primary">
+<body>
 
-    <div class="d-flex align-items-center justify-content-center ht-100v">
-      <div class="login-wrapper wd-700 pd-25 pd-x-40 bg-white shadow-base bd-0">
-        <div class="tx-center mg-b-30">
-            <span class="tx-30 tx-bold tx-inverse"><span class="tx-info">DR.</span> WOOF</span>
-            <p class="tx-12 mg-t-5">Crea tu cuenta para gestionar tus mascotas</p>
+    <div class="d-flex align-items-center justify-content-center p-3" style="min-height: 100vh;">
+      <div class="br-section-wrapper">
+        
+        <div class="title-display-center">DR. WOOF</div>
+
+        <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger text-center mx-auto mg-b-30" style="max-width: 750px; border-radius: 20px; font-weight: bold;">
+            <i class="fa fa-times mg-r-5"></i> 
+            <?php 
+                $error = $_GET['error'];
+                if ($error == 'campos')         echo "Por favor, completa todos los campos obligatorios.";
+                elseif ($error == 'tipo_imagen') echo "Formato de imagen inválido. Solo se admiten JPG, PNG, GIF y WEBP.";
+                elseif ($error == 'tamano_imagen') echo "La imagen es demasiado grande. No debe superar los 3 MB.";
+                elseif ($error == 'imagen')    echo "No se pudo guardar la imagen en el servidor.";
+                elseif ($error == 'db')        echo "Error al registrar el usuario. Intenta de nuevo.";
+                elseif ($error == 'consulta')  echo "Error en la consulta a la base de datos.";
+                elseif ($error == 'conexion')  echo "No se pudo conectar con la base de datos.";
+                else echo "Ocurrió un error al procesar el registro. Inténtalo de nuevo.";
+            ?>
         </div>
+        <?php endif; ?>
 
-        <form onsubmit="event.preventDefault(); enviarUsuario();" enctype="multipart/form-data">
-            <div class="row row-xs">
-                <div class="col-sm-4">
+        <form action="views/bd/crudusuarios/guardar_usuario.php" method="POST" enctype="multipart/form-data" onsubmit="return validarAntesDeEnviar();">
+            
+            <div class="row justify-content-center">
+                
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label class="form-control-label">Nombre:</label>
-                        <input id="u_nombre" type="text" class="form-control" placeholder="Nombre" required>
+                        <input name="nombre" id="u_nombre" type="text" class="form-control form-control-custom" placeholder="Nombre" required>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label class="form-control-label">Apellido Paterno:</label>
-                        <input id="u_paterno" type="text" class="form-control" placeholder="Paterno" required>
+                        <input name="paterno" id="u_paterno" type="text" class="form-control form-control-custom" placeholder="Apellido Paterno" required>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label class="form-control-label">Apellido Materno:</label>
-                        <input id="u_materno" type="text" class="form-control" placeholder="Materno" required>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 mg-t-10">
-                    <div class="form-group">
-                        <label class="form-control-label">Número de teléfono:</label>
-                        <input id="u_telefono" type="text" class="form-control" placeholder="248 000 0000" required>
-                    </div>
-                </div>
-                <div class="col-sm-6 mg-t-10">
-                    <div class="form-group">
-                        <label class="form-control-label">Dirección:</label>
-                        <input id="u_direccion" type="text" class="form-control" placeholder="Calle, Número, Col." required>
+                        <input name="materno" id="u_materno" type="text" class="form-control form-control-custom" placeholder="Apellido Materno" required>
                     </div>
                 </div>
 
-                <div class="col-sm-12 mg-t-10">
+                <div class="col-md-5">
                     <div class="form-group">
-                        <label class="form-control-label">Correo Electrónico:</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="icon ion-ios-email-outline tx-20"></i></span>
-                            <input id="u_correo" type="email" class="form-control" placeholder="ejemplo@correo.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gob|mx|info|biz)" title="El correo debe terminar con una extensión válida como .com, .mx, .net, etc." required>
-                        </div>
+                        <input name="telefono" id="u_telefono" type="text" class="form-control form-control-custom" placeholder="Número de teléfono" required>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <input name="direccion" id="u_direccion" type="text" class="form-control form-control-custom" placeholder="Dirección" required>
                     </div>
                 </div>
 
-                <div class="col-sm-12 mg-t-10">
+                <div class="col-md-10">
                     <div class="form-group">
-                        <label class="form-control-label">Contraseña:</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="icon ion-ios-locked-outline tx-20"></i></span>
-                            <input id="u_password" type="password" class="form-control" placeholder="********" required>
-                        </div>
+                        <input name="correo" id="u_correo" type="email" class="form-control form-control-custom" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gob|mx|info|biz)" title="La extensión debe ser válida (ej: .com, .mx)" required>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input name="password" id="u_password" type="password" class="form-control form-control-custom" placeholder="Contraseña" required>
                         <ul class="pswm-req">
-                            <li id="req_longitud"><i class="icon ion-ios-circle-outline"></i> Mínimo 8 dígitos</li>
-                            <li id="req_numero"><i class="icon ion-ios-circle-outline"></i> Un número</li>
-                            <li id="req_especial"><i class="icon ion-ios-circle-outline"></i> Un carácter especial</li>
+                            <li id="req_longitud"><i id="ico_longitud" class="icon ion-ios-circle-outline"></i> Mínimo 8 dígitos</li>
+                            <li id="req_numero"><i id="ico_numero" class="icon ion-ios-circle-outline"></i> Un número</li>
+                            <li id="req_especial"><i id="ico_especial" class="icon ion-ios-circle-outline"></i> Un carácter especial</li>
                         </ul>
                     </div>
                 </div>
+
             </div>
             
-            <div class="row row-xs mg-t-30">
-                <div class="col-sm-4">
-                    <button type="submit" class="btn btn-info btn-block">Crear Cuenta</button>
+            <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
+                
+                <div>
+                    <button type="submit" class="btn-custom-registrar">Crear Cuenta</button>
                 </div>
-                <div class="col-sm-4 mg-t-10 mg-sm-t-0">
-                    <button type="button" class="btn btn-outline-primary btn-block" onclick="document.getElementById('u_foto').click();">
-                        <i class="fa fa-camera mg-r-5"></i> <span id="txt_foto">Foto</span>
-                    </button>
-                    <input type="file" id="u_foto" name="foto" accept="image/*" style="display: none;" onchange="actualizarBotonFoto(this)">
+
+                <div>
+                    <label for="u_foto" class="btn-custom-foto m-0">
+                        <span id="txt_foto">Agregar foto</span> <span class="tx-20 font-weight-normal">+</span>
+                    </label>
+                    <input type="file" id="u_foto" name="foto" accept="image/*" class="input-file-hidden" onchange="actualizarBotonFoto()">
                 </div>
-                <div class="col-sm-4 mg-t-10 mg-sm-t-0">
-                    <a href="index.php?menu=sesion&opc=index" class="btn btn-secondary btn-block">Cancelar</a>
+
+                <div>
+                    <a href="index.php?menu=sesion&opc=index" class="btn btn-custom-cancelar text-center">Cancelar</a>
                 </div>
+
             </div>
 
-            <div class="mg-t-40 tx-center tx-12">DR. WOOF_JCR &copy; 2026.</div>
+            <div class="mg-t-50 tx-center tx-12 text-muted">DR. WOOF &copy; 2026.</div>
         </form>
       </div>
     </div>
@@ -128,108 +247,108 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <script src="public/lib/bootstrap/bootstrap.js"></script>
 
     <script>
-        const pswInput = document.getElementById('u_password');
-        const reqLongitud = document.getElementById('req_longitud');
-        const reqNumero = document.getElementById('req_numero');
-        const reqEspecial = document.getElementById('req_especial');
-
-        pswInput.addEventListener('input', function() {
-            const valor = pswInput.value;
+        var pswInput = document.getElementById('u_password');
+        
+        pswInput.oninput = function() {
+            var valor = pswInput.value;
 
             if (valor.length >= 8) {
-                reqLongitud.classList.add('req-valido');
-                reqLongitud.querySelector('i').className = 'icon ion-ios-checkmark';
+                document.getElementById('req_longitud').className = 'req-valido';
+                document.getElementById('ico_longitud').className = 'icon ion-ios-checkmark';
             } else {
-                reqLongitud.classList.remove('req-valido');
-                reqLongitud.querySelector('i').className = 'icon ion-ios-circle-outline';
+                document.getElementById('req_longitud').className = '';
+                document.getElementById('ico_longitud').className = 'icon ion-ios-circle-outline';
             }
 
-            if (/[0-9]/.test(valor)) {
-                reqNumero.classList.add('req-valido');
-                reqNumero.querySelector('i').className = 'icon ion-ios-checkmark';
-            } else {
-                reqNumero.classList.remove('req-valido');
-                reqNumero.querySelector('i').className = 'icon ion-ios-circle-outline';
+            var tieneNumero = false;
+            var numeros = "0123456789";
+            for (var i = 0; i < valor.length; i++) {
+                if (numeros.indexOf(valor.charAt(i)) !== -1) {
+                    tieneNumero = true;
+                    break;
+                }
             }
 
-            if (/[!@#$%^&*(),.?":{}|<>_+\-\[\]\\/]/.test(valor)) {
-                reqEspecial.classList.add('req-valido');
-                reqEspecial.querySelector('i').className = 'icon ion-ios-checkmark';
+            if (tieneNumero) {
+                document.getElementById('req_numero').className = 'req-valido';
+                document.getElementById('ico_numero').className = 'icon ion-ios-checkmark';
             } else {
-                reqEspecial.classList.remove('req-valido');
-                reqEspecial.querySelector('i').className = 'icon ion-ios-circle-outline';
+                document.getElementById('req_numero').className = '';
+                document.getElementById('ico_numero').className = 'icon ion-ios-circle-outline';
             }
-        });
 
-        function actualizarBotonFoto(input) {
-            const txtFoto = document.getElementById('txt_foto');
-            if (input.files && input.files[0]) {
-                txtFoto.textContent = "¡Foto cargada!";
+            var caracteresEspeciales = "!@#$%^&*(),.?\":{}|<>_+-[]\\/";
+            var tieneEspecial = false;
+            for (var j = 0; j < valor.length; j++) {
+                if (caracteresEspeciales.indexOf(valor.charAt(j)) !== -1) {
+                    tieneEspecial = true;
+                    break;
+                }
+            }
+
+            if (tieneEspecial) {
+                document.getElementById('req_especial').className = 'req-valido';
+                document.getElementById('ico_especial').className = 'icon ion-ios-checkmark';
             } else {
-                txtFoto.textContent = "Foto";
+                document.getElementById('req_especial').className = '';
+                document.getElementById('ico_especial').className = 'icon ion-ios-circle-outline';
+            }
+        };
+
+        function actualizarBotonFoto() {
+            var archivo = document.getElementById('u_foto');
+            var txtFoto = document.getElementById('txt_foto');
+            if (archivo.value !== "") {
+                txtFoto.innerHTML = "¡Foto cargada!";
+            } else {
+                txtFoto.innerHTML = "Agregar foto";
             }
         }
 
-        function enviarUsuario() {
-            const passwordVal = pswInput.value;
-            const correoVal = document.getElementById('u_correo').value;
+        function validarAntesDeEnviar() {
+            var valorPassword = pswInput.value;
+            var valorCorreo = document.getElementById('u_correo').value;
 
-            const tieneLongitud = passwordVal.length >= 8;
-            const tieneNumero = /[0-9]/.test(passwordVal);
-            const tieneEspecial = /[!@#$%^&*(),.?":{}|<>_+\-\[\]\\/]/.test(passwordVal);
+            var tieneLongitud = valorPassword.length >= 8;
 
-            if (!tieneLongitud || !tieneNumero || !tieneEspecial) {
+            var tieneNumero = false;
+            var numeros = "0123456789";
+            for (var i = 0; i < valorPassword.length; i++) {
+                if (numeros.indexOf(valorPassword.charAt(i)) !== -1) {
+                    tieneNumero = true;
+                    break;
+                }
+            }
+
+            var caracteresEspeciales = "!@#$%^&*(),.?\":{}|<>_+-[]\\/";
+            var tieneEspecial = false;
+            for (var j = 0; j < valorPassword.length; j++) {
+                if (caracteresEspeciales.indexOf(valorPassword.charAt(j)) !== -1) {
+                    tieneEspecial = true;
+                    break;
+                }
+            }
+
+            if (tieneLongitud == false || tieneNumero == false || tieneEspecial == false) {
                 alert("Por favor, cumple con todos los requisitos de la contraseña.");
-                return;
+                return false;
             }
 
-            const regexCorreo = /\.(com|net|org|edu|gob|mx|info|biz)$/i;
-            if (!regexCorreo.test(correoVal)) {
+            var extensionesValidas = [".com", ".net", ".org", ".edu", ".gob", ".mx", ".info", ".biz"];
+            var correoValido = false;
+            for (var k = 0; k < extensionesValidas.length; k++) {
+                if (valorCorreo.toLowerCase().endsWith(extensionesValidas[k])) {
+                    correoValido = true;
+                    break;
+                }
+            }
+
+            if (correoValido == false) {
                 alert("El correo electrónico debe terminar con una extensión válida (ej: .com, .mx)");
-                return;
+                return false;
             }
 
-            const formData = new FormData();
-            formData.append('nombre', document.getElementById('u_nombre').value);
-            formData.append('paterno', document.getElementById('u_paterno').value);
-            formData.append('materno', document.getElementById('u_materno').value);
-            formData.append('telefono', document.getElementById('u_telefono').value);
-            formData.append('direccion', document.getElementById('u_direccion').value);
-            formData.append('correo', correoVal);
-            formData.append('password', passwordVal);
-
-            const fotoInput = document.getElementById('u_foto');
-            if (fotoInput.files && fotoInput.files.length > 0) {
-                formData.append('foto', fotoInput.files[0]);
-            }
-
-            fetch('views/bd/crudusuarios/guardar_usuario.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Error HTTP: ' + res.status);
-                }
-                return res.text();
-            })
-            .then(text => {
-                try {
-                    const data = JSON.parse(text);
-                    if(data.status === 'success') {
-                        alert(data.message);
-                        window.location.href = 'index.php?menu=sesion&opc=index';
-                    } else {
-                        alert("Error del servidor: " + data.message);
-                    }
-                } catch (e) {
-                    alert("Respuesta inesperada del servidor: " + text);
-                }
-            })
-            .catch(err => {
-                console.error("Error:", err);
-                alert("Hubo un error de red al procesar el registro.");
-            });
+            return true;
         }
     </script>
 </body>

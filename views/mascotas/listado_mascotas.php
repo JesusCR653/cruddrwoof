@@ -1,11 +1,14 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 include 'views/bd/conexion.php';
 
-$id_usuario = $_SESSION['id_usuario'] ?? 4;
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
 
 $query = "SELECT * FROM caninos WHERE id_usuario = '$id_usuario'";
 $resultado = mysqli_query($conexion, $query);
@@ -14,14 +17,35 @@ $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
 
-$nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
-$apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
-$nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
+$nombre_usuario = "Usuario";
+if (isset($usuario['nombre'])) {
+    $nombre_usuario = $usuario['nombre'];
+} else if (isset($_SESSION['nombre'])) {
+    $nombre_usuario = $_SESSION['nombre'];
+}
 
-$foto_db = $usuario['FotoUS'] ?? ''; 
-$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
-               ? $foto_db . '?v=' . time() 
-               : 'logo.png'; 
+$apellido_usuario = "";
+if (isset($usuario['apellido_paterno'])) {
+    $apellido_usuario = $usuario['apellido_paterno'];
+} else if (isset($_SESSION['apellido'])) {
+    $apellido_usuario = $_SESSION['apellido'];
+}
+
+$apellido_materno = "";
+if (isset($usuario['apellido_materno'])) {
+    $apellido_materno = $usuario['apellido_materno'];
+} else if (isset($_SESSION['apellidom'])) {
+    $apellido_materno = $_SESSION['apellidom'];
+}
+
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario . ' ' . $apellido_materno;
+
+$foto_perfil = 'logo.png';
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_perfil = $usuario['FotoUS'] . '?v=' . time();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,77 +60,141 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        .br-sideleft { background-color: #1d2127; }
-        .br-menu-link.active {
-            color: #17a2b8 !important;
-            background-color: #1b1e24;
+        .br-sideleft { background-color: #2c4ea3 !important; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        
+        .br-logo { background-color: #1e3a8a !important; border: none !important; }
+        .br-logo a { color: #ffffff !important; font-weight: 700; }
+        .br-logo a span { color: #00bfa5 !important; font-weight: 400; }
+        
+        .br-mainpanel {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
         }
-        .br-pagebody { margin-top: 20px; }
+
+        .br-pageheader {
+            display: none !important;
+        }
+
+        .br-pagebody {
+            padding: 0 30px 30px 30px !important;
+        }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 0 0 40px 40px !important;
+            padding: 50px 40px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: none !important;
+            margin-top: 0 !important;
+        }
+
+        .label-turquesa {
+            background-color: #34b5e5 !important;
+            color: white !important;
+            padding: 10px 25px;
+            font-weight: bold;
+            border-radius: 25px !important;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .btn-custom-agregar {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 10px 30px !important;
+            font-size: 15px !important;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .thead-marino th {
+            background-color: #1e3a8a !important;
+            color: white !important;
+            border: none !important;
+            font-size: 13px !important;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 15px !important;
+        }
+
+        .btn-outline-custom-service {
+            border: 2px solid #34b5e5 !important;
+            color: #34b5e5 !important;
+            background-color: transparent;
+            font-weight: bold;
+            padding: 6px 15px;
+            transition: all 0.2s;
+        }
+        .btn-outline-custom-service:hover {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+        }
+
+        .header-welcome-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: auto;
+        }
+        .header-welcome-centered h6 { margin: 0; font-weight: bold; font-size: 18px; text-transform: uppercase; }
+
+        .logged-name, .navicon-left a i, .sidebar-label, .br-menu-link { color: #ffffff !important; }
+        .br-menu-link.active { background-color: #4da9d4 !important; }
     </style>
 </head>
 
-<body>
+<body class="show-left">
 
-    <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
+    <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
       <div class="br-sideleft-menu">
         <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Inicio</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
         </a>
         <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-person-outline tx-24"></i>
-            <span class="menu-item-label">Información Personal</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-plus-outline tx-24"></i>
-            <span class="menu-item-label">Registro Canino</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-paw tx-24"></i>
-            <span class="menu-item-label">Mis Mascotas</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
         </a>
       </div>
 
       <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
       <div class="br-sideleft-menu">
         <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-calendar-outline tx-24"></i>
-            <span class="menu-item-label">Agenda</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
         </a>
         <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-alarm-outline tx-24"></i>
-            <span class="menu-item-label">Recordatorios</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
         </a>
         <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-chatboxes-outline tx-24"></i>
-            <span class="menu-item-label">Comentarios</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
         </a>
       </div>
     </div>
 
     <div class="br-header">
       <div class="br-header-left">
-        <div class="navicon-left hidden-md-down">
-          <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
-        </div>
+        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
       </div>
+
+      <div class="header-welcome-centered">
+          <h6>MIS MASCOTAS</h6>
+      </div>
+      
       <div class="br-header-right">
         <nav class="nav">
           <div class="dropdown">
@@ -128,57 +216,49 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <div class="br-mainpanel">
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <div class="d-flex align-items-center justify-content-between mg-b-20">
-              <h6 class="tx-gray-800 tx-uppercase tx-bold mg-b-0">Mis mascotas</h6>
-              <a href="index.php?menu=mascotas&opc=registro" class="btn btn-info btn-sm pd-x-15">
-                  <i class="fa fa-plus mg-r-5"></i> Agregar Mascota
+          
+          <div class="d-flex align-items-center justify-content-between mg-b-30 flex-wrap gap-3">
+              <span class="label-turquesa">Mis Mascotas registradas</span>
+              <a href="index.php?menu=mascotas&opc=registro" class="btn-custom-agregar">
+                  <i class="fa fa-plus"></i> Agregar Nueva
               </a>
           </div>
 
           <div class="table-responsive">
             <table class="table table-bordered mg-b-0">
-                <thead class="thead-dark bg-dark">
-                    <tr class="tx-white">
-                        <th class="wd-5p text-uppercase tx-12">ID</th>
-                        <th class="wd-15p text-uppercase tx-12">NOMBRE</th>
-                        <th class="wd-15p text-uppercase tx-12">RAZA</th>
-                        <th class="wd-45p text-uppercase tx-12 text-center">SERVICIOS</th>
-                        <th class="wd-20p text-uppercase tx-12 text-center">GESTIÓN</th>
+                <thead class="thead-marino">
+                    <tr>
+                        <th class="wd-5p text-center">ID</th>
+                        <th class="wd-15p">Mascota</th>
+                        <th class="wd-15p">Raza</th>
+                        <th class="wd-50p text-center">Opciones de Servicio</th>
+                        <th class="wd-15p text-center">Gestión</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (mysqli_num_rows($resultado) > 0): ?>
                         <?php while($row = mysqli_fetch_assoc($resultado)): ?>
-                        <tr class="tx-inverse bg-light">
-                            <td class="valign-middle"><?php echo $row['id_canino']; ?></td>
-                            <td class="valign-middle"><strong class="tx-info"><?php echo $row['nombre']; ?></strong></td>
-                            <td class="valign-middle"><?php echo $row['raza']; ?></td>
-                            <td class="text-center">
-                                <div class="btn-group shadow-base" role="group">
-                                    <a href="index.php?menu=mascotas&opc=info&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-info btn-sm">Info</a>
-                                    <a href="index.php?menu=servicios&opc=historial&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-info btn-sm">Historial</a>
-                                    <a href="index.php?menu=servicios&opc=agendam&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-info btn-sm">Citas</a>
-                                    <a href="index.php?menu=mascotas&opc=qr&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-info btn-sm">QR</a>
-                                    <a href="index.php?menu=mascotas&opc=galeria&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-info btn-sm">Fotos</a>
+                        <tr class="tx-inverse bg-white text-center">
+                            <td class="valign-middle font-weight-bold"><?php echo $row['id_canino']; ?></td>
+                            <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($row['nombre']); ?></strong></td>
+                            <td class="valign-middle text-left"><?php echo htmlspecialchars($row['raza']); ?></td>
+                            <td class="valign-middle text-center">
+                                <div class="btn-group" role="group">
+                                    <a href="index.php?menu=mascotas&opc=info&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Info</a>
+                                    <a href="index.php?menu=mascotas&opc=qr&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">QR</a>
+                                    <a href="index.php?menu=servicios&opc=historial&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Historial</a>
+                                    <a href="index.php?menu=servicios&opc=agendam&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Citas</a>
+                                    <a href="index.php?menu=mascotas&opc=galeria&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Fotos</a>
                                 </div>
                             </td>
-                            <td class="text-center">
-                                <a href="index.php?menu=mascotas&opc=editar&id=<?php echo $row['id_canino']; ?>" class="btn btn-warning btn-icon btn-sm" title="Editar">
-                                    <div><i class="fa fa-edit"></i></div>
-                                </a>
-                                <a href="index.php?menu=mascotas&opc=eliminar&id=<?php echo $row['id_canino']; ?>" class="btn btn-danger btn-icon btn-sm mg-l-5" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar esta mascota?')">
-                                    <div><i class="fa fa-trash"></i></div>
-                                </a>
+                            <td class="valign-middle text-center">
+                                <a href="index.php?menu=mascotas&opc=editar&id=<?php echo $row['id_canino']; ?>" class="btn btn-warning btn-icon btn-sm" style="border-radius: 6px;"><i class="fa fa-edit"></i></a>
+                                <a href="index.php?menu=mascotas&opc=eliminar&id=<?php echo $row['id_canino']; ?>" class="btn btn-danger btn-icon btn-sm mg-l-5" style="border-radius: 6px;" onclick="return confirm('¿Estás seguro de eliminar a esta mascota?')"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr>
-                            <td colspan="5" class="tx-center tx-gray-500 pd-y-20">
-                                <i class="icon ion-ios-paw tx-40 d-block mg-b-10"></i>
-                                No tienes mascotas registradas aún.
-                            </td>
-                        </tr>
+                        <tr><td colspan="5" class="text-center pd-y-40 text-muted font-weight-bold">No tienes mascotas registradas aún.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

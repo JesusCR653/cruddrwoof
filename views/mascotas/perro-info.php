@@ -1,19 +1,47 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include 'views/bd/conexion.php';
 
-$id_canino  = $_GET['id'] ?? 0;
-$id_usuario = $_SESSION['id_usuario'];
+if (isset($_GET['id'])) {
+    $id_canino = $_GET['id'];
+} else {
+    $id_canino = 0;
+}
 
-$query     = "SELECT * FROM caninos WHERE id_canino = '$id_canino' AND id_usuario = '$id_usuario'";
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
+
+$query_user = mysqli_query($conexion, "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'");
+$usuario = mysqli_fetch_assoc($query_user);
+
+$nombre_usuario = "Usuario";
+$apellido_usuario = "";
+if (isset($_SESSION['nombre'])) {
+    $nombre_usuario = $_SESSION['nombre'];
+}
+if (isset($_SESSION['apellido'])) {
+    $apellido_usuario = $_SESSION['apellido'];
+}
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario;
+
+$foto_perfil = 'logo.png';
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_perfil = $usuario['FotoUS'] . '?v=' . time();
+    }
+}
+
+$query = "SELECT * FROM caninos WHERE id_canino = '$id_canino' AND id_usuario = '$id_usuario'";
 $resultado = mysqli_query($conexion, $query);
-
 $perro = mysqli_fetch_assoc($resultado);
 
-if (!$perro) {
+if ($perro == false) {
     header("Location: index.php?menu=mascotas&opc=listado");
     exit();
 }
@@ -31,15 +59,122 @@ if (!$perro) {
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        .br-sideleft { background-color: #1d2127; }
+        .br-sideleft { 
+            background-color: #2c4ea3 !important; 
+        }
+        
+        .sidebar-label, .br-menu-link {
+            color: #ffffff !important;
+        }
+
         .br-menu-link.active {
-            color: #17a2b8 !important;
-            background-color: #1b1e24;
+            color: #ffffff !important;
+            background-color: #34b5e5 !important;
+        }
+
+        .br-header { 
+            background-color: #1e3a8a !important; 
+            border: none !important; 
+        }
+        
+        .navicon-left a i, .logged-name {
+            color: #ffffff !important;
+        }
+
+        .br-logo { 
+            background-color: #1e3a8a !important; 
+            border: none !important; 
+        }
+        .br-logo a { 
+            color: #ffffff !important; 
+            font-weight: 700; 
+        }
+        .br-logo a span { 
+            color: #34b5e5 !important; 
+            font-weight: 400; 
+        }
+
+        .br-mainpanel {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
+        }
+
+        .br-pageheader {
+            display: none !important;
+        }
+
+        .br-pagebody {
+            padding: 0 30px 30px 30px !important;
+        }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 0 0 40px 40px !important;
+            padding: 50px 40px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: none !important;
+            margin-top: 0 !important;
+        }
+
+        .form-control-label {
+            color: #1e3a8a !important;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 25px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            height: auto !important;
+            text-align: center;
+        }
+
+        .card.bd-0.shadow-base {
+            border: 6px solid #1e3a8a !important;
+            border-radius: 15px !important;
+            overflow: hidden;
+            background-color: #ffffff;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .card-img-top {
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .card-body.bg-gray-100 {
+            background-color: #1e3a8a !important;
+            padding: 12px !important;
+        }
+        .card-text.tx-inverse {
+            color: #ffffff !important;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-secondary {
+            background-color: #34b5e5 !important;
+            border: none !important;
+            color: #ffffff !important;
+            border-radius: 25px !important;
+            padding: 12px 40px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn-secondary:hover {
+            background-color: #299ec9 !important;
         }
     </style>
 </head>
 
-<body>
+<body class="show-left">
 
     <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
 
@@ -105,8 +240,8 @@ if (!$perro) {
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
-              <img src="public/img/logo.png" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+              <span class="logged-name"><?php echo $nombre_completo; ?></span>
+              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
@@ -130,7 +265,7 @@ if (!$perro) {
 
       <div class="br-pagebody">
         <div class="br-section-wrapper shadow-base bd-0">
-          <div class="row">
+          <div class="row align-items-center">
 
             <div class="col-md-8">
               <div class="form-layout form-layout-1">
@@ -138,49 +273,50 @@ if (!$perro) {
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label">Nombre del canino:</label>
-                      <input class="form-control tx-bold tx-inverse" type="text" value="<?php echo $perro['nombre']; ?>" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control tx-bold tx-inverse" type="text" value="<?php echo $perro['nombre']; ?>" readonly>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label">Raza:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['raza']; ?>" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control" type="text" value="<?php echo $perro['raza']; ?>" readonly>
                     </div>
                   </div>
                   <div class="col-lg-6 mg-t-20">
                     <div class="form-group">
                       <label class="form-control-label">Edad:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['edad']; ?> años" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control" type="text" value="<?php echo $perro['edad']; ?> años" readonly>
                     </div>
                   </div>
                   <div class="col-lg-6 mg-t-20">
                     <div class="form-group">
                       <label class="form-control-label">Sexo:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['sexo']; ?>" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control" type="text" value="<?php echo $perro['sexo']; ?>" readonly>
                     </div>
                   </div>
                   <div class="col-lg-6 mg-t-20">
                     <div class="form-group">
                       <label class="form-control-label">Color:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['Color']; ?>" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control" type="text" value="<?php echo $perro['Color']; ?>" readonly>
                     </div>
                   </div>
                   <div class="col-lg-6 mg-t-20">
                     <div class="form-group">
                       <label class="form-control-label">Peso:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['peso']; ?> kg" readonly style="background-color: #f8f9fa;">
+                      <input class="form-control" type="text" value="<?php echo $perro['peso']; ?> kg" readonly>
                     </div>
                   </div>
                 </div>
-                <div class="form-layout-footer text-right">
-                  <a href="index.php?menu=mascotas&opc=listado" class="btn btn-secondary pd-x-20 mg-r-10">
+                
+                <div class="form-layout-footer text-left mg-t-20">
+                  <a href="index.php?menu=mascotas&opc=listado" class="btn btn-secondary pd-x-30">
                     <i class="fa fa-arrow-left mg-r-5"></i> Regresar
                   </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mg-t-30 mg-md-t-0">
               <div class="card bd-0 shadow-base">
                 <img class="card-img-top img-fluid" 
                      src="public/img/caninos/<?php echo $perro['fotoCan']; ?>" 

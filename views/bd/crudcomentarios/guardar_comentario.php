@@ -3,26 +3,27 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 
-header('Content-Type: application/json');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: /drwoof/index.php?menu=servicios&opc=comentarios&error=metodo');
+    exit;
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $comentario  = mysqli_real_escape_string($conexion, $_POST['comentario'] ?? '');
-    $id_usuario  = mysqli_real_escape_string($conexion, $_POST['id_usuario'] ?? ($_SESSION['usuario_id'] ?? 4));
-    $fecha       = date('Y-m-d H:i:s');
+$comentario = mysqli_real_escape_string($conexion, $_POST['comentario'] ?? '');
+$id_usuario = mysqli_real_escape_string($conexion, $_POST['id_usuario'] ?? ($_SESSION['id_usuario'] ?? 4));
+$fecha      = date('Y-m-d H:i:s');
 
-    if (empty($comentario)) {
-        echo json_encode(['status' => 'error', 'message' => 'El comentario no puede estar vacío.']);
-        exit;
-    }
+if (empty($comentario)) {
+    header('Location: /drwoof/index.php?menu=servicios&opc=comentarios&error=vacio');
+    exit;
+}
 
-    $query = "INSERT INTO comentarios (comentario, id_usuario, fecha_registro) VALUES ('$comentario', '$id_usuario', '$fecha')";
+$query = "INSERT INTO comentarios (comentario, id_usuario, fecha_registro) VALUES ('$comentario', '$id_usuario', '$fecha')";
 
-    if (mysqli_query($conexion, $query)) {
-        echo json_encode(['status' => 'success', 'message' => '¡Comentario enviado correctamente!']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error al guardar: ' . mysqli_error($conexion)]);
-    }
+if (mysqli_query($conexion, $query)) {
+    header('Location: /drwoof/index.php?menu=servicios&opc=mis-comentarios&guardado=exitoso');
+    exit;
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Método no permitido.']);
+    header('Location: /drwoof/index.php?menu=servicios&opc=comentarios&error=db');
+    exit;
 }
 ?>

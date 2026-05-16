@@ -1,24 +1,42 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include 'views/bd/conexion.php';
 
-$id_usuario = $_SESSION['id_usuario'] ?? 4;
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
 
 $query = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result = mysqli_query($conexion, $query);
 $usuario = mysqli_fetch_assoc($result);
 
-$nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
-$apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
-$nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
+$nombre_usuario = "Usuario";
+if (isset($usuario['nombre'])) {
+    $nombre_usuario = $usuario['nombre'];
+} else if (isset($_SESSION['nombre'])) {
+    $nombre_usuario = $_SESSION['nombre'];
+}
 
-$foto_db = $usuario['FotoUS'] ?? ''; 
-$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
-               ? $foto_db . '?v=' . time() 
-               : 'logo.png'; 
+$apellido_usuario = "";
+if (isset($usuario['apellido_paterno'])) {
+    $apellido_usuario = $usuario['apellido_paterno'];
+} else if (isset($_SESSION['apellido'])) {
+    $apellido_usuario = $_SESSION['apellido'];
+}
+
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario;
+
+$foto_perfil = 'logo.png';
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_perfil = $usuario['FotoUS'] . '?v=' . time();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,12 +49,114 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/bracket.css">
     <style>
-        .br-sideleft { background-color: #1d2127; }
+        .br-sideleft { background-color: #2c4ea3 !important; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        
+        .br-logo { background-color: #1e3a8a !important; border: none !important; }
+        .br-logo a { color: #ffffff !important; font-weight: 700; }
+        .br-logo a span { color: #00bfa5 !important; font-weight: 400; }
+
+        .br-mainpanel {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
+        }
+
+        .br-pagebody {
+            padding: 0 30px 30px 30px !important;
+        }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 0 0 40px 40px !important;
+            padding: 60px 40px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: none !important;
+            min-height: 85vh;
+            margin-top: 0 !important;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-control-custom {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 25px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            height: auto !important;
+            transition: all 0.2s ease;
+            text-align-last: center;
+        }
+        .form-control-custom::placeholder {
+            color: #444444;
+            text-align: center;
+        }
+        .form-control-custom:focus {
+            background-color: #cfcfcf !important;
+            outline: none;
+        }
+        input.form-control-custom {
+            text-align: center;
+        }
+
+        .input-file-hidden {
+            display: none;
+        }
+
+        .btn-custom-foto {
+            background-color: #1e3a8a !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 30px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 190px;
+            cursor: pointer;
+        }
+        .btn-custom-registrar {
+            background-color: #92bc5c !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 50px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-custom-qr {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 35px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+        }
+
+        .header-welcome-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: auto;
+        }
+        .header-welcome-centered h6 { margin: 0; font-weight: bold; font-size: 18px; text-transform: uppercase; }
+
+        .logged-name, .navicon-left a i, .sidebar-label, .br-menu-link { color: #ffffff !important; }
+        .br-menu-link.active { background-color: #4da9d4 !important; }
     </style>
 </head>
-<body>
+<body class="show-left">
 
-    <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
+    <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
 
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
@@ -51,7 +171,7 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
           <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+          <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
         </a>
       </div>
 
@@ -75,6 +195,11 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
           <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
         </div>
       </div>
+
+      <div class="header-welcome-centered">
+          <h6>REGISTRO DE CANINO</h6>
+      </div>
+
       <div class="br-header-right">
         <nav class="nav">
           <div class="dropdown">
@@ -94,113 +219,102 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item active">Registro Canino</span>
-        </nav>
-      </div>
-
-      <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">Registro de Nueva Mascota</h4>
-        <p class="mg-b-0">Ingrese los datos para registrar un nuevo canino.</p>
-      </div>
-
-      <?php if (isset($_GET['exito'])): ?>
-      <div class="alert alert-success mg-x-20 mg-t-20">
-        <i class="fa fa-check mg-r-5"></i> Mascota registrada correctamente.
-      </div>
-      <?php endif; ?>
-
-      <?php if (isset($_GET['error'])): ?>
-      <div class="alert alert-danger mg-x-20 mg-t-20">
-        <i class="fa fa-times mg-r-5"></i> Ocurrió un error al registrar. Intenta de nuevo.
-      </div>
-      <?php endif; ?>
-
       <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          <form action="index.php?menu=mascotas&opc=guardar" method="POST" enctype="multipart/form-data">
-            <div class="form-layout form-layout-1">
-              <div class="row mg-b-25">
+        
+        <?php if (isset($_GET['exito'])): ?>
+        <div class="alert alert-success mg-t-15">
+            <i class="fa fa-check mg-r-5"></i> Mascota registrada correctamente.
+        </div>
+        <?php endif; ?>
 
-                <div class="col-lg-4">
+        <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger mg-t-15">
+            <i class="fa fa-times mg-r-5"></i> Ocurrió un error al registrar. Intenta de nuevo.
+        </div>
+        <?php endif; ?>
+
+        <div class="br-section-wrapper d-flex flex-column justify-content-center">
+          <form action="index.php?menu=mascotas&opc=guardar" method="POST" enctype="multipart/form-data">
+            
+            <div class="row justify-content-center">
+                
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Nombre:</label>
-                    <input name="nombre" class="form-control" type="text" placeholder="Ejemplo: Firulais" required>
+                    <input name="nombre" class="form-control form-control-custom" type="text" placeholder="Nombre" required>
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Sexo:</label>
-                    <select name="sexo" class="form-control">
+                    <select name="sexo" class="form-control form-control-custom" required>
+                      <option value="" disabled selected hidden>Sexo</option>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Fecha de nacimiento:</label>
-                    <input name="fecha_nacimiento" class="form-control" type="date" required>
+                    <input name="fecha_nacimiento" id="fecha_nac" class="form-control form-control-custom" type="text" placeholder="Fecha de nacimiento" required>
                   </div>
                 </div>
 
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Raza:</label>
-                    <input name="raza" class="form-control" type="text" placeholder="Ejemplo: Husky Siberiano" required>
+                    <input name="raza" class="form-control form-control-custom" type="text" placeholder="Raza" required>
                   </div>
                 </div>
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Color:</label>
-                    <input name="color" class="form-control" type="text" placeholder="Ejemplo: Blanco con Gris" required>
+                    <input name="color" class="form-control form-control-custom" type="text" placeholder="Color" required>
                   </div>
                 </div>
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Alergias:</label>
-                    <input name="alergias" class="form-control" type="text" placeholder="Ejemplo: Polen o Ninguna">
+                    <input name="alergias" class="form-control form-control-custom" type="text" placeholder="Alergias">
                   </div>
                 </div>
 
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Edad (número):</label>
-                    <input name="edad" class="form-control" type="number" placeholder="Ejemplo: 3" required>
+                    <input name="edad" class="form-control form-control-custom" type="number" placeholder="Edad" required>
                   </div>
                 </div>
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Peso en kg:</label>
-                    <input name="peso" class="form-control" type="text" placeholder="Ejemplo: 2.2" required>
+                    <input name="peso" class="form-control form-control-custom" type="text" placeholder="Peso" required>
                   </div>
                 </div>
-                <div class="col-lg-4 mg-t-20">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-control-label">Tratamiento:</label>
-                    <input name="tratamiento" class="form-control" type="text" placeholder="Ejemplo: Desparasitación mensual">
+                    <input name="tratamiento" class="form-control form-control-custom" type="text" placeholder="Tratamiento">
                   </div>
                 </div>
 
-                <div class="col-lg-12 mg-t-20">
-                  <div class="form-group">
-                    <label class="form-control-label">Foto del canino:</label>
-                    <input name="foto" class="form-control" type="file" accept="image/*">
-                  </div>
-                </div>
-
-              </div>
-              <div class="form-layout-footer text-right">
-                <a href="index.php?menu=mascotas&opc=listado" class="btn btn-secondary pd-x-20 mg-r-10">
-                  <i class="fa fa-arrow-left mg-r-5"></i> Cancelar
-                </a>
-                <button type="submit" class="btn btn-info pd-x-20">
-                  <i class="fa fa-save mg-r-5"></i> Registrar
-                </button>
-              </div>
             </div>
+
+            <div class="d-flex align-items-center justify-content-center mg-t-40 gap-4 flex-wrap">
+                
+                <div>
+                    <label for="foto-canino" class="btn-custom-foto m-0">
+                        <span id="txt-foto">Agregar foto</span> <span class="tx-20 font-weight-normal">+</span>
+                    </label>
+                    <input name="foto" id="foto-canino" type="file" accept="image/*" class="input-file-hidden" onchange="cambiarTextoFoto()">
+                </div>
+
+                <div>
+                    <button type="submit" class="btn-custom-registrar">
+                        Registrar
+                    </button>
+                </div>
+
+                <div>
+                    <a href="index.php?menu=mascotas&opc=listado" class="btn btn-custom-qr text-center">
+                        Generar QR
+                    </a>
+                </div>
+
+            </div>
+
           </form>
         </div>
       </div>
@@ -210,5 +324,29 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="public/lib/bootstrap/bootstrap.js"></script>
     <script src="public/js/bracket.js"></script>
+
+    <script>
+    var inputFecha = document.getElementById("fecha_nac");
+    
+    inputFecha.onfocus = function() {
+        inputFecha.type = "date";
+    };
+
+    inputFecha.onblur = function() {
+        if (inputFecha.value == "") {
+            inputFecha.type = "text";
+        }
+    };
+
+    function cambiarTextoFoto() {
+        var archivo = document.getElementById("foto-canino");
+        var texto = document.getElementById("txt-foto");
+        if (archivo.value != "") {
+            texto.innerHTML = "¡Foto cargada!";
+        } else {
+            texto.innerHTML = "Agregar foto";
+        }
+    }
+    </script>
 </body>
 </html>

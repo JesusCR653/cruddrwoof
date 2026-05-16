@@ -65,10 +65,12 @@ if ($menu == 'bienvenida') {
         include 'views/servicios/historial-manchas.php';
     } elseif ($opc == 'agendam') {
         include 'views/servicios/citas-manchas.php';
-    } elseif ($opc == 'listado_citas') {
-        include 'views/servicios/listado_citas.php';
     } elseif ($opc == 'agendag') {
         include 'views/servicios/agenda.php';
+    }elseif ($opc == 'histom') {
+        include 'views/servicios/historial-completo-manchas.php';
+    } elseif ($opc == 'listado_citas') {
+        include 'views/servicios/listado_citas.php';
     } elseif ($opc == 'recordatorios') {
         include 'views/servicios/recordatorios.php';
     } elseif ($opc == 'listarecordatorios') {

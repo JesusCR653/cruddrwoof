@@ -1,12 +1,39 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
-$id_usuario = $_SESSION['usuario_id'] ?? 4;
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 if (file_exists($ruta_conexion)) {
     include_once $ruta_conexion;
 } else {
     include_once 'views/bd/conexion.php';
+}
+
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
+
+$query_user = mysqli_query($conexion, "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'");
+$usuario = mysqli_fetch_assoc($query_user);
+
+$nombre_usuario = "Usuario";
+$apellido_usuario = "";
+if (isset($usuario['nombre'])) {
+    $nombre_usuario = $usuario['nombre'];
+}
+if (isset($usuario['apellido_paterno'])) {
+    $apellido_usuario = $usuario['apellido_paterno'];
+}
+$nombre_completo = $nombre_usuario . " " . $apellido_usuario;
+
+$foto_user = "logo.png";
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_user = $usuario['FotoUS'] . '?v=' . time();
+    }
 }
 
 $result = mysqli_query($conexion, "
@@ -28,78 +55,153 @@ $result = mysqli_query($conexion, "
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/bracket.css">
     <style>
-        .br-menu-sub { display: block !important; }
-        .br-sideleft { background-color: #1d2127; }
+        .br-sideleft { background-color: #2c4ea3 !important; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        
+        .br-logo { background-color: #1e3a8a !important; border: none !important; }
+        .br-logo a { color: #ffffff !important; font-weight: 700; }
+        .br-logo a span { color: #00bfa5 !important; font-weight: 400; }
+
+        .br-mainpanel {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
+        }
+
+        .br-pageheader {
+            display: none !important;
+        }
+
+        .br-pagebody {
+            padding: 0 30px 30px 30px !important;
+        }
+
+        .sidebar-label, .br-menu-link, .br-menu-item { color: #ffffff !important; }
         .br-sideleft-menu .br-menu-link.active {
-            background-color: #11b79e !important;
-            color: #ffffff !important;
-            border-radius: 4px;
-            margin: 0 10px;
-        }
-        .br-sideleft-menu .br-menu-link.active i,
-        .br-sideleft-menu .br-menu-link.active span {
+            background-color: #34b5e5 !important;
             color: #ffffff !important;
         }
-        .list-number { font-size: 24px; font-weight: bold; color: #17a2b8; padding-right: 15px; }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 0 0 40px 40px !important;
+            padding: 50px 40px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: none !important;
+            min-height: 85vh;
+            margin-top: 0 !important;
+        }
+
+        .title-section-custom {
+            color: #1e3a8a !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .media-list-custom {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .media-item-custom {
+            background-color: #ffffff !important;
+            border: none !important;
+            border-bottom: 1px solid #e9ecef !important;
+            padding: 20px 10px !important;
+        }
+        .list-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #34b5e5 !important;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .box-oval-data {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border-radius: 25px !important;
+            padding: 10px 15px !important;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+        .form-control-custom-edit {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            height: auto !important;
+            padding: 6px 12px !important;
+        }
+        .form-control-custom-edit:focus {
+            background-color: #cfcfcf !important;
+            outline: none;
+        }
+
+        .label-field-title {
+            color: #1e3a8a !important;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-custom-agregar {
+            background-color: #92bc5c !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 35px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+        }
+        .btn-custom-regresar {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 35px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+        }
+
+        .header-welcome-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: auto;
+        }
+        .header-welcome-centered h6 { margin: 0; font-weight: bold; font-size: 18px; text-transform: uppercase; }
     </style>
 </head>
-<body>
+<body class="show-left">
 
-    <div class="br-logo"><a href="index.html"><span>DR.</span> WOOF<span>+</span></a></div>
+    <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
+    
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
       <div class="br-sideleft-menu">
         <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Inicio</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
         </a>
         <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-person-outline tx-24"></i>
-            <span class="menu-item-label">Información Personal</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-plus-outline tx-24"></i>
-            <span class="menu-item-label">Registro Canino</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
         </a>
-      </div>
-
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20 tx-info op-9">MIS MASCOTAS</label>
-      <div class="br-sideleft-menu">
-        <a href="#" class="br-menu-link show-sub">
-          <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-paw tx-22"></i>
-            <span class="menu-item-label">Manchas</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div>
+        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
         </a>
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=info" class="nav-link">Información canina</a></li>
-          <li class="nav-item"><a href="index.php?menu=servicios&opc=historial" class="nav-link">Historial medico</a></li>
-          <li class="nav-item"><a href="index.php?menu=servicios&opc=agendam" class="nav-link">Citas</a></li>
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=qr" class="nav-link">Qr</a></li>
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=galeria" class="nav-link">Galeria de fotos</a></li>
-        </ul>
-
-        <a href="#" class="br-menu-link show-sub mg-t-10">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-paw tx-22"></i>
-            <span class="menu-item-label">Huesos</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div>
-        </a>
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-info" class="nav-link">Información canina</a></li>
-          <li class="nav-item"><a href="index.php?menu=servicios&opc=huesos-historial" class="nav-link">Historial medico</a></li>
-          <li class="nav-item"><a href="index.php?menu=servicios&opc=huesos-agenda" class="nav-link">Citas</a></li>
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-qr" class="nav-link">Qr</a></li>
-          <li class="nav-item"><a href="index.php?menu=mascotas&opc=huesos-galeria" class="nav-link">Galeria de fotos</a></li>
-        </ul>
       </div>
 
       <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
@@ -118,16 +220,19 @@ $result = mysqli_query($conexion, "
 
     <div class="br-header">
       <div class="br-header-left">
-        <div class="navicon-left hidden-md-down">
-          <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
-        </div>
+        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
       </div>
+      
+      <div class="header-welcome-centered">
+          <h6>RECORDATORIOS</h6>
+      </div>
+
       <div class="br-header-right">
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name">Axel Jesús Casique</span>
-              <img src="public/img/Axel.png" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+              <span class="logged-name"><?php echo $nombre_completo; ?></span>
+              <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
@@ -150,77 +255,76 @@ $result = mysqli_query($conexion, "
       </div>
 
       <div class="br-pagebody">
-        <div class="br-section-wrapper shadow-base bd-0">
-          <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-25">Recordatorios Activos</h6>
+        <div class="br-section-wrapper">
+          <h6 class="title-section-custom mg-b-25">Recordatorios Activos</h6>
 
-          <div class="media-list bg-white rounded shadow-base">
+          <div class="media-list media-list-custom">
             <?php
             $total = mysqli_num_rows($result);
             if ($total == 0): ?>
-              <p class="tx-gray-500 text-center pd-20">No tienes recordatorios registrados.</p>
+              <p class="text-muted text-center pd-20 font-weight-bold">No tienes recordatorios registrados actualmente.</p>
             <?php else:
               $i = 1;
               while ($row = mysqli_fetch_assoc($result)): ?>
 
-              <div class="media pd-20 bd-b" id="rec-<?= $row['id_recordatorio'] ?>">
-                <span class="list-number"><?= $i++ ?></span>
-                <div class="media-body row">
+              <div class="media media-item-custom align-items-center" id="rec-<?php echo $row['id_recordatorio']; ?>">
+                <span class="list-number"><?php echo $i; ?></span>
+                <div class="media-body row align-items-center">
 
-                  <!-- Modo lectura -->
-                  <div class="col-sm-2 modo-lectura">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Mascota</label>
-                    <p class="mg-b-0 tx-inverse tx-bold"><?= htmlspecialchars($row['nombre_canino']) ?></p>
+                  <div class="col-sm-2 text-center" id="lec-pet-<?php echo $row['id_recordatorio']; ?>">
+                    <label class="label-field-title">Mascota</label>
+                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['nombre_canino']); ?></div>
                   </div>
-                  <div class="col-sm-2 modo-lectura">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Fecha</label>
-                    <p class="mg-b-0 tx-inverse"><?= date('d/m/Y', strtotime($row['fecha'])) ?></p>
+                  <div class="col-sm-2 text-center" id="lec-fec-<?php echo $row['id_recordatorio']; ?>">
+                    <label class="label-field-title">Fecha</label>
+                    <div class="box-oval-data"><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></div>
                   </div>
-                  <div class="col-sm-2 modo-lectura">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Hora</label>
-                    <p class="mg-b-0 tx-inverse"><?= date('h:i A', strtotime($row['hora'])) ?></p>
+                  <div class="col-sm-2 text-center" id="lec-hor-<?php echo $row['id_recordatorio']; ?>">
+                    <label class="label-field-title">Hora</label>
+                    <div class="box-oval-data"><?php echo date('h:i A', strtotime($row['hora'])); ?></div>
                   </div>
-                  <div class="col-sm-2 modo-lectura">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Repetir</label>
-                    <p class="mg-b-0 tx-inverse"><?= htmlspecialchars($row['repetir']) ?></p>
+                  <div class="col-sm-2 text-center" id="lec-rep-<?php echo $row['id_recordatorio']; ?>">
+                    <label class="label-field-title">Repetir</label>
+                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['repetir']); ?></div>
                   </div>
-                  <div class="col-sm-3 modo-lectura">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Motivo</label>
-                    <p class="mg-b-0 tx-inverse tx-bold"><?= htmlspecialchars($row['motivo']) ?></p>
+                  <div class="col-sm-3 text-center" id="lec-mot-<?php echo $row['id_recordatorio']; ?>">
+                    <label class="label-field-title">Motivo</label>
+                    <div class="box-oval-data text-truncate" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['motivo']); ?></div>
                   </div>
 
-                  <!-- Modo edición (oculto por defecto) -->
-                  <div class="col-sm-2 modo-edicion" style="display:none;">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Fecha</label>
-                    <input type="date" class="form-control edit-fecha" value="<?= $row['fecha'] ?>">
+                  <div class="col-sm-2 text-center" id="edit-fec-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                    <label class="label-field-title">Fecha</label>
+                    <input type="date" id="input-fec-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo $row['fecha']; ?>">
                   </div>
-                  <div class="col-sm-2 modo-edicion" style="display:none;">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Hora</label>
-                    <input type="time" class="form-control edit-hora" value="<?= substr($row['hora'], 0, 5) ?>">
+                  <div class="col-sm-2 text-center" id="edit-hor-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                    <label class="label-field-title">Hora</label>
+                    <input type="time" id="input-hor-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo substr($row['hora'], 0, 5); ?>">
                   </div>
-                  <div class="col-sm-2 modo-edicion" style="display:none;">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Repetir</label>
-                    <select class="form-control edit-repetir">
+                  <div class="col-sm-2 text-center" id="edit-rep-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                    <label class="label-field-title">Repetir</label>
+                    <select id="input-rep-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" style="text-align-last: center;">
                       <?php
-                      $opciones = ['5 minutos','10 minutos','30 minutos','1 hora','2 horas','6 horas','12 horas','24 horas','7 días'];
-                      foreach ($opciones as $op): ?>
-                        <option value="<?= $op ?>" <?= $row['repetir'] == $op ? 'selected' : '' ?>><?= $op ?></option>
-                      <?php endforeach; ?>
+                      $opciones = array('5 minutos','10 minutos','30 minutos','1 hora','2 horas','6 horas','12 horas','24 horas','7 días');
+                      for ($k = 0; $k < count($opciones); $k++): 
+                        $op = $opciones[$k];
+                      ?>
+                        <option value="<?php echo $op; ?>" <?php if ($row['repetir'] == $op) { echo 'selected'; } ?>><?php echo $op; ?></option>
+                      <?php endfor; ?>
                     </select>
                   </div>
-                  <div class="col-sm-4 modo-edicion" style="display:none;">
-                    <label class="tx-11 tx-uppercase tx-gray-600 mg-b-5">Motivo</label>
-                    <input type="text" class="form-control edit-motivo" value="<?= htmlspecialchars($row['motivo']) ?>">
+                  <div class="col-sm-5 text-center" id="edit-mot-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                    <label class="label-field-title">Motivo</label>
+                    <input type="text" id="input-mot-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo htmlspecialchars($row['motivo']); ?>">
                   </div>
 
-                  <!-- Botones -->
-                  <div class="col-sm-1 text-right">
-                    <button class="btn btn-outline-info btn-icon rounded-circle mg-b-5 btn-editar" onclick="activarEdicion(<?= $row['id_recordatorio'] ?>)">
+                  <div class="col-sm-1 text-right d-flex flex-column align-items-center justify-content-center gap-1">
+                    <button class="btn btn-outline-info btn-icon rounded-circle" id="btn-edit-<?php echo $row['id_recordatorio']; ?>" onclick="activarEdicion(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
                       <i class="icon ion-ios-compose-outline tx-18"></i>
                     </button>
-                    <button class="btn btn-success btn-icon rounded-circle mg-b-5 btn-guardar" style="display:none;" onclick="guardarEdicion(<?= $row['id_recordatorio'] ?>)">
+                    <button class="btn btn-success btn-icon rounded-circle" id="btn-save-<?php echo $row['id_recordatorio']; ?>" style="display:none; padding: 4px 8px;" onclick="guardarEdicion(<?php echo $row['id_recordatorio']; ?>)">
                       <i class="fa fa-check tx-14"></i>
                     </button>
-                    <button class="btn btn-outline-danger btn-icon rounded-circle" onclick="eliminarRecordatorio(<?= $row['id_recordatorio'] ?>)">
+                    <button class="btn btn-outline-danger btn-icon rounded-circle mg-t-5" onclick="eliminarRecordatorio(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
                       <i class="icon ion-ios-trash-outline tx-20"></i>
                     </button>
                   </div>
@@ -228,12 +332,12 @@ $result = mysqli_query($conexion, "
                 </div>
               </div>
 
-            <?php endwhile; endif; ?>
+            <?php $i = $i + 1; endwhile; endif; ?>
           </div>
 
-          <div class="mg-t-30 text-center">
-            <button class="btn btn-info pd-x-30" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">AGREGAR OTRO</button>
-            <button class="btn btn-secondary pd-x-30 mg-l-5" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">REGRESAR</button>
+          <div class="mg-t-40 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
+            <button class="btn btn-custom-agregar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">AGREGAR OTRO</button>
+            <button class="btn btn-custom-regresar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">REGRESAR</button>
           </div>
         </div>
       </div>
@@ -246,74 +350,89 @@ $result = mysqli_query($conexion, "
 
     <script>
         function activarEdicion(id) {
-            const rec = document.getElementById('rec-' + id);
-            rec.querySelectorAll('.modo-lectura').forEach(el => el.style.display = 'none');
-            rec.querySelectorAll('.modo-edicion').forEach(el => el.style.display = 'block');
-            rec.querySelector('.btn-editar').style.display = 'none';
-            rec.querySelector('.btn-guardar').style.display = 'inline-block';
+            document.getElementById('lec-fec-' + id).style.display = 'none';
+            document.getElementById('lec-hor-' + id).style.display = 'none';
+            document.getElementById('lec-rep-' + id).style.display = 'none';
+            document.getElementById('lec-mot-' + id).style.display = 'none';
+
+            document.getElementById('edit-fec-' + id).style.display = 'block';
+            document.getElementById('edit-hor-' + id).style.display = 'block';
+            document.getElementById('edit-rep-' + id).style.display = 'block';
+            document.getElementById('edit-mot-' + id).style.display = 'block';
+
+            document.getElementById('btn-edit-' + id).style.display = 'none';
+            document.getElementById('btn-save-' + id).style.display = 'inline-block';
         }
 
         function guardarEdicion(id) {
-            const rec     = document.getElementById('rec-' + id);
-            const fecha   = rec.querySelector('.edit-fecha').value;
-            const hora    = rec.querySelector('.edit-hora').value;
-            const repetir = rec.querySelector('.edit-repetir').value;
-            const motivo  = rec.querySelector('.edit-motivo').value;
+            var fecha = document.getElementById('input-fec-' + id).value;
+            var hora = document.getElementById('input-hor-' + id).value;
+            var repetir = document.getElementById('input-rep-' + id).value;
+            var motivo = document.getElementById('input-mot-' + id).value;
 
-            if (!fecha || !hora || !motivo.trim()) {
+            var motivoLimpio = "";
+            for (var i = 0; i < motivo.length; i++) {
+                if (motivo.charAt(i) !== ' ' && motivo.charAt(i) !== '\n' && motivo.charAt(i) !== '\r') {
+                    motivoLimpio = motivo;
+                    break;
+                }
+            }
+
+            if (fecha == "" || hora == "" || motivoLimpio == "") {
                 alert('Por favor completa todos los campos.');
                 return;
             }
 
-            const formData = new FormData();
-            formData.append('id_recordatorio', id);
-            formData.append('fecha', fecha);
-            formData.append('hora', hora);
-            formData.append('repetir', repetir);
-            formData.append('motivo', motivo);
+            var ajax = new XMLHttpRequest();
+            ajax.open('POST', 'views/bd/crudrecordatorios/editar_recordatorio.php', true);
+            
+            var datos = new FormData();
+            datos.append('id_recordatorio', id);
+            datos.append('fecha', fecha);
+            datos.append('hora', hora);
+            datos.append('repetir', repetir);
+            datos.append('motivo', motivo);
 
-            fetch('views/bd/crudrecordatorios/editar_recordatorio.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                    location.reload();
-                } else {
-                    alert('Error: ' + data.message);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(ajax.responseText);
+                    if (respuesta.status == 'success') {
+                        alert(respuesta.message);
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + respuesta.message);
+                    }
                 }
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Error de conexión.');
-            });
+            };
+            
+            ajax.send(datos);
         }
 
         function eliminarRecordatorio(id) {
-            if (!confirm('¿Estás seguro de eliminar este recordatorio?')) return;
+            if (confirm('¿Estás seguro de eliminar este recordatorio?') == false) {
+                return;
+            }
 
-            const formData = new FormData();
-            formData.append('id_recordatorio', id);
+            var ajax = new XMLHttpRequest();
+            ajax.open('POST', 'views/bd/crudrecordatorios/eliminar_recordatorio.php', true);
+            
+            var datos = new FormData();
+            datos.append('id_recordatorio', id);
 
-            fetch('views/bd/crudrecordatorios/eliminar_recordatorio.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('rec-' + id).remove();
-                    alert(data.message);
-                } else {
-                    alert('Error: ' + data.message);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(ajax.responseText);
+                    if (respuesta.status == 'success') {
+                        var elemento = document.getElementById('rec-' + id);
+                        elemento.parentNode.removeChild(elemento);
+                        alert(respuesta.message);
+                    } else {
+                        alert('Error: ' + respuesta.message);
+                    }
                 }
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Error de conexión.');
-            });
+            };
+
+            ajax.send(datos);
         }
     </script>
 </body>

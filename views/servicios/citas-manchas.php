@@ -1,27 +1,46 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include 'views/bd/conexion.php';
 
-$id_usuario = $_SESSION['id_usuario'] ?? 4;
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
 
 $query_user = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result_user = mysqli_query($conexion, $query_user);
 $usuario = mysqli_fetch_assoc($result_user);
 
-$nombre_completo = trim(($usuario['nombre'] ?? 'Usuario') . ' ' . ($usuario['apellido_paterno'] ?? ''));
-$foto_perfil = (!empty($usuario['FotoUS']) && file_exists('public/img/' . $usuario['FotoUS'])) 
-                ? $usuario['FotoUS'] . '?v=' . time() 
-                : 'logo.png'; 
+$nombre_usuario = "Usuario";
+$apellido_usuario = "";
+if (isset($usuario['nombre'])) {
+    $nombre_usuario = $usuario['nombre'];
+}
+if (isset($usuario['apellido_paterno'])) {
+    $apellido_usuario = $usuario['apellido_paterno'];
+}
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario;
 
-$id_canino_url = $_GET['id'] ?? 0;
+$foto_perfil = 'logo.png';
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_perfil = $usuario['FotoUS'] . '?v=' . time();
+    }
+}
+
+if (isset($_GET['id'])) {
+    $id_canino_url = $_GET['id'];
+} else {
+    $id_canino_url = 0;
+}
+
 $query_dog = "SELECT nombre FROM caninos WHERE id_canino = '$id_canino_url' AND id_usuario = '$id_usuario'";
 $res_dog = mysqli_query($conexion, $query_dog);
 $perro = mysqli_fetch_assoc($res_dog);
-
-$mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos WHERE id_usuario = '$id_usuario'");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,57 +55,141 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        .br-sideleft { background-color: #1d2127; }
-        .br-menu-link.active { color: #17a2b8 !important; background-color: #1b1e24; }
+        .br-sideleft { background-color: #2c4ea3 !important; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        
+        .br-logo { background-color: #1e3a8a !important; border: none !important; }
+        .br-logo a { color: #ffffff !important; font-weight: 700; }
+        .br-logo a span { color: #00bfa5 !important; font-weight: 400; }
+
+        .br-mainpanel {
+            background-color: #cdebf7 !important;
+            min-height: 100vh;
+        }
+
+        .br-pageheader {
+            display: none !important;
+        }
+
+        .br-pagebody {
+            padding: 0 30px 30px 30px !important;
+        }
+
+        .br-section-wrapper {
+            background-color: #ffffff !important;
+            border-radius: 0 0 40px 40px !important;
+            padding: 50px 40px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: none !important;
+            min-height: 85vh;
+            margin-top: 0 !important;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-control-label-custom {
+            color: #1e3a8a !important;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 6px;
+            display: block;
+            text-align: center;
+        }
+        .form-control-custom {
+            background-color: #dcdcdc !important;
+            color: #333333 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 25px !important;
+            font-size: 16px !important;
+            font-weight: bold;
+            height: auto !important;
+            text-align: center;
+        }
+        .form-control-custom:focus {
+            background-color: #cfcfcf !important;
+            outline: none;
+        }
+        textarea.form-control-custom {
+            border-radius: 20px !important;
+        }
+
+        .btn-custom-agendar {
+            background-color: #92bc5c !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 35px !important;
+            font-size: 15px !important;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-custom-lista {
+            background-color: #1e3a8a !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 30px !important;
+            font-size: 15px !important;
+            font-weight: bold;
+        }
+        .btn-custom-regresar {
+            background-color: #34b5e5 !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 12px 35px !important;
+            font-size: 15px !important;
+            font-weight: bold;
+        }
+
+        .header-welcome-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: auto;
+        }
+        .header-welcome-centered h6 { margin: 0; font-weight: bold; font-size: 18px; text-transform: uppercase; }
+
+        .logged-name, .navicon-left a i, .sidebar-label, .br-menu-link { color: #ffffff !important; }
+        .br-menu-link.active { background-color: #4da9d4 !important; }
     </style>
 </head>
 
-<body>
+<body class="show-left">
 
-    <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
+    <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
       <div class="br-sideleft-menu">
         <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Inicio</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
         </a>
         <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-person-outline tx-24"></i>
-            <span class="menu-item-label">Información Personal</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
         </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-paw tx-24"></i>
-            <span class="menu-item-label">Mis Mascotas</span>
-          </div>
+        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro Canino</span></div>
+        </a>
+        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
         </a>
       </div>
 
       <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
       <div class="br-sideleft-menu">
         <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-calendar-outline tx-24"></i>
-            <span class="menu-item-label">Agenda</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
         </a>
         <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-alarm-outline tx-24"></i>
-            <span class="menu-item-label">Recordatorios</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
         </a>
         <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-chatboxes-outline tx-24"></i>
-            <span class="menu-item-label">Comentarios</span>
-          </div>
+          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
         </a>
       </div>
     </div>
@@ -95,6 +198,11 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
       <div class="br-header-left">
         <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
       </div>
+      
+      <div class="header-welcome-centered">
+          <h6>AGENDAR CITA</h6>
+      </div>
+
       <div class="br-header-right">
         <nav class="nav">
           <div class="dropdown">
@@ -114,68 +222,54 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item">Mascota</span>
-          <span class="breadcrumb-item active">Agendar Cita</span>
-        </nav>
-      </div>
-
       <div class="br-pagebody">
-        <div class="br-section-wrapper shadow-base bd-0 text-center">
-          <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-20">
-            Nueva Cita <?php echo $perro ? "para " . $perro['nombre'] : ""; ?>
-          </h6>
+        <div class="br-section-wrapper d-flex flex-column justify-content-center align-items-center">
           
-          <form action="index.php?menu=servicios&opc=guardar-cita" method="POST">
+          <form action="index.php?menu=servicios&opc=guardar-cita" method="POST" style="width: 100%; max-width: 750px;">
+            <input type="hidden" name="id_canino" value="<?php echo (int)$id_canino_url; ?>">
+
             <div class="form-layout form-layout-1">
-                <div class="row mg-b-25 justify-content-center">
+                
+                <div class="text-center mg-b-30">
+                    <h4 class="tx-inverse tx-bold" style="color: #1e3a8a;">
+                        Nueva Cita <?php if ($perro) { echo "para " . htmlspecialchars($perro['nombre']); } ?>
+                    </h4>
+                </div>
+
+                <div class="row justify-content-center">
                     
-                    <div class="col-lg-5">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label">Mascota: <span class="tx-danger">*</span></label>
-                            <select name="id_canino" class="form-control" required>
-                                <?php if($perro): ?>
-                                    <option value="<?= $id_canino_url ?>"><?= $perro['nombre'] ?></option>
-                                <?php else: ?>
-                                    <option value="">-- Selecciona una mascota --</option>
-                                    <?php while($m = mysqli_fetch_assoc($mascotas_user)): ?>
-                                        <option value="<?= $m['id_canino'] ?>"><?= $m['nombre'] ?></option>
-                                    <?php endwhile; ?>
-                                <?php endif; ?>
-                            </select>
+                            <label class="form-control-label-custom">Fecha de la cita:</label>
+                            <input class="form-control form-control-custom" type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                     </div>
 
-                    <div class="col-lg-5">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label">Fecha de la cita: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="date" name="fecha" value="<?= date('Y-m-d') ?>" required>
+                            <label class="form-control-label-custom">Hora de la consulta:</label>
+                            <input class="form-control form-control-custom" type="time" name="hora" value="12:00" required>
                         </div>
                     </div>
 
-                    <div class="col-lg-5 mg-t-20">
+                    <div class="col-md-12 mg-t-10">
                         <div class="form-group">
-                            <label class="form-control-label">Hora: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="time" name="hora" value="12:00" required>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-10 mg-t-20">
-                        <div class="form-group mg-b-0">
-                            <label class="form-control-label">Motivo de la cita: <span class="tx-danger">*</span></label>
-                            <textarea rows="3" class="form-control" name="motivo_cita" placeholder="Ej: Refuerzo de vacuna triple o revisión de crecimiento" required></textarea>
+                            <label class="form-control-label-custom">Motivo de la cita:</label>
+                            <textarea rows="4" class="form-control form-control-custom" name="motivo_cita" placeholder="Ej: Refuerzo de vacuna triple o revisión de crecimiento" required></textarea>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-layout-footer mg-t-30">
-                    <button type="submit" class="btn btn-success pd-x-40 tx-uppercase tx-bold tx-11">Agendar</button>
-                    
-                    <button type="button" class="btn btn-info pd-x-40 tx-uppercase tx-bold tx-11 mg-l-5" onclick="location.href='index.php?menu=servicios&opc=listado_citas'">Lista de citas</button>
-                    
-                    <button type="button" class="btn btn-secondary pd-x-40 tx-uppercase tx-bold tx-11 mg-l-5" onclick="history.back()">Regresar</button>
+                <div class="d-flex align-items-center justify-content-center mg-t-40 gap-3 flex-wrap">
+                    <div>
+                        <button type="submit" class="btn-custom-agendar">Agendar Cita</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-custom-lista" id="btnListaCitas">Lista de Citas</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-custom-regresar" id="btnRegresarCita">Regresar</button>
+                    </div>
                 </div>
             </div>
           </form>
@@ -187,5 +281,17 @@ $mascotas_user = mysqli_query($conexion, "SELECT id_canino, nombre FROM caninos 
     <script src="public/lib/jquery/jquery.js"></script>
     <script src="public/lib/bootstrap/bootstrap.js"></script>
     <script src="public/js/bracket.js"></script>
+
+    <script>
+    var botonLista = document.getElementById("btnListaCitas");
+    botonLista.onclick = function() {
+        window.location.href = "index.php?menu=servicios&opc=listado_citas";
+    };
+
+    var botonRegresar = document.getElementById("btnRegresarCita");
+    botonRegresar.onclick = function() {
+        window.history.back();
+    };
+    </script>
 </body>
 </html>

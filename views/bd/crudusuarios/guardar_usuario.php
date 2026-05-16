@@ -1,6 +1,5 @@
 <?php
 error_reporting(0);
-header('Content-Type: application/json; charset=utf-8');
 
 $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 
@@ -11,13 +10,13 @@ if (file_exists($ruta_conexion)) {
     if (file_exists($ruta_alternativa)) {
         include_once $ruta_alternativa;
     } else {
-        echo json_encode(["status" => "error", "message" => "No se encontró el archivo de conexión."]);
+        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=conexion');
         exit();
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["status" => "error", "message" => "Método no permitido."]);
+    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=metodo');
     exit();
 }
 
@@ -30,7 +29,7 @@ $correo    = trim($_POST['correo']    ?? '');
 $password  = $_POST['password'] ?? '';
 
 if (empty($nombre) || empty($correo) || empty($password)) {
-    echo json_encode(["status" => "error", "message" => "Por favor, completa los campos obligatorios."]);
+    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=campos');
     exit();
 }
 
@@ -42,12 +41,12 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $tipoReal        = mime_content_type($_FILES['foto']['tmp_name']);
 
     if (!in_array($tipoReal, $tiposPermitidos)) {
-        echo json_encode(["status" => "error", "message" => "Solo se permiten imágenes (JPG, PNG, GIF, WEBP)."]);
+        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=tipo_imagen');
         exit();
     }
 
     if ($_FILES['foto']['size'] > 3 * 1024 * 1024) {
-        echo json_encode(["status" => "error", "message" => "La imagen no debe superar los 3 MB."]);
+        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=tamano_imagen');
         exit();
     }
 
@@ -63,7 +62,7 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $carpetaDestino . $nombreFoto)) {
         $FotoUS = $nombreFoto;
     } else {
-        echo json_encode(["status" => "error", "message" => "No se pudo guardar la imagen en el servidor."]);
+        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=imagen');
         exit();
     }
 }
@@ -80,16 +79,17 @@ if ($stmt) {
     );
 
     if ($stmt->execute()) {
-        echo json_encode([
-            "status"  => "success",
-            "message" => "¡Cuenta creada con éxito! Bienvenido a DR. WOOF",
-            "foto"    => $FotoUS
-        ]);
+        $stmt->close();
+        // Redirige al login con mensaje de éxito
+        header('Location: /drwoof/index.php?menu=sesion&opc=index&registro=exitoso');
+        exit();
     } else {
-        echo json_encode(["status" => "error", "message" => "Error al registrar: " . $stmt->error]);
+        $stmt->close();
+        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=db');
+        exit();
     }
-    $stmt->close();
 } else {
-    echo json_encode(["status" => "error", "message" => "Error en la consulta: " . $conexion->error]);
+    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=consulta');
+    exit();
 }
 ?>

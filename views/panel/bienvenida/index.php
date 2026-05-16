@@ -1,24 +1,42 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include 'views/bd/conexion.php';
 
-$id_usuario = $_SESSION['id_usuario'] ?? 4;
+if (isset($_SESSION['id_usuario'])) {
+    $id_usuario = $_SESSION['id_usuario'];
+} else {
+    $id_usuario = 4;
+}
 
 $query = "SELECT * FROM usuarios WHERE id_usuario = '$id_usuario'";
 $result = mysqli_query($conexion, $query);
 $usuario = mysqli_fetch_assoc($result);
 
-$nombre_usuario = $usuario['nombre'] ?? $_SESSION['nombre'] ?? 'Usuario';
-$apellido_usuario = $usuario['apellido_paterno'] ?? $_SESSION['apellido'] ?? '';
-$nombre_completo = trim($nombre_usuario . ' ' . $apellido_usuario);
+$nombre_usuario = "Usuario";
+if (isset($usuario['nombre'])) {
+    $nombre_usuario = $usuario['nombre'];
+} else if (isset($_SESSION['nombre'])) {
+    $nombre_usuario = $_SESSION['nombre'];
+}
 
-$foto_db = $usuario['FotoUS'] ?? ''; 
-$foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db)) 
-               ? $foto_db . '?v=' . time() 
-               : 'logo.png'; 
+$apellido_usuario = "";
+if (isset($usuario['apellido_paterno'])) {
+    $apellido_usuario = $usuario['apellido_paterno'];
+} else if (isset($_SESSION['apellido'])) {
+    $apellido_usuario = $_SESSION['apellido'];
+}
+
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario;
+
+$foto_perfil = 'logo.png';
+if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
+    if (file_exists('public/img/' . $usuario['FotoUS'])) {
+        $foto_perfil = $usuario['FotoUS'] . '?v=' . time();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,22 +48,62 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
-        .br-sideleft { background-color: #1d2127; }
+        .br-sideleft { background-color: #2c4ea3 !important; }
+        .br-header { background-color: #1e3a8a !important; border: none !important; }
+        .sidebar-label { color: #ffffff !important; opacity: 0.7; }
+        .br-menu-link { color: #ffffff !important; }
+        .br-menu-link.active { background-color: #4da9d4 !important; color: #ffffff !important; }
         
-        .br-menu-link.active {
-            color: #17a2b8 !important;
-            background-color: #1b1e24;
+        .br-logo { 
+            background-color: #1e3a8a !important; 
+            border: none !important;
         }
+        .br-logo a {
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+        .br-logo a span {
+            color: #00bfa5 !important;
+            font-weight: 400;
+        }
+        
+        .br-mainpanel {
+            background-image: url('public/img/fondo.png') !important;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .br-pagebody {
+            margin: 0 !important;
+            padding: 100px 0 0 0 !important;
+        }
+
+        .header-welcome-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: auto;
+        }
+        .header-welcome-centered h6 { margin: 0; font-weight: bold; font-size: 16px; }
+        .header-welcome-centered p { margin: 0; font-size: 11px; opacity: 0.9; }
+
+        .logged-name { color: #ffffff !important; }
+        .navicon-left a i { color: #ffffff !important; }
     </style>
 </head>
 
 <body>
 
-    <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
+    <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
@@ -56,21 +114,18 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
             <span class="menu-item-label">Inicio</span>
           </div>
         </a>
-
         <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
           <div class="br-menu-item">
             <i class="icon ion-ios-person-outline tx-24"></i>
             <span class="menu-item-label">Información Personal</span>
           </div>
         </a>
-
         <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
           <div class="br-menu-item">
             <i class="icon ion-ios-plus-outline tx-24"></i>
             <span class="menu-item-label">Registro Canino</span>
           </div>
         </a>
-
         <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
           <div class="br-menu-item">
             <i class="icon ion-ios-paw-outline tx-24"></i>
@@ -108,6 +163,11 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
           <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
         </div>
       </div>
+
+      <div class="header-welcome-centered">
+          <h6>¡Bienvenidos, <?php echo $nombre_usuario; ?>!</h6>
+          <p>Bienvenido de nuevo al centro de control de DR. WOOF</p>
+      </div>
       
       <div class="br-header-right">
         <nav class="nav">
@@ -118,7 +178,7 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Editar Perfil</a></li>
                 <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
               </ul>
             </div>
@@ -128,22 +188,19 @@ $foto_perfil = (!empty($foto_db) && file_exists('public/img/' . $foto_db))
     </div>
 
     <div class="br-mainpanel">
-      <div class="pd-30 text-center mg-t-40">
-        <h4 class="tx-gray-800 mg-b-5">¡Bienvenidos, <?php echo $nombre_usuario; ?>!</h4>
-        <p class="mg-b-0">Bienvenido de nuevo al centro de control de DR. WOOF</p>
-      </div>
-
       <div class="br-pagebody">
-        <div class="card shadow-base bd-0 pd-30 text-center">
-            <div class="d-flex justify-content-center mg-b-20">
-                <img src="public/img/logo.png" style="width: 180px; height: auto;" alt="Logo DR. WOOF">
+        <div class="text-center">
+            
+            <div class="d-flex justify-content-center mg-b-40">
+                <img src="public/img/logo.png" style="width: 350px; height: auto;" alt="Logo DR. WOOF">
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <a href="index.php?menu=mascotas&opc=registro" class="btn btn-info pd-x-50 pd-y-15 tx-uppercase tx-bold tx-14" style="background-color: #4da9d4; border: none; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                    Registrar mascota
+                </a>
             </div>
 
-            <h2 class="tx-inverse tx-bold mg-t-20 text-uppercase">DR. WOOF</h2>
-            <p class="mg-b-25 tx-16">Consulta el listado de tus mascotas o registra una nueva para comenzar.</p>
-            <div class="d-flex justify-content-center">
-                <a href="index.php?menu=mascotas&opc=registro" class="btn btn-info pd-x-35 tx-uppercase tx-bold tx-11">Registrar mascota</a>
-            </div>
         </div>
       </div>
     </div>

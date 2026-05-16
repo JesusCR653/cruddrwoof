@@ -8,7 +8,6 @@
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="public/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-
     <link rel="stylesheet" href="public/css/bracket.css">
     
     <style>
@@ -60,9 +59,7 @@
     <li class="nav-item"><a href="index.php?menu=servicios&opc=historial" class="nav-link">Historial medico</a></li>
     <li class="nav-item"><a href="index.php?menu=servicios&opc=agendam" class="nav-link">Citas</a></li>
     <li class="nav-item"><a href="index.php?menu=mascotas&opc=qr" class="nav-link">Qr</a></li>
-<li class="nav-item">
-    <a href="index.php?menu=mascotas&opc=galeria" class="nav-link">Galeria de fotos</a>
-</li>
+    <li class="nav-item"><a href="index.php?menu=mascotas&opc=galeria" class="nav-link">Galeria de fotos</a></li>
   </ul>
 
   <a href="#" class="br-menu-link show-sub mg-t-10">
@@ -110,16 +107,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-header wd-200">
           <ul class="list-unstyled user-profile-nav">
-            <li>
-              <a href="index.php?menu=personal&opc=perfil">
-                <i class="icon ion-ios-person"></i> Perfil
-              </a>
-            </li>
-            <li>
-              <a href="index.php?menu=bienvenida">
-                <i class="icon ion-power"></i> Cerrar Sesión
-              </a>
-            </li>
+            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
           </ul>
         </div>
       </div>
@@ -183,8 +172,8 @@
           </div>
           
           <div class="mg-t-30 text-right">
-            <button class="btn btn-secondary pd-x-30" onclick="window.location.href='historial-manchas.html'">Regresar</button>
-            <button class="btn btn-info pd-x-30 mg-l-5"><i class="fa fa-print mg-r-5"></i> Imprimir Cartilla</button>
+            <button class="btn btn-secondary pd-x-30" id="btnRegresar">Regresar</button>
+            <button class="btn btn-info pd-x-30 mg-l-5" id="btnImprimir"><i class="fa fa-print mg-r-5"></i> Imprimir Cartilla</button>
           </div>
         </div>
       </div>
@@ -193,5 +182,17 @@
     <script src="public/lib/jquery/jquery.js"></script>
     <script src="public/lib/bootstrap/bootstrap.js"></script>
     <script src="public/js/bracket.js"></script>
+
+    <script>
+        var botonRegresar = document.getElementById("btnRegresar");
+        botonRegresar.onclick = function() {
+            window.location.href = "historial-manchas.html";
+        };
+
+        var botonImprimir = document.getElementById("btnImprimir");
+        botonImprimir.onclick = function() {
+            window.print();
+        };
+    </script>
 </body>
 </html>

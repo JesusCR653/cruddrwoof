@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_query($conexion, $sql)) {
             echo "<script>
                     alert('¡Cita agendada con éxito!');
-                    window.location.href='index.php?menu=servicios&opc=agendag';
+                    window.location.href='index.php?menu=servicios&opc=listado_citas';
                   </script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
