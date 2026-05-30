@@ -110,85 +110,85 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>GENERAR QR</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>GENERAR QR</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody text-center d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
-          
-          <div class="mg-b-40">
-              <div class="qr-display-area">
-                  <i class="fa fa-qrcode qr-icon-big"></i>
-              </div>
-          </div>
+        <div class="br-pagebody text-center d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
+            
+            <div class="mg-b-40">
+                <div class="qr-display-area">
+                    <i class="fa fa-qrcode qr-icon-big"></i>
+                </div>
+            </div>
 
-          <div>
-              <button type="button" class="btn-custom-generar" id="btnGenerarQR">
-                  Generar Nuevo
-              </button>
-          </div>
+            <div>
+                <button type="button" class="btn-custom-generar" id="btnGenerarQR">
+                    Generar Nuevo
+                </button>
+            </div>
 
-      </div>
+        </div>
     </div>
 
     <div id="successModal" class="modal fade">
@@ -213,10 +213,10 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <script src="public/js/bracket.js"></script>
 
     <script>
-    var botonGenerar = document.getElementById("btnGenerarQR");
-    botonGenerar.onclick = function() {
-        $('#successModal').modal('show');
-    };
+        var botonGenerar = document.getElementById("btnGenerarQR");
+        botonGenerar.onclick = function() {
+            $('#successModal').modal('show');
+        };
     </script>
 </body>
 </html>

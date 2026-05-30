@@ -184,147 +184,147 @@ if ($perro != false) {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>HISTORIAL MÉDICO DE <?php echo htmlspecialchars(strtoupper($nombre_mascota)); ?></h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>HISTORIAL MÉDICO DE <?php echo htmlspecialchars(strtoupper($nombre_mascota)); ?></h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item">Mascota</span>
-          <span class="breadcrumb-item active">Historial Médico</span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center" style="min-height: 85vh;">
-          
-          <div class="row align-items-center justify-content-center">
-            
-            <div class="col-md-7">
-              <div class="form-layout form-layout-1">
-                <div class="row">
-                  
-                  <div class="col-lg-12">
-                    <div class="form-group">
-                      <label class="form-control-label">Peso actual:</label>
-                      <input class="form-control tx-bold tx-inverse" type="text" value="24.5 Kg" readonly>
-                    </div>
-                  </div>
-                  
-                  <div class="col-lg-12">
-                    <div class="form-group">
-                      <label class="form-control-label">Diagnostico:</label>
-                      <textarea rows="4" class="form-control tx-bold tx-inverse" readonly>Paciente presenta dermatitis alérgica leve. Se recomienda cambio de dieta y baño medicado.</textarea>
-                    </div>
-                  </div>
-                  
-                  <div class="col-lg-12">
-                    <div class="form-group">
-                      <label class="form-control-label">Fecha de consulta:</label>
-                      <input class="form-control" type="text" value="08 de Abril, 2026" readonly>
-                    </div>
-                  </div>
-                  
-                  <div class="col-lg-12">
-                    <div class="form-group">
-                      <label class="form-control-label">Proxima revisión:</label>
-                      <input class="form-control text-danger tx-bold" type="text" value="22 de Abril, 2026" readonly>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 text-center mg-l-20">
-                
-                <h6 class="title-seccion-blue mg-b-10">Archivos adjuntos:</h6>
-                <div class="card card-seccion-dark mg-b-25">
-                    <i class="icon ion-ios-download-outline tx-60"></i>
-                    <p class="mg-t-10 tx-13">Recetas, Análisis Clínicos, Placas.</p>
-                    <button class="btn btn-block btn-sm btn-custom-panel" id="btnDescargarTodo">Descargar Todo</button>
-                </div>
-
-                <h6 class="title-seccion-blue mg-b-10">Certificados:</h6>
-                <div class="card card-seccion-dark">
-                    <i class="icon ion-ios-paper-outline tx-60"></i>
-                    <p class="mg-t-10 tx-13">Cartilla de Vacunación Digital.</p>
-                    <button class="btn btn-block btn-sm btn-custom-panel" id="btnAbrirCartilla">Abrir Cartilla</button>
-                </div>
-
-            </div>
-
-          </div>
-
-          <div class="form-layout-footer mg-t-50 text-center">
-            <button class="btn btn-outline-custom-historial" id="btnVerHistorial">
-              Ver historial completo
-            </button>
-          </div>
-          
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <span class="breadcrumb-item">Mascota</span>
+                <span class="breadcrumb-item active">Historial Médico</span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center" style="min-height: 85vh;">
+                
+                <div class="row align-items-center justify-content-center">
+                    
+                    <div class="col-md-7">
+                        <div class="form-layout form-layout-1">
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Peso actual:</label>
+                                        <input class="form-control tx-bold tx-inverse" type="text" value="24.5 Kg" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Diagnostico:</label>
+                                        <textarea rows="4" class="form-control tx-bold tx-inverse" readonly>Paciente presents dermatitis alérgica leve. Se recomienda cambio de dieta y baño medicado.</textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Fecha de consulta:</label>
+                                        <input class="form-control" type="text" value="08 de Abril, 2026" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Proxima revisión:</label>
+                                        <input class="form-control text-danger tx-bold" type="text" value="22 de Abril, 2026" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center mg-l-20">
+                        
+                        <h6 class="title-seccion-blue mg-b-10">Archivos adjuntos:</h6>
+                        <div class="card card-seccion-dark mg-b-25">
+                            <i class="icon ion-ios-download-outline tx-60"></i>
+                            <p class="mg-t-10 tx-13">Recetas, Análisis Clínicos, Placas.</p>
+                            <button class="btn btn-block btn-sm btn-custom-panel" id="btnDescargarTodo">Descargar Todo</button>
+                        </div>
+
+                        <h6 class="title-seccion-blue mg-b-10">Certificados:</h6>
+                        <div class="card card-seccion-dark">
+                            <i class="icon ion-ios-paper-outline tx-60"></i>
+                            <p class="mg-t-10 tx-13">Cartilla de Vacunación Digital.</p>
+                            <button class="btn btn-block btn-sm btn-custom-panel" id="btnAbrirCartilla">Abrir Cartilla</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-layout-footer mg-t-50 text-center">
+                    <button class="btn btn-outline-custom-historial" id="btnVerHistorial">
+                        Ver historial completo
+                    </button>
+                </div>
+                
+            </div>
+        </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -333,20 +333,26 @@ if ($perro != false) {
     <script src="public/js/bracket.js"></script>
 
     <script>
-    var botonCartilla = document.getElementById("btnAbrirCartilla");
-    botonCartilla.onclick = function() {
-        window.location.href = "index.php?menu=mascotas&opc=cartilla&id=<?php echo $id_canino; ?>";
-    };
+        var botonCartilla = document.getElementById("btnAbrirCartilla");
+        if (botonCartilla) {
+            botonCartilla.onclick = function() {
+                window.location.href = "index.php?menu=mascotas&opc=cartillamanchas&id=<?php echo $id_canino; ?>";
+            };
+        }
 
-    var botonHistorial = document.getElementById("btnVerHistorial");
-    botonHistorial.onclick = function() {
-        window.location.href = "index.php?menu=servicios&opc=histom&id=<?php echo $id_canino; ?>";
-    };
+        var botonHistorial = document.getElementById("btnVerHistorial");
+        if (botonHistorial) {
+            botonHistorial.onclick = function() {
+                window.location.href = "index.php?menu=servicios&opc=histom&id=<?php echo $id_canino; ?>";
+            };
+        }
 
-    var botonDescargar = document.getElementById("btnDescargarTodo");
-    botonDescargar.onclick = function() {
-        alert("Iniciando descarga de archivos adjuntos...");
-    };
+        var botonDescargar = document.getElementById("btnDescargarTodo");
+        if (botonDescargar) {
+            botonDescargar.onclick = function() {
+                alert("Iniciando descarga de archivos adjuntos...");
+            };
+        }
     </script>
 </body>
 </html>

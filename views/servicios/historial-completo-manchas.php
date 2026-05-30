@@ -152,138 +152,138 @@ if ($perro != false) {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>HISTORIAL MÉDICO COMPLETO</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>HISTORIAL MÉDICO COMPLETO</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item active">Historial Completo</span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center">
-          
-          <div class="mg-b-30">
-              <span class="label-turquesa mg-b-10">Historial Médico de <?php echo htmlspecialchars($nombre_mascota); ?></span>
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead class="thead-marino">
-                <tr>
-                  <th class="wd-15p text-center">Fecha</th>
-                  <th class="wd-15p text-center">Peso</th>
-                  <th class="wd-50p text-left">Diagnóstico / Motivo</th>
-                  <th class="wd-20p text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="tx-inverse bg-white text-center">
-                  <td class="valign-middle">08/04/2026</td>
-                  <td class="valign-middle font-weight-bold">24.5 Kg</td>
-                  <td class="valign-middle text-left"><strong>Dermatitis Alérgica:</strong> Inicio de tratamiento con champú medicado y dieta hipoalergénica.</td>
-                  <td class="valign-middle text-center">
-                    <button class="btn btn-outline-custom-table btn-icon btn-sm" title="Ver Receta"><i class="fa fa-file-pdf-o"></i></button>
-                    <button class="btn btn-outline-custom-table btn-icon btn-sm mg-l-5" title="Ver Fotos"><i class="fa fa-image"></i></button>
-                  </td>
-                </tr>
-                <tr class="tx-inverse bg-white text-center">
-                  <td class="valign-middle">15/01/2026</td>
-                  <td class="valign-middle font-weight-bold">23.8 Kg</td>
-                  <td class="valign-middle text-left"><strong>Check-up Anual:</strong> Vacunación Sextuple y Rabia. Parámetros normales.</td>
-                  <td class="valign-middle text-center">
-                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
-                  </td>
-                </tr>
-                <tr class="tx-inverse bg-white text-center">
-                  <td class="valign-middle">10/11/2025</td>
-                  <td class="valign-middle font-weight-bold">24.0 Kg</td>
-                  <td class="valign-middle text-left"><strong>Desparasitación:</strong> Aplicación de refuerzo interno y externo.</td>
-                  <td class="valign-middle text-center">
-                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
-                  </td>
-                </tr>
-                <tr class="tx-inverse bg-white text-center">
-                  <td class="valign-middle">02/09/2025</td>
-                  <td class="valign-middle font-weight-bold">22.5 Kg</td>
-                  <td class="valign-middle text-left"><strong>Infección Estomacal:</strong> Tratamiento con antibióticos por 7 días debido a ingesta de basura.</td>
-                  <td class="valign-middle text-center">
-                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mg-t-40 text-center">
-            <a href="idex.php?menu=mascotas&opc=listado" id="btnRegresarHistorial" class="btn btn-custom-regresar">Regresar</a>
-          </div>
-
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <span class="breadcrumb-item active">Historial Completo</span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center">
+              
+                <div class="mg-b-30">
+                    <span class="label-turquesa mg-b-10">Historial Médico de <?php echo htmlspecialchars($nombre_mascota); ?></span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-marino">
+                            <tr>
+                                <th class="wd-15p text-center">Fecha</th>
+                                <th class="wd-15p text-center">Peso</th>
+                                <th class="wd-50p text-left">Diagnóstico / Motivo</th>
+                                <th class="wd-20p text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tx-inverse bg-white text-center">
+                                <td class="valign-middle">08/04/2026</td>
+                                <td class="valign-middle font-weight-bold">24.5 Kg</td>
+                                <td class="valign-middle text-left"><strong>Dermatitis Alérgica:</strong> Inicio de tratamiento con champú medicado y dieta hipoalergénica.</td>
+                                <td class="valign-middle text-center">
+                                    <button class="btn btn-outline-custom-table btn-icon btn-sm" title="Ver Receta"><i class="fa fa-file-pdf-o"></i></button>
+                                    <button class="btn btn-outline-custom-table btn-icon btn-sm mg-l-5" title="Ver Fotos"><i class="fa fa-image"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="tx-inverse bg-white text-center">
+                                <td class="valign-middle">15/01/2026</td>
+                                <td class="valign-middle font-weight-bold">23.8 Kg</td>
+                                <td class="valign-middle text-left"><strong>Check-up Anual:</strong> Vacunación Sextuple y Rabia. Parámetros normales.</td>
+                                <td class="valign-middle text-center">
+                                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="tx-inverse bg-white text-center">
+                                <td class="valign-middle">10/11/2025</td>
+                                <td class="valign-middle font-weight-bold">24.0 Kg</td>
+                                <td class="valign-middle text-left"><strong>Desparasitación:</strong> Aplicación de refuerzo interno y externo.</td>
+                                <td class="valign-middle text-center">
+                                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="tx-inverse bg-white text-center">
+                                <td class="valign-middle">02/09/2025</td>
+                                <td class="valign-middle font-weight-bold">22.5 Kg</td>
+                                <td class="valign-middle text-left"><strong>Infección Estomacal:</strong> Tratamiento con antibióticos por 7 días debido a ingesta de basura.</td>
+                                <td class="valign-middle text-center">
+                                    <button class="btn btn-outline-custom-table btn-icon btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mg-t-40 text-center">
+                    <a href="idex.php?menu=mascotas&opc=listado" id="btnRegresarHistorial" class="btn btn-custom-regresar">Regresar</a>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -291,11 +291,11 @@ if ($perro != false) {
     <script src="public/lib/bootstrap/bootstrap.js"></script>
     <script src="public/js/bracket.js"></script>
     <script>
-    var botonRegresar = document.getElementById("btnRegresarHistorial");
-    botonRegresar.onclick = function(e) {
-        e.preventDefault();
-        window.history.back();
-    };
+        var botonRegresar = document.getElementById("btnRegresarHistorial");
+        botonRegresar.onclick = function(e) {
+            e.preventDefault();
+            window.history.back();
+        };
     </script>
 </body>
 </html>

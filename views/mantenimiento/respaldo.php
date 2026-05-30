@@ -28,7 +28,13 @@ if (isset($usuario['apellido_paterno'])) {
     $apellido_usuario = $_SESSION['apellido'];
 }
 
-$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario;
+if ($usuario['apellido_materno'] != "") {
+    $apellido_materno = $usuario['apellido_materno'];
+} else {
+    $apellido_materno = '';
+}
+
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario . ' ' . $apellido_materno;
 
 $foto_perfil = 'logo.png';
 if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
@@ -159,108 +165,108 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
 
-      <div class="header-welcome-centered">
-          <h6>MANTENIMIENTO DEL SISTEMA</h6>
-      </div>
-      
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="header-welcome-centered">
+            <h6>MANTENIMIENTO DEL SISTEMA</h6>
+        </div>
+        
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          
-          <h6 class="title-section-custom mg-b-40">
-              Respaldo y Restauración de Base de Datos
-          </h6>
+        <div class="br-pagebody">
+            <div class="br-section-wrapper">
+                
+                <h6 class="title-section-custom mg-b-40">
+                    Respaldo y Restauración de Base de Datos
+                </h6>
 
-          <div class="row justify-content-center gap-4 d-flex flex-wrap">
-              
-              <div class="col-md-5 mg-b-20 d-flex justify-content-center">
-                  <div class="box-oval-container">
-                      <i class="fa fa-download mg-b-15 text-center" style="font-size: 80px; color: #1e3a8a !important; display: block;"></i>
-                      <h5 class="mg-b-15" style="color: #1e3a8a !important; font-weight: bold;">Generar Respaldo</h5>
-                      <p class="mg-b-20">Descarga una copia completa de la base de datos actual (.sql) con todas las tablas del sistema.</p>
-                      <button type="button" class="btn-custom-respaldar" id="btnRespaldar">Respaldar BD</button>
-                  </div>
-              </div>
+                <div class="row justify-content-center gap-4 d-flex flex-wrap">
+                    
+                    <div class="col-md-5 mg-b-20 d-flex justify-content-center">
+                        <div class="box-oval-container">
+                            <i class="fa fa-download mg-b-15 text-center" style="font-size: 80px; color: #1e3a8a !important; display: block;"></i>
+                            <h5 class="mg-b-15" style="color: #1e3a8a !important; font-weight: bold;">Generar Respaldo</h5>
+                            <p class="mg-b-20">Descarga una copia completa de la base de datos actual (.sql) con todas las tablas del sistema.</p>
+                            <button type="button" class="btn-custom-respaldar" id="btnRespaldar">Respaldar BD</button>
+                        </div>
+                    </div>
 
-              <div class="col-md-5 mg-b-20 d-flex justify-content-center">
-                  <div class="box-oval-container">
-                      <i class="fa fa-upload mg-b-15 text-center" style="font-size: 80px; color: #1e3a8a !important; display: block;"></i>
-                      <h5 class="mg-b-15" style="color: #1e3a8a !important; font-weight: bold;">Restaurar Sistema</h5>
-                      <p class="mg-b-20">Sube un archivo de respaldo previo (.sql) para restaurar la información de la base de datos.</p>
-                      <div class="form-group mg-b-15 d-flex justify-content-center">
-                          <input type="file" id="archivo_sql" class="form-control-custom-file" accept=".sql">
-                      </div>
-                      <button type="button" class="btn-custom-restaurar" id="btnRestaurar">Restaurar BD</button>
-                  </div>
-              </div>
+                    <div class="col-md-5 mg-b-20 d-flex justify-content-center">
+                        <div class="box-oval-container">
+                            <i class="fa fa-upload mg-b-15 text-center" style="font-size: 80px; color: #1e3a8a !important; display: block;"></i>
+                            <h5 class="mg-b-15" style="color: #1e3a8a !important; font-weight: bold;">Restaurar Sistema</h5>
+                            <p class="mg-b-20">Sube un archivo de respaldo previo (.sql) para restaurar la información de la base de datos.</p>
+                            <div class="form-group mg-b-15 d-flex justify-content-center">
+                                <input type="file" id="archivo_sql" class="form-control-custom-file" accept=".sql">
+                            </div>
+                            <button type="button" class="btn-custom-restaurar" id="btnRestaurar">Restaurar BD</button>
+                        </div>
+                    </div>
 
-          </div>
+                </div>
 
-          <div class="text-center mg-t-40">
-            <button type="button" class="btn-custom-regresar" id="btnSalirMantenimiento">Regresar</button>
-          </div>
+                <div class="text-center mg-t-40">
+                    <button type="button" class="btn-custom-regresar" id="btnSalirMantenimiento">Regresar</button>
+                </div>
 
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -274,7 +280,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             if (confirm("¿Deseas descargar el respaldo de la base de datos?") == false) {
                 return;
             }
-            window.location.href = "views/bd/crudmantenimiento/procesar_respaldo.php";
+            window.location.href = "controllers/crudmantenimiento/procesar_respaldo.php";
         };
 
         var btnRestaurar = document.getElementById("btnRestaurar");
@@ -290,7 +296,7 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open("POST", "views/bd/crudmantenimiento/procesar_restauracion.php", true);
+            ajax.open("POST", "controllers/crudmantenimiento/procesar_restauracion.php", true);
 
             var datos = new FormData();
             datos.append("respaldo", archivoInput.files[0]);

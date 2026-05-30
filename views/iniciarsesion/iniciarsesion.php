@@ -126,71 +126,71 @@ if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
 <body>
 
     <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh; padding: 20px;">
-      <div class="br-section-wrapper">
+        <div class="br-section-wrapper">
         
-        <div class="title-display-center">DR. WOOF</div>
+            <div class="title-display-center">DR. WOOF</div>
 
-        <form action="index.php?menu=sesion&opc=validar" method="POST">
-            
-            <div class="row align-items-center justify-content-center">
+            <form action="index.php?menu=sesion&opc=validar" method="POST">
                 
-                <div class="col-md-5 text-center mg-b-30 mg-md-b-0">
-                    <img src="public/img/logo.png" class="img-fluid" alt="Logo DR. WOOF" style="max-width: 200px;">
-                </div>
-
-                <div class="col-md-6">
+                <div class="row align-items-center justify-content-center">
                     
-                    <div class="form-group-container">
-                        <div class="icon-box-custom">
-                            <i class="icon ion-ios-email-outline"></i>
-                        </div>
-                        <input type="email" name="correo" class="form-control form-control-custom" placeholder="Correo Electronico" required>
+                    <div class="col-md-5 text-center mg-b-30 mg-md-b-0">
+                        <img src="public/img/logo.png" class="img-fluid" alt="Logo DR. WOOF" style="max-width: 200px;">
                     </div>
 
-                    <div class="form-group-container">
-                        <div class="icon-box-custom" style="padding-top: 4px;">
-                            <span style="font-weight: bold; font-size: 18px; letter-spacing: -1px;">***</span>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group-container">
+                            <div class="icon-box-custom">
+                                <i class="icon ion-ios-email-outline"></i>
+                            </div>
+                            <input type="email" name="correo" class="form-control form-control-custom" placeholder="Correo Electronico" required>
                         </div>
-                        <input type="password" name="password" class="form-control form-control-custom" placeholder="Contraseña" required>
-                    </div>
 
-                    <div class="d-flex align-items-center justify-content-start gap-3 mg-t-35 pd-l-60 flex-wrap">
-                        <div>
-                            <button type="submit" class="btn-custom-iniciar">Iniciar Sesión</button>
+                        <div class="form-group-container">
+                            <div class="icon-box-custom" style="padding-top: 4px;">
+                                <span style="font-weight: bold; font-size: 18px; letter-spacing: -1px;">***</span>
+                            </div>
+                            <input type="password" name="password" class="form-control form-control-custom" placeholder="Contraseña" required>
                         </div>
-                        <div>
-                            <a href="index.php?menu=sesion&opc=registro" class="btn btn-custom-cuenta text-center">Crear Cuenta</a>
+
+                        <div class="d-flex align-items-center justify-content-start gap-3 mg-t-35 pd-l-60 flex-wrap">
+                            <div>
+                                <button type="submit" class="btn-custom-iniciar">Iniciar Sesión</button>
+                            </div>
+                            <div>
+                                <a href="index.php?menu=sesion&opc=registro" class="btn btn-custom-cuenta text-center">Crear Cuenta</a>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
 
-            </div>
+                <div class="mg-t-50 tx-center tx-12 text-muted">DR. WOOF_JCR &copy; 2026. Todos los derechos reservados.</div>
+            </form>
 
-            <div class="mg-t-50 tx-center tx-12 text-muted">DR. WOOF_JCR &copy; 2026. Todos los derechos reservados.</div>
-        </form>
-
-      </div>
+        </div>
     </div>
 
     <div class="modal-error-overlay" id="modalError" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-      <div style="background:#fff; border-radius:12px; width:100%; max-width:400px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
-        <div style="background:#e74c3c; padding:20px 25px;">
-          <h5 style="color:#fff; margin:0; font-size:16px; font-weight:700;">&#9888; Acceso Denegado</h5>
+        <div style="background:#fff; border-radius:12px; width:100%; max-width:400px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+            <div style="background:#e74c3c; padding:20px 25px;">
+                <h5 style="color:#fff; margin:0; font-size:16px; font-weight:700;">&#9888; Acceso Denegado</h5>
+            </div>
+            <div style="padding:30px 25px; text-align:center;">
+                <div style="font-size:48px; color:#e74c3c; margin-bottom:15px;">&#128274;</div>
+                <p style="font-size:15px; color:#555; margin:0;">
+                    El correo electrónico o la contraseña son <strong>incorrectos</strong>.<br>
+                    Por favor verifica tus datos e intenta de nuevo.
+                </p>
+            </div>
+            <div style="padding:15px 25px; text-align:center; border-top:1px solid #dee2e6;">
+                <button onclick="cerrarModal()" style="background:#e74c3c; color:#fff; border:none; padding:8px 35px; border-radius:6px; font-size:14px; cursor:pointer;">
+                    Intentar de nuevo
+                </button>
+            </div>
         </div>
-        <div style="padding:30px 25px; text-align:center;">
-          <div style="font-size:48px; color:#e74c3c; margin-bottom:15px;">&#128274;</div>
-          <p style="font-size:15px; color:#555; margin:0;">
-            El correo electrónico o la contraseña son <strong>incorrectos</strong>.<br>
-            Por favor verifica tus datos e intenta de nuevo.
-          </p>
-        </div>
-        <div style="padding:15px 25px; text-align:center; border-top:1px solid #dee2e6;">
-          <button onclick="cerrarModal()" style="background:#e74c3c; color:#fff; border:none; padding:8px 35px; border-radius:6px; font-size:14px; cursor:pointer;">
-            Intentar de nuevo
-          </button>
-        </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>

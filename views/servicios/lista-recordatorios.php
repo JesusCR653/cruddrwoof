@@ -188,165 +188,165 @@ $result = mysqli_query($conexion, "
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>RECORDATORIOS</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>RECORDATORIOS</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <a class="breadcrumb-item" href="index.php?menu=servicios&opc=recordatorios">Recordatorios</a>
-          <span class="breadcrumb-item active">Listado</span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          <h6 class="title-section-custom mg-b-25">Recordatorios Activos</h6>
-
-          <div class="media-list media-list-custom">
-            <?php
-            $total = mysqli_num_rows($result);
-            if ($total == 0): ?>
-              <p class="text-muted text-center pd-20 font-weight-bold">No tienes recordatorios registrados actualmente.</p>
-            <?php else:
-              $i = 1;
-              while ($row = mysqli_fetch_assoc($result)): ?>
-
-              <div class="media media-item-custom align-items-center" id="rec-<?php echo $row['id_recordatorio']; ?>">
-                <span class="list-number"><?php echo $i; ?></span>
-                <div class="media-body row align-items-center">
-
-                  <div class="col-sm-2 text-center" id="lec-pet-<?php echo $row['id_recordatorio']; ?>">
-                    <label class="label-field-title">Mascota</label>
-                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['nombre_canino']); ?></div>
-                  </div>
-                  <div class="col-sm-2 text-center" id="lec-fec-<?php echo $row['id_recordatorio']; ?>">
-                    <label class="label-field-title">Fecha</label>
-                    <div class="box-oval-data"><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></div>
-                  </div>
-                  <div class="col-sm-2 text-center" id="lec-hor-<?php echo $row['id_recordatorio']; ?>">
-                    <label class="label-field-title">Hora</label>
-                    <div class="box-oval-data"><?php echo date('h:i A', strtotime($row['hora'])); ?></div>
-                  </div>
-                  <div class="col-sm-2 text-center" id="lec-rep-<?php echo $row['id_recordatorio']; ?>">
-                    <label class="label-field-title">Repetir</label>
-                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['repetir']); ?></div>
-                  </div>
-                  <div class="col-sm-3 text-center" id="lec-mot-<?php echo $row['id_recordatorio']; ?>">
-                    <label class="label-field-title">Motivo</label>
-                    <div class="box-oval-data text-truncate" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['motivo']); ?></div>
-                  </div>
-
-                  <div class="col-sm-2 text-center" id="edit-fec-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
-                    <label class="label-field-title">Fecha</label>
-                    <input type="date" id="input-fec-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo $row['fecha']; ?>">
-                  </div>
-                  <div class="col-sm-2 text-center" id="edit-hor-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
-                    <label class="label-field-title">Hora</label>
-                    <input type="time" id="input-hor-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo substr($row['hora'], 0, 5); ?>">
-                  </div>
-                  <div class="col-sm-2 text-center" id="edit-rep-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
-                    <label class="label-field-title">Repetir</label>
-                    <select id="input-rep-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" style="text-align-last: center;">
-                      <?php
-                      $opciones = array('5 minutos','10 minutos','30 minutos','1 hora','2 horas','6 horas','12 horas','24 horas','7 días');
-                      for ($k = 0; $k < count($opciones); $k++): 
-                        $op = $opciones[$k];
-                      ?>
-                        <option value="<?php echo $op; ?>" <?php if ($row['repetir'] == $op) { echo 'selected'; } ?>><?php echo $op; ?></option>
-                      <?php endfor; ?>
-                    </select>
-                  </div>
-                  <div class="col-sm-5 text-center" id="edit-mot-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
-                    <label class="label-field-title">Motivo</label>
-                    <input type="text" id="input-mot-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo htmlspecialchars($row['motivo']); ?>">
-                  </div>
-
-                  <div class="col-sm-1 text-right d-flex flex-column align-items-center justify-content-center gap-1">
-                    <button class="btn btn-outline-info btn-icon rounded-circle" id="btn-edit-<?php echo $row['id_recordatorio']; ?>" onclick="activarEdicion(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
-                      <i class="icon ion-ios-compose-outline tx-18"></i>
-                    </button>
-                    <button class="btn btn-success btn-icon rounded-circle" id="btn-save-<?php echo $row['id_recordatorio']; ?>" style="display:none; padding: 4px 8px;" onclick="guardarEdicion(<?php echo $row['id_recordatorio']; ?>)">
-                      <i class="fa fa-check tx-14"></i>
-                    </button>
-                    <button class="btn btn-outline-danger btn-icon rounded-circle mg-t-5" onclick="eliminarRecordatorio(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
-                      <i class="icon ion-ios-trash-outline tx-20"></i>
-                    </button>
-                  </div>
-
-                </div>
-              </div>
-
-            <?php $i = $i + 1; endwhile; endif; ?>
-          </div>
-
-          <div class="mg-t-40 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
-            <button class="btn btn-custom-agregar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">AGREGAR OTRO</button>
-            <button class="btn btn-custom-regresar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">REGRESAR</button>
-          </div>
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <a class="breadcrumb-item" href="index.php?menu=servicios&opc=recordatorios">Recordatorios</a>
+                <span class="breadcrumb-item active">Listado</span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper">
+                <h6 class="title-section-custom mg-b-25">Recordatorios Activos</h6>
+
+                <div class="media-list media-list-custom">
+                    <?php
+                    $total = mysqli_num_rows($result);
+                    if ($total == 0): ?>
+                        <p class="text-muted text-center pd-20 font-weight-bold">No tienes recordatorios registrados actualmente.</p>
+                    <?php else:
+                        $i = 1;
+                        while ($row = mysqli_fetch_assoc($result)): ?>
+
+                        <div class="media media-item-custom align-items-center" id="rec-<?php echo $row['id_recordatorio']; ?>">
+                            <span class="list-number"><?php echo $i; ?></span>
+                            <div class="media-body row align-items-center">
+
+                                <div class="col-sm-2 text-center" id="lec-pet-<?php echo $row['id_recordatorio']; ?>">
+                                    <label class="label-field-title">Mascota</label>
+                                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['nombre_canino']); ?></div>
+                                </div>
+                                <div class="col-sm-2 text-center" id="lec-fec-<?php echo $row['id_recordatorio']; ?>">
+                                    <label class="label-field-title">Fecha</label>
+                                    <div class="box-oval-data"><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></div>
+                                </div>
+                                <div class="col-sm-2 text-center" id="lec-hor-<?php echo $row['id_recordatorio']; ?>">
+                                    <label class="label-field-title">Hora</label>
+                                    <div class="box-oval-data"><?php echo date('h:i A', strtotime($row['hora'])); ?></div>
+                                </div>
+                                <div class="col-sm-2 text-center" id="lec-rep-<?php echo $row['id_recordatorio']; ?>">
+                                    <label class="label-field-title">Repetir</label>
+                                    <div class="box-oval-data text-truncate"><?php echo htmlspecialchars($row['repetir']); ?></div>
+                                </div>
+                                <div class="col-sm-3 text-center" id="lec-mot-<?php echo $row['id_recordatorio']; ?>">
+                                    <label class="label-field-title">Motivo</label>
+                                    <div class="box-oval-data text-truncate" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['motivo']); ?></div>
+                                </div>
+
+                                <div class="col-sm-2 text-center" id="edit-fec-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                                    <label class="label-field-title">Fecha</label>
+                                    <input type="date" id="input-fec-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo $row['fecha']; ?>">
+                                </div>
+                                <div class="col-sm-2 text-center" id="edit-hor-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                                    <label class="label-field-title">Hora</label>
+                                    <input type="time" id="input-hor-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo substr($row['hora'], 0, 5); ?>">
+                                </div>
+                                <div class="col-sm-2 text-center" id="edit-rep-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                                    <label class="label-field-title">Repetir</label>
+                                    <select id="input-rep-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" style="text-align-last: center;">
+                                        <?php
+                                        $opciones = array('5 minutos','10 minutos','30 minutos','1 hora','2 horas','6 horas','12 horas','24 horas','7 días');
+                                        for ($k = 0; $k < count($opciones); $k++): 
+                                            $op = $opciones[$k];
+                                        ?>
+                                            <option value="<?php echo $op; ?>" <?php if ($row['repetir'] == $op) { echo 'selected'; } ?>><?php echo $op; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+                                <div class="col-sm-5 text-center" id="edit-mot-<?php echo $row['id_recordatorio']; ?>" style="display:none;">
+                                    <label class="label-field-title">Motivo</label>
+                                    <input type="text" id="input-mot-<?php echo $row['id_recordatorio']; ?>" class="form-control form-control-custom-edit" value="<?php echo htmlspecialchars($row['motivo']); ?>">
+                                </div>
+
+                                <div class="col-sm-1 text-right d-flex flex-column align-items-center justify-content-center gap-1">
+                                    <button class="btn btn-outline-info btn-icon rounded-circle" id="btn-edit-<?php echo $row['id_recordatorio']; ?>" onclick="activarEdicion(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
+                                        <i class="icon ion-ios-compose-outline tx-18"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-icon rounded-circle" id="btn-save-<?php echo $row['id_recordatorio']; ?>" style="display:none; padding: 4px 8px;" onclick="guardarEdicion(<?php echo $row['id_recordatorio']; ?>)">
+                                        <i class="fa fa-check tx-14"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-icon rounded-circle mg-t-5" onclick="eliminarRecordatorio(<?php echo $row['id_recordatorio']; ?>)" style="padding: 4px 8px;">
+                                        <i class="icon ion-ios-trash-outline tx-20"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    <?php $i = $i + 1; endwhile; endif; ?>
+                </div>
+
+                <div class="mg-t-40 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
+                    <button class="btn btn-custom-agregar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">AGREGAR OTRO</button>
+                    <button class="btn btn-custom-regresar" onclick="location.href='index.php?menu=servicios&opc=recordatorios'">REGRESAR</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -390,7 +390,7 @@ $result = mysqli_query($conexion, "
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open('POST', 'views/bd/crudrecordatorios/editar_recordatorio.php', true);
+            ajax.open('POST', 'controllers/crudrecordatorios/editar_recordatorio.php', true);
             
             var datos = new FormData();
             datos.append('id_recordatorio', id);
@@ -420,7 +420,7 @@ $result = mysqli_query($conexion, "
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open('POST', 'views/bd/crudrecordatorios/eliminar_recordatorio.php', true);
+            ajax.open('POST', 'controllers/crudrecordatorios/eliminar_recordatorio.php', true);
             
             var datos = new FormData();
             datos.append('id_recordatorio', id);

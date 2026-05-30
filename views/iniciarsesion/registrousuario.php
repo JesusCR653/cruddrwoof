@@ -148,99 +148,99 @@ if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
 <body>
 
     <div class="d-flex align-items-center justify-content-center p-3" style="min-height: 100vh;">
-      <div class="br-section-wrapper">
+        <div class="br-section-wrapper">
         
-        <div class="title-display-center">DR. WOOF</div>
+            <div class="title-display-center">DR. WOOF</div>
 
-        <?php if (isset($_GET['error'])): ?>
-        <div class="alert alert-danger text-center mx-auto mg-b-30" style="max-width: 750px; border-radius: 20px; font-weight: bold;">
-            <i class="fa fa-times mg-r-5"></i> 
-            <?php 
-                $error = $_GET['error'];
-                if ($error == 'campos')         echo "Por favor, completa todos los campos obligatorios.";
-                elseif ($error == 'tipo_imagen') echo "Formato de imagen inválido. Solo se admiten JPG, PNG, GIF y WEBP.";
-                elseif ($error == 'tamano_imagen') echo "La imagen es demasiado grande. No debe superar los 3 MB.";
-                elseif ($error == 'imagen')    echo "No se pudo guardar la imagen en el servidor.";
-                elseif ($error == 'db')        echo "Error al registrar el usuario. Intenta de nuevo.";
-                elseif ($error == 'consulta')  echo "Error en la consulta a la base de datos.";
-                elseif ($error == 'conexion')  echo "No se pudo conectar con la base de datos.";
-                else echo "Ocurrió un error al procesar el registro. Inténtalo de nuevo.";
-            ?>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger text-center mx-auto mg-b-30" style="max-width: 750px; border-radius: 20px; font-weight: bold;">
+                    <i class="fa fa-times mg-r-5"></i> 
+                    <?php 
+                        $error = $_GET['error'];
+                        if ($error == 'campos') echo "Por favor, completa todos los campos obligatorios.";
+                        elseif ($error == 'tipo_imagen') echo "Formato de imagen inválido. Solo se admiten JPG, PNG, GIF y WEBP.";
+                        elseif ($error == 'tamano_imagen') echo "La imagen es demasiado grande. No debe superar los 3 MB.";
+                        elseif ($error == 'imagen') echo "No se pudo guardar la imagen en el servidor.";
+                        elseif ($error == 'db') echo "Error al registrar el usuario. Intenta de nuevo.";
+                        elseif ($error == 'consulta') echo "Error en la consulta a la base de datos.";
+                        elseif ($error == 'conexion') echo "No se pudo conectar con la base de datos.";
+                        else echo "Ocurrió un error al procesar el registro. Inténtalo de nuevo.";
+                    ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="controllers/crudusuarios/guardar_usuario.php" method="POST" enctype="multipart/form-data" onsubmit="return validarAntesDeEnviar();">
+                
+                <div class="row justify-content-center">
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input name="nombre" id="u_nombre" type="text" class="form-control form-control-custom" placeholder="Nombre" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input name="paterno" id="u_paterno" type="text" class="form-control form-control-custom" placeholder="Apellido Paterno" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input name="materno" id="u_materno" type="text" class="form-control form-control-custom" placeholder="Apellido Materno" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input name="telefono" id="u_telefono" type="text" class="form-control form-control-custom" placeholder="Número de teléfono" >
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input name="direccion" id="u_direccion" type="text" class="form-control form-control-custom" placeholder="Dirección" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input name="correo" id="u_correo" type="email" class="form-control form-control-custom" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gob|mx|info|biz)" title="La extensión debe ser válida (ej: .com, .mx)" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input name="password" id="u_password" type="password" class="form-control form-control-custom" placeholder="Contraseña" required>
+                            <ul class="pswm-req">
+                                <li id="req_longitud"><i id="ico_longitud" class="icon ion-ios-circle-outline"></i> Mínimo 8 dígitos</li>
+                                <li id="req_numero"><i id="ico_numero" class="icon ion-ios-circle-outline"></i> Un número</li>
+                                <li id="req_especial"><i id="ico_especial" class="icon ion-ios-circle-outline"></i> Un carácter especial</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
+                    
+                    <div>
+                        <button type="submit" class="btn-custom-registrar">Crear Cuenta</button>
+                    </div>
+
+                    <div>
+                        <label for="u_foto" class="btn-custom-foto m-0">
+                            <span id="txt_foto">Agregar foto</span> <span class="tx-20 font-weight-normal">+</span>
+                        </label>
+                        <input type="file" id="u_foto" name="foto" accept="image/*" class="input-file-hidden" onchange="actualizarBotonFoto()">
+                    </div>
+
+                    <div>
+                        <a href="index.php?menu=sesion&opc=index" class="btn btn-custom-cancelar text-center">Cancelar</a>
+                    </div>
+
+                </div>
+
+                <div class="mg-t-50 tx-center tx-12 text-muted">DR. WOOF &copy; 2026.</div>
+            </form>
         </div>
-        <?php endif; ?>
-
-        <form action="views/bd/crudusuarios/guardar_usuario.php" method="POST" enctype="multipart/form-data" onsubmit="return validarAntesDeEnviar();">
-            
-            <div class="row justify-content-center">
-                
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input name="nombre" id="u_nombre" type="text" class="form-control form-control-custom" placeholder="Nombre" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input name="paterno" id="u_paterno" type="text" class="form-control form-control-custom" placeholder="Apellido Paterno" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input name="materno" id="u_materno" type="text" class="form-control form-control-custom" placeholder="Apellido Materno" required>
-                    </div>
-                </div>
-
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <input name="telefono" id="u_telefono" type="text" class="form-control form-control-custom" placeholder="Número de teléfono" required>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="form-group">
-                        <input name="direccion" id="u_direccion" type="text" class="form-control form-control-custom" placeholder="Dirección" required>
-                    </div>
-                </div>
-
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <input name="correo" id="u_correo" type="email" class="form-control form-control-custom" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gob|mx|info|biz)" title="La extensión debe ser válida (ej: .com, .mx)" required>
-                    </div>
-                </div>
-
-                <div class="col-md-10">
-                    <div class="form-group">
-                        <input name="password" id="u_password" type="password" class="form-control form-control-custom" placeholder="Contraseña" required>
-                        <ul class="pswm-req">
-                            <li id="req_longitud"><i id="ico_longitud" class="icon ion-ios-circle-outline"></i> Mínimo 8 dígitos</li>
-                            <li id="req_numero"><i id="ico_numero" class="icon ion-ios-circle-outline"></i> Un número</li>
-                            <li id="req_especial"><i id="ico_especial" class="icon ion-ios-circle-outline"></i> Un carácter especial</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
-                
-                <div>
-                    <button type="submit" class="btn-custom-registrar">Crear Cuenta</button>
-                </div>
-
-                <div>
-                    <label for="u_foto" class="btn-custom-foto m-0">
-                        <span id="txt_foto">Agregar foto</span> <span class="tx-20 font-weight-normal">+</span>
-                    </label>
-                    <input type="file" id="u_foto" name="foto" accept="image/*" class="input-file-hidden" onchange="actualizarBotonFoto()">
-                </div>
-
-                <div>
-                    <a href="index.php?menu=sesion&opc=index" class="btn btn-custom-cancelar text-center">Cancelar</a>
-                </div>
-
-            </div>
-
-            <div class="mg-t-50 tx-center tx-12 text-muted">DR. WOOF &copy; 2026.</div>
-        </form>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>

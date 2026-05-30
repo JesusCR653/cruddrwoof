@@ -176,133 +176,133 @@ $result_citas = mysqli_query($conexion, $query_citas);
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>LISTADO DE CITAS</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>LISTADO DE CITAS</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item active">Listado de Citas</span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center">
-          
-          <div class="mg-b-30">
-              <span class="label-turquesa">Citas Agendadas</span>
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead class="thead-marino">
-                <tr>
-                  <th class="wd-20p text-center">Mascota</th>
-                  <th class="wd-15p text-center">Fecha</th>
-                  <th class="wd-15p text-center">Hora</th>
-                  <th class="wd-35p text-left">Motivo</th>
-                  <th class="wd-15p text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php if(mysqli_num_rows($result_citas) > 0): ?>
-                    <?php while($cita = mysqli_fetch_assoc($result_citas)): ?>
-                    <tr class="tx-inverse bg-white text-center">
-                      <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($cita['nombre_mascota']); ?></strong></td>
-                      <td class="valign-middle"><?php echo date('d/m/Y', strtotime($cita['fecha'])); ?></td>
-                      <td class="valign-middle"><?php echo date('h:i A', strtotime($cita['hora'])); ?></td>
-                      <td class="valign-middle text-left"><?php echo htmlspecialchars($cita['motivo_cita']); ?></td>
-                      <td class="valign-middle text-center">
-                        <button class="btn btn-warning btn-icon rounded-circle" 
-                                onclick="abrirEditarCita('<?php echo $cita['id_cita']; ?>', '<?php echo $cita['fecha']; ?>', '<?php echo $cita['hora']; ?>', '<?php echo addslashes($cita['motivo_cita']); ?>')">
-                            <i class="fa fa-edit text-white"></i>
-                        </button>
-                        <a href="index.php?menu=servicios&opc=eliminar-cita&id=<?php echo $cita['id_cita']; ?>" 
-                           class="btn btn-danger btn-icon rounded-circle mg-l-5" 
-                           onclick="return confirm('¿Estás seguro de cancelar esta cita?')">
-                            <i class="fa fa-trash text-white"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="5" class="text-center pd-y-40 text-muted font-weight-bold">
-                            <i class="icon ion-ios-calendar-outline tx-60 text-muted d-block mg-b-10"></i>
-                            No tienes citas agendadas actualmente.
-                        </td>
-                    </tr>
-                <?php endif; ?>
-              </tbody>
-            </table>
-          </div>
-          
-          <div class="mg-t-40 text-center">
-            <button class="btn btn-custom-regresar text-center" onclick="history.back()">Regresar</button>
-          </div>
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <span class="breadcrumb-item active">Listado de Citas</span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center">
+              
+                <div class="mg-b-30">
+                    <span class="label-turquesa">Citas Agendadas</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-marino">
+                            <tr>
+                                <th class="wd-20p text-center">Mascota</th>
+                                <th class="wd-15p text-center">Fecha</th>
+                                <th class="wd-15p text-center">Hora</th>
+                                <th class="wd-35p text-left">Motivo</th>
+                                <th class="wd-15p text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if(mysqli_num_rows($result_citas) > 0): ?>
+                                <?php while($cita = mysqli_fetch_assoc($result_citas)): ?>
+                                    <tr class="tx-inverse bg-white text-center">
+                                        <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($cita['nombre_mascota']); ?></strong></td>
+                                        <td class="valign-middle"><?php echo date('d/m/Y', strtotime($cita['fecha'])); ?></td>
+                                        <td class="valign-middle"><?php echo date('h:i A', strtotime($cita['hora'])); ?></td>
+                                        <td class="valign-middle text-left"><?php echo htmlspecialchars($cita['motivo_cita']); ?></td>
+                                        <td class="valign-middle text-center">
+                                            <button class="btn btn-warning btn-icon rounded-circle" 
+                                                    onclick="abrirEditarCita('<?php echo $cita['id_cita']; ?>', '<?php echo $cita['fecha']; ?>', '<?php echo $cita['hora']; ?>', '<?php echo addslashes($cita['motivo_cita']); ?>')">
+                                                <i class="fa fa-edit text-white"></i>
+                                            </button>
+                                            <a href="index.php?menu=servicios&opc=eliminar-cita&id=<?php echo $cita['id_cita']; ?>" 
+                                               class="btn btn-danger btn-icon rounded-circle mg-l-5" 
+                                               onclick="return confirm('¿Estás seguro de cancelar esta cita?')">
+                                                <i class="fa fa-trash text-white"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="5" class="text-center pd-y-40 text-muted font-weight-bold">
+                                        <i class="icon ion-ios-calendar-outline tx-60 text-muted d-block mg-b-10"></i>
+                                        No tienes citas agendadas actualmente.
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+              
+                <div class="mg-t-40 text-center">
+                    <button class="btn btn-custom-regresar text-center" onclick="history.back()">Regresar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="modalEditarCita" class="modal fade">
@@ -344,13 +344,13 @@ $result_citas = mysqli_query($conexion, $query_citas);
     <script src="public/js/bracket.js"></script>
 
     <script>
-    function abrirEditarCita(id, fecha, hora, motivo) {
-        document.getElementById('edit_id_cita').value = id;
-        document.getElementById('edit_fecha').value = fecha;
-        document.getElementById('edit_hora').value = hora;
-        document.getElementById('edit_motivo').value = motivo;
-        $('#modalEditarCita').modal('show');
-    }
+        function abrirEditarCita(id, fecha, hora, motivo) {
+            document.getElementById('edit_id_cita').value = id;
+            document.getElementById('edit_fecha').value = fecha;
+            document.getElementById('edit_hora').value = hora;
+            document.getElementById('edit_motivo').value = motivo;
+            $('#modalEditarCita').modal('show');
+        }
     </script>
 </body>
 </html>

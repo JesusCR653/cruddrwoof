@@ -6,17 +6,17 @@ $ruta_conexion = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
 if (file_exists($ruta_conexion)) {
     include_once $ruta_conexion;
 } else {
-    $ruta_alternativa = $_SERVER['DOCUMENT_ROOT'] . '/conexion.php';
+    $ruta_alternativa = $_SERVER['DOCUMENT_ROOT'] . '/drwoof/views/bd/conexion.php';
     if (file_exists($ruta_alternativa)) {
         include_once $ruta_alternativa;
     } else {
-        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=conexion');
+        header('Location: ../../index.php?menu=sesion&opc=registro&error=conexion');
         exit();
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=metodo');
+    header('Location: ../../index.php?menu=sesion&opc=registro&error=metodo');
     exit();
 }
 
@@ -29,7 +29,7 @@ $correo    = trim($_POST['correo']    ?? '');
 $password  = $_POST['password'] ?? '';
 
 if (empty($nombre) || empty($correo) || empty($password)) {
-    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=campos');
+    header('Location: ../../index.php?menu=sesion&opc=registro&error=campos');
     exit();
 }
 
@@ -41,12 +41,12 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $tipoReal        = mime_content_type($_FILES['foto']['tmp_name']);
 
     if (!in_array($tipoReal, $tiposPermitidos)) {
-        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=tipo_imagen');
+        header('Location: ../../index.php?menu=sesion&opc=registro&error=tipo_imagen');
         exit();
     }
 
     if ($_FILES['foto']['size'] > 3 * 1024 * 1024) {
-        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=tamano_imagen');
+        header('Location: ../../index.php?menu=sesion&opc=registro&error=tamano_imagen');
         exit();
     }
 
@@ -62,7 +62,7 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $carpetaDestino . $nombreFoto)) {
         $FotoUS = $nombreFoto;
     } else {
-        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=imagen');
+        header('Location: ../../index.php?menu=sesion&opc=registro&error=imagen');
         exit();
     }
 }
@@ -80,16 +80,15 @@ if ($stmt) {
 
     if ($stmt->execute()) {
         $stmt->close();
-        // Redirige al login con mensaje de éxito
-        header('Location: /drwoof/index.php?menu=sesion&opc=index&registro=exitoso');
+        header('Location: ../../index.php?menu=sesion&opc=index&registro=exitoso');
         exit();
     } else {
         $stmt->close();
-        header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=db');
+        header('Location: ../../index.php?menu=sesion&opc=registro&error=db');
         exit();
     }
 } else {
-    header('Location: /drwoof/index.php?menu=sesion&opc=registro&error=consulta');
+    header('Location: ../../index.php?menu=sesion&opc=registro&error=consulta');
     exit();
 }
 ?>

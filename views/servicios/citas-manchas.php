@@ -164,124 +164,124 @@ $perro = mysqli_fetch_assoc($res_dog);
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>AGENDAR CITA</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>AGENDAR CITA</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center align-items-center">
-          
-          <form action="index.php?menu=servicios&opc=guardar-cita" method="POST" style="width: 100%; max-width: 750px;">
-            <input type="hidden" name="id_canino" value="<?php echo (int)$id_canino_url; ?>">
-
-            <div class="form-layout form-layout-1">
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center align-items-center">
                 
-                <div class="text-center mg-b-30">
-                    <h4 class="tx-inverse tx-bold" style="color: #1e3a8a;">
-                        Nueva Cita <?php if ($perro) { echo "para " . htmlspecialchars($perro['nombre']); } ?>
-                    </h4>
-                </div>
+                <form action="index.php?menu=servicios&opc=guardar-cita" method="POST" style="width: 100%; max-width: 750px;">
+                    <input type="hidden" name="id_canino" value="<?php echo (int)$id_canino_url; ?>">
 
-                <div class="row justify-content-center">
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label-custom">Fecha de la cita:</label>
-                            <input class="form-control form-control-custom" type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>" required>
+                    <div class="form-layout form-layout-1">
+                        
+                        <div class="text-center mg-b-30">
+                            <h4 class="tx-inverse tx-bold" style="color: #1e3a8a;">
+                                Nueva Cita <?php if ($perro) { echo "para " . htmlspecialchars($perro['nombre']); } ?>
+                            </h4>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label-custom">Fecha de la cita:</label>
+                                    <input class="form-control form-control-custom" type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label-custom">Hora de la consulta:</label>
+                                    <input class="form-control form-control-custom" type="time" name="hora" value="12:00" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mg-t-10">
+                                <div class="form-group">
+                                    <label class="form-control-label-custom">Motivo de la cita:</label>
+                                    <textarea rows="4" class="form-control form-control-custom" name="motivo_cita" placeholder="Ej: Refuerzo de vacuna triple o revisión de crecimiento" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center mg-t-40 gap-3 flex-wrap">
+                            <div>
+                                <button type="submit" class="btn-custom-agendar">Agendar Cita</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn-custom-lista" id="btnListaCitas">Lista de Citas</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn-custom-regresar" id="btnRegresarCita">Regresar</button>
+                            </div>
                         </div>
                     </div>
+                </form>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label-custom">Hora de la consulta:</label>
-                            <input class="form-control form-control-custom" type="time" name="hora" value="12:00" required>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mg-t-10">
-                        <div class="form-group">
-                            <label class="form-control-label-custom">Motivo de la cita:</label>
-                            <textarea rows="4" class="form-control form-control-custom" name="motivo_cita" placeholder="Ej: Refuerzo de vacuna triple o revisión de crecimiento" required></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-center justify-content-center mg-t-40 gap-3 flex-wrap">
-                    <div>
-                        <button type="submit" class="btn-custom-agendar">Agendar Cita</button>
-                    </div>
-                    <div>
-                        <button type="button" class="btn-custom-lista" id="btnListaCitas">Lista de Citas</button>
-                    </div>
-                    <div>
-                        <button type="button" class="btn-custom-regresar" id="btnRegresarCita">Regresar</button>
-                    </div>
-                </div>
             </div>
-          </form>
-
         </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -289,15 +289,15 @@ $perro = mysqli_fetch_assoc($res_dog);
     <script src="public/js/bracket.js"></script>
 
     <script>
-    var botonLista = document.getElementById("btnListaCitas");
-    botonLista.onclick = function() {
-        window.location.href = "index.php?menu=servicios&opc=listado_citas";
-    };
+        var botonLista = document.getElementById("btnListaCitas");
+        botonLista.onclick = function() {
+            window.location.href = "index.php?menu=servicios&opc=listado_citas";
+        };
 
-    var botonRegresar = document.getElementById("btnRegresarCita");
-    botonRegresar.onclick = function() {
-        window.history.back();
-    };
+        var botonRegresar = document.getElementById("btnRegresarCita");
+        botonRegresar.onclick = function() {
+            window.history.back();
+        };
     </script>
 </body>
 </html>

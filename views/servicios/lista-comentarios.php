@@ -162,122 +162,122 @@ $result = mysqli_query($conexion, "SELECT * FROM comentarios WHERE id_usuario = 
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
       
-      <div class="header-welcome-centered">
-          <h6>HISTORIAL DE COMENTARIOS</h6>
-      </div>
+        <div class="header-welcome-centered">
+            <h6>HISTORIAL DE COMENTARIOS</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <a class="breadcrumb-item" href="index.php?menu=servicios&opc=comentarios">Comentarios</a>
-          <span class="breadcrumb-item active">Listado</span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          <h6 class="title-section-custom mg-b-25">Historial de Comentarios</h6>
-
-          <div class="list-group" style="gap: 15px;">
-            <?php
-            $total = mysqli_num_rows($result);
-            if ($total == 0): ?>
-              <p class="text-muted text-center font-weight-bold pd-y-20">No has enviado comentarios aún.</p>
-            <?php else: while ($row = mysqli_fetch_assoc($result)): ?>
-              <div class="list-group-item comment-item pd-y-20 pd-x-25 mg-b-10 shadow-sm" id="item-<?php echo $row['id_comentario']; ?>">
-                <div class="d-flex align-items-center justify-content-between mg-b-15">
-                  <span class="tx-13 font-weight-bold" style="color: #1e3a8a;">
-                    <i class="fa fa-calendar mg-r-5"></i>
-                    <?php echo date('d \d\e F, Y', strtotime($row['fecha_registro'])); ?>
-                  </span>
-                  <span class="badge badge-custom-enviado">Enviado</span>
-                </div>
-
-                <p class="mg-b-0 tx-inverse texto-comentario" id="texto-<?php echo $row['id_comentario']; ?>"><?php echo htmlspecialchars($row['comentario']); ?></p>
-
-                <textarea class="form-control form-control-custom-edit" id="editor-<?php echo $row['id_comentario']; ?>" rows="3" style="display:none;"><?php echo htmlspecialchars($row['comentario']); ?></textarea>
-
-                <div class="text-right mg-t-15">
-                  <button class="btn btn-outline-info btn-icon rounded-circle mg-r-5" id="btn-editar-<?php echo $row['id_comentario']; ?>" onclick="activarEdicion(<?php echo $row['id_comentario']; ?>)" style="padding: 4px 8px;">
-                    <i class="icon ion-ios-compose-outline tx-18"></i>
-                  </button>
-                  <button class="btn btn-success btn-icon rounded-circle mg-r-5" id="btn-guardar-<?php echo $row['id_comentario']; ?>" style="display:none; padding: 4px 8px;" onclick="guardarEdicion(<?php echo $row['id_comentario']; ?>)">
-                    <i class="fa fa-check tx-14"></i>
-                  </button>
-                  <button class="btn btn-outline-danger btn-icon rounded-circle" onclick="eliminarComentario(<?php echo $row['id_comentario']; ?>)" style="padding: 4px 8px;">
-                    <i class="icon ion-ios-trash-outline tx-18"></i>
-                  </button>
-                </div>
-              </div>
-            <?php endwhile; endif; ?>
-          </div>
-
-          <div class="mg-t-40 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
-            <button class="btn btn-custom-nuevo" onclick="location.href='index.php?menu=servicios&opc=comentarios'">NUEVO COMENTARIO</button>
-            <button class="btn btn-custom-salir" onclick="location.href='index.php?menu=servicios&opc=comentarios'">SALIR</button>
-          </div>
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <a class="breadcrumb-item" href="index.php?menu=servicios&opc=comentarios">Comentarios</a>
+                <span class="breadcrumb-item active">Listado</span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper">
+                <h6 class="title-section-custom mg-b-25">Historial de Comentarios</h6>
+
+                <div class="list-group" style="gap: 15px;">
+                    <?php
+                    $total = mysqli_num_rows($result);
+                    if ($total == 0): ?>
+                        <p class="text-muted text-center font-weight-bold pd-y-20">No has enviado comentarios aún.</p>
+                    <?php else: while ($row = mysqli_fetch_assoc($result)): ?>
+                        <div class="list-group-item comment-item pd-y-20 pd-x-25 mg-b-10 shadow-sm" id="item-<?php echo $row['id_comentario']; ?>">
+                            <div class="d-flex align-items-center justify-content-between mg-b-15">
+                                <span class="tx-13 font-weight-bold" style="color: #1e3a8a;">
+                                    <i class="fa fa-calendar mg-r-5"></i>
+                                    <?php echo date('d \d\e F, Y', strtotime($row['fecha_registro'])); ?>
+                                </span>
+                                <span class="badge badge-custom-enviado">Enviado</span>
+                            </div>
+
+                            <p class="mg-b-0 tx-inverse texto-comentario" id="texto-<?php echo $row['id_comentario']; ?>"><?php echo htmlspecialchars($row['comentario']); ?></p>
+
+                            <textarea class="form-control form-control-custom-edit" id="editor-<?php echo $row['id_comentario']; ?>" rows="3" style="display:none;"><?php echo htmlspecialchars($row['comentario']); ?></textarea>
+
+                            <div class="text-right mg-t-15">
+                                <button class="btn btn-outline-info btn-icon rounded-circle mg-r-5" id="btn-editar-<?php echo $row['id_comentario']; ?>" onclick="activarEdicion(<?php echo $row['id_comentario']; ?>)" style="padding: 4px 8px;">
+                                    <i class="icon ion-ios-compose-outline tx-18"></i>
+                                </button>
+                                <button class="btn btn-success btn-icon rounded-circle mg-r-5" id="btn-guardar-<?php echo $row['id_comentario']; ?>" style="display:none; padding: 4px 8px;" onclick="guardarEdicion(<?php echo $row['id_comentario']; ?>)">
+                                    <i class="fa fa-check tx-14"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-icon rounded-circle" onclick="eliminarComentario(<?php echo $row['id_comentario']; ?>)" style="padding: 4px 8px;">
+                                    <i class="icon ion-ios-trash-outline tx-18"></i>
+                                </button>
+                            </div>
+                        </div>
+                    <?php endwhile; endif; ?>
+                </div>
+
+                <div class="mg-t-40 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
+                    <button class="btn btn-custom-nuevo" onclick="location.href='index.php?menu=servicios&opc=comentarios'">NUEVO COMENTARIO</button>
+                    <button class="btn btn-custom-salir" onclick="location.href='index.php?menu=servicios&opc=comentarios'">SALIR</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
@@ -311,7 +311,7 @@ $result = mysqli_query($conexion, "SELECT * FROM comentarios WHERE id_usuario = 
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open('POST', 'views/bd/crudcomentarios/editar_comentario.php', true);
+            ajax.open('POST', 'controllers/crudcomentarios/editar_comentario.php', true);
             
             var datos = new FormData();
             datos.append('id_comentario', id);
@@ -342,7 +342,7 @@ $result = mysqli_query($conexion, "SELECT * FROM comentarios WHERE id_usuario = 
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open('POST', 'views/bd/crudcomentarios/eliminar_comentario.php', true);
+            ajax.open('POST', 'controllers/crudcomentarios/eliminar_comentario.php', true);
             
             var datos = new FormData();
             datos.append('id_comentario', id);

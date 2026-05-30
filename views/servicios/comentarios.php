@@ -27,7 +27,13 @@ if (isset($usuario['nombre'])) {
 if (isset($usuario['apellido_paterno'])) {
     $apellido_usuario = $usuario['apellido_paterno'];
 }
-$nombre_completo = $nombre_usuario . " " . $apellido_usuario;
+if ($usuario['apellido_materno'] != "") {
+    $apellido_materno = $usuario['apellido_materno'];
+} else {
+    $apellido_materno = '';
+}
+
+$nombre_completo = $nombre_usuario . ' ' . $apellido_usuario . ' ' . $apellido_materno;
 
 $foto_user = 'logo.png';
 if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
@@ -163,125 +169,125 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
    
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw-outline tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
      
-      <div class="header-welcome-centered">
-          <h6>COMENTARIOS</h6>
-      </div>
+        <div class="header-welcome-centered">
+            <h6>COMENTARIOS</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_user; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center">
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center">
 
-          <?php if (isset($_GET['error'])): ?>
-          <div class="alert alert-danger text-center mx-auto mg-b-20" style="max-width: 700px; border-radius: 20px; font-weight: bold;">
-              <i class="fa fa-times mg-r-5"></i>
-              <?php
-                  $error = $_GET['error'];
-                  if ($error == 'vacio') {
-                      echo "El comentario no puede estar vacío.";
-                  } else if ($error == 'db') {
-                      echo "Error al guardar el comentario. Intenta de nuevo.";
-                  } else {
-                      echo "Ocurrió un error. Intenta de nuevo.";
-                  }
-              ?>
-          </div>
-          <?php endif; ?>
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger text-center mx-auto mg-b-20" style="max-width: 700px; border-radius: 20px; font-weight: bold;">
+                        <i class="fa fa-times mg-r-5"></i>
+                        <?php
+                            $error = $_GET['error'];
+                            if ($error == 'vacio') {
+                                echo "El comentario no puede estar vacío.";
+                            } else if ($error == 'db') {
+                                echo "Error al guardar el comentario. Intenta de nuevo.";
+                            } else {
+                                echo "Ocurrió un error. Intenta de nuevo.";
+                            }
+                        ?>
+                    </div>
+                <?php endif; ?>
          
-          <form action="views/bd/crudcomentarios/guardar_comentario.php" method="POST">
-            <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+                <form action="controllers/crudcomentarios/guardar_comentario.php" method="POST">
+                    <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
 
-            <div class="row align-items-center justify-content-center">
+                    <div class="row align-items-center justify-content-center">
                
-                <div class="col-md-4 text-center mg-b-30">
-                    <div class="label-ovalada">
-                        Comentarios o sugerencias
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <i class="fa fa-file-text-o decoracion-icono"></i>
-                    </div>
-                </div>
-
-                <div class="col-md-7 mg-b-30">
-                    <div class="textarea-marino-container">
-                        <div><i class="fa fa-font"></i></div>
-                        <textarea name="comentario" rows="8" class="textarea-custom" placeholder="Escribe aquí tu opinión o sugerencia..." required></textarea>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
-                        <div>
-                            <button type="submit" class="btn-custom-agregar">Agregar</button>
+                        <div class="col-md-4 text-center mg-b-30">
+                            <div class="label-ovalada">
+                                Comentarios o sugerencias
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <i class="fa fa-file-text-o decoracion-icono"></i>
+                            </div>
                         </div>
-                        <div>
-                            <a href="index.php?menu=servicios&opc=mis-comentarios" class="btn btn-custom-ver text-center">Ver comentarios</a>
+
+                        <div class="col-md-7 mg-b-30">
+                            <div class="textarea-marino-container">
+                                <div><i class="fa fa-font"></i></div>
+                                <textarea name="comentario" rows="8" class="textarea-custom" placeholder="Escribe aquí tu opinión o sugerencia..." required></textarea>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
+                                <div>
+                                    <button type="submit" class="btn-custom-agregar">Agregar</button>
+                                </div>
+                                <div>
+                                    <a href="index.php?menu=servicios&opc=mis-comentarios" class="btn btn-custom-ver text-center">Ver comentarios</a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
 
-            </div>
-
-          </form>
+                </form>
          
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>

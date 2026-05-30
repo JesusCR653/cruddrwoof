@@ -152,145 +152,145 @@ if ($foto_db != "" && file_exists('public/img/' . $foto_db)) {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
-      
-      <div class="header-welcome-centered">
-          <h6>INFORMACIÓN PERSONAL</h6>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
+        
+        <div class="header-welcome-centered">
+            <h6>INFORMACIÓN PERSONAL</h6>
+        </div>
 
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody">
-        <div class="br-section-wrapper d-flex flex-column justify-content-center">
-          
-          <form action="index.php?menu=personal&opc=actualizar" method="POST" enctype="multipart/form-data">
-            <div class="row align-items-center justify-content-center">
-              
-              <div class="col-md-8">
-                <div class="form-layout form-layout-1">
-                  <div class="row">
-                    
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <label class="form-control-label">Nombre(s):</label>
-                        <input class="form-control form-control-custom" type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>" required>
-                      </div>
+        <div class="br-pagebody">
+            <div class="br-section-wrapper d-flex flex-column justify-content-center">
+                
+                <form action="index.php?menu=personal&opc=actualizar" method="POST" enctype="multipart/form-data">
+                    <div class="row align-items-center justify-content-center">
+                        
+                        <div class="col-md-8">
+                            <div class="form-layout form-layout-1">
+                                <div class="row">
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Nombre(s):</label>
+                                            <input class="form-control form-control-custom" type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Apellido Paterno:</label>
+                                            <input class="form-control form-control-custom" type="text" name="paterno" value="<?php echo $usuario['apellido_paterno']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Apellido Materno:</label>
+                                            <input class="form-control form-control-custom" type="text" name="materno" value="<?php echo $usuario['apellido_materno']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Número de teléfono:</label>
+                                            <input class="form-control form-control-custom" type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Dirección:</label>
+                                            <textarea rows="3" class="form-control form-control-custom" name="direccion" required><?php echo $usuario['direccion']; ?></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 text-center mg-t-30 mg-md-t-0">
+                            <div class="card card-profile-right">
+                                <img class="img-fluid rounded-circle wd-130 mx-auto" src="public/img/<?php echo $foto_perfil; ?>" alt="Foto Perfil Principal" style="height: 130px; object-fit: cover; border: 3px solid #34b5e5;">
+                                <div class="mg-t-20">
+                                    <p class="tx-inverse tx-bold tx-uppercase tx-12 mg-b-10" style="color: #1e3a8a;">Actualizar Foto</p>
+                                    <input type="file" name="foto" class="form-control-file mx-auto" accept="image/*" style="max-width: 200px; font-size: 13px;">
+                                    <p class="tx-11 mg-t-10 text-muted">Selecciona una imagen nueva para cambiar tu foto de perfil.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label">Apellido Paterno:</label>
-                        <input class="form-control form-control-custom" type="text" name="paterno" value="<?php echo $usuario['apellido_paterno']; ?>" required>
-                      </div>
+                    <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
+                        <div>
+                            <button type="submit" class="btn-custom-guardar">Guardar Cambios</button>
+                        </div>
+                        <div>
+                            <a href="index.php?menu=personal&opc=perfil" class="btn btn-custom-cancelar text-center">Cancelar</a>
+                        </div>
                     </div>
 
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label">Apellido Materno:</label>
-                        <input class="form-control form-control-custom" type="text" name="materno" value="<?php echo $usuario['apellido_materno']; ?>" required>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <label class="form-control-label">Número de teléfono:</label>
-                        <input class="form-control form-control-custom" type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" required>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <label class="form-control-label">Dirección:</label>
-                        <textarea rows="3" class="form-control form-control-custom" name="direccion" required><?php echo $usuario['direccion']; ?></textarea>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 text-center mg-t-30 mg-md-t-0">
-                <div class="card card-profile-right">
-                  <img class="img-fluid rounded-circle wd-130 mx-auto" src="public/img/<?php echo $foto_perfil; ?>" alt="Foto Perfil Principal" style="height: 130px; object-fit: cover; border: 3px solid #34b5e5;">
-                  <div class="mg-t-20">
-                    <p class="tx-inverse tx-bold tx-uppercase tx-12 mg-b-10" style="color: #1e3a8a;">Actualizar Foto</p>
-                    <input type="file" name="foto" class="form-control-file mx-auto" accept="image/*" style="max-width: 200px; font-size: 13px;">
-                    <p class="tx-11 mg-t-10 text-muted">Selecciona una imagen nueva para cambiar tu foto de perfil.</p>
-                  </div>
-                </div>
-              </div>
-
+                </form>
+                
             </div>
-
-            <div class="d-flex align-items-center justify-content-center mg-t-30 gap-4 flex-wrap">
-                <div>
-                    <button type="submit" class="btn-custom-guardar">Guardar Cambios</button>
-                </div>
-                <div>
-                    <a href="index.php?menu=personal&opc=perfil" class="btn btn-custom-cancelar text-center">Cancelar</a>
-                </div>
-            </div>
-
-          </form>
-          
         </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>

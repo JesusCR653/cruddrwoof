@@ -13,6 +13,11 @@ if (isset($_GET['opc'])) {
     $opc = $_GET['opc'];
 }
 
+// SOLUCIÓN AL PROBLEMA: Si el usuario pide la cartilla pero olvidó definir el menú en la URL, se lo asignamos.
+if ($opc == 'cartillamanchas' && (!isset($_GET['menu']) || $_GET['menu'] != 'mascotas')) {
+    $menu = 'mascotas';
+}
+
 $paginas_publicas = array('bienvenida', 'sesion');
 
 $es_publica = false;
@@ -63,17 +68,17 @@ if ($menu == 'bienvenida') {
     } else if ($opc == 'cartillamanchas') {
         include 'views/mascotas/cartilla-manchas.php';
     } else if ($opc == 'guardar') {
-        include 'views/bd/crudmascotas/guardar.php';
+        include 'controllers/crudmascotas/guardar.php';
     } else if ($opc == 'editar') {
-        include 'views/bd/crudmascotas/editar.php';
+        include 'controllers/crudmascotas/editar.php';
     } else if ($opc == 'eliminar') {
-        include 'views/bd/crudmascotas/eliminar.php';
+        include 'controllers/crudmascotas/eliminar.php';
     } else if ($opc == 'subir-galeria') {
-        include 'views/bd/crudgaleria/guardarfoto.php';
+        include 'controllers/crudgaleria/guardarfoto.php';
     } else if ($opc == 'editar-foto') {
-        include 'views/bd/crudgaleria/editarfoto.php';
+        include 'controllers/crudgaleria/editarfoto.php';
     } else if ($opc == 'eliminar-foto') {
-        include 'views/bd/crudgaleria/eliminarfoto.php';
+        include 'controllers/crudgaleria/eliminarfoto.php';
     }
 
 } else if ($menu == 'servicios') {
@@ -96,11 +101,11 @@ if ($menu == 'bienvenida') {
     } else if ($opc == 'mis-comentarios') {
         include 'views/servicios/lista-comentarios.php';
     } else if ($opc == 'guardar-cita') {
-        include 'views/bd/crudcitas/guardarcita.php';
+        include 'controllers/crudcitas/guardarcita.php';
     } else if ($opc == 'editar-cita') {
-        include 'views/bd/crudcitas/editarcita.php';
+        include 'controllers/crudcitas/editarcita.php';
     } else if ($opc == 'eliminar-cita') {
-        include 'views/bd/crudcitas/eliminarcita.php';
+        include 'controllers/crudcitas/eliminarcita.php';
     } else if ($opc == 'mantenimiento') {
         include 'views/mantenimiento/respaldo.php';
     }
@@ -111,9 +116,9 @@ if ($menu == 'bienvenida') {
     } else if ($opc == 'editar-perfil') {
         include 'views/informacionpersonal/editar-perfil.php';
     } else if ($opc == 'actualizar') {
-        include 'views/bd/crudusuarios/actualizar_usuario.php';
+        include 'controllers/crudusuarios/actualizar_usuario.php';
     } else if ($opc == 'eliminar') {
-        include 'views/bd/crudusuarios/eliminar_usuario.php';
+        include 'controllers/crudusuarios/eliminar_usuario.php';
     }
 }
 ?>

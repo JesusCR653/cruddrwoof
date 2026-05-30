@@ -38,6 +38,11 @@ if (isset($usuario['apellido_materno'])) {
 } else if (isset($_SESSION['apellidom'])) {
     $apellido_materno = $_SESSION['apellidom'];
 }
+if ($usuario['apellido_materno'] != "") {
+    $apellido_materno = $usuario['apellido_materno'];
+} else {
+    $apellido_materno = '';
+}
 
 $nombre_completo = $nombre_usuario . ' ' . $apellido_usuario . ' ' . $apellido_materno;
 
@@ -157,124 +162,123 @@ if (isset($usuario['FotoUS']) && $usuario['FotoUS'] != "") {
     <div class="br-logo"><a href="index.php?menu=panel&opc=bienvenida"><span>DR. </span>WOOF<span>+</span></a></div>
     
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-home-outline tx-22"></i><span class="menu-item-label">Inicio</span></div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-person-outline tx-24"></i><span class="menu-item-label">Información Personal</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-plus-outline tx-24"></i><span class="menu-item-label">Registro de mascota</span></div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item"><i class="icon ion-ios-paw tx-24"></i><span class="menu-item-label">Mis Mascotas</span></div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-calendar-outline tx-24"></i><span class="menu-item-label">Agenda</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-alarm-outline tx-24"></i><span class="menu-item-label">Recordatorios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item"><i class="icon ion-ios-chatboxes-outline tx-24"></i><span class="menu-item-label">Comentarios</span></div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div>
 
-      <div class="header-welcome-centered">
-          <h6>MIS MASCOTAS</h6>
-      </div>
-      
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+        <div class="header-welcome-centered">
+            <h6>MIS MASCOTAS</h6>
+        </div>
+        
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=bienvenida"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          
-          <div class="d-flex align-items-center justify-content-between mg-b-30 flex-wrap gap-3">
-              <span class="label-turquesa">Mis Mascotas registradas</span>
-              <a href="index.php?menu=mascotas&opc=registro" class="btn-custom-agregar">
-                  <i class="fa fa-plus"></i> Agregar Nueva
-              </a>
-          </div>
+        <div class="br-pagebody">
+            <div class="br-section-wrapper">
+                
+                <div class="d-flex align-items-center justify-content-between mg-b-30 flex-wrap gap-3">
+                    <span class="label-turquesa">Mis Mascotas registradas</span>
+                    <a href="index.php?menu=mascotas&opc=registro" class="btn-custom-agregar">
+                        <i class="fa fa-plus"></i> Agregar Nueva
+                    </a>
+                </div>
 
-          <div class="table-responsive">
-            <table class="table table-bordered mg-b-0">
-                <thead class="thead-marino">
-                    <tr>
-                        <th class="wd-5p text-center">ID</th>
-                        <th class="wd-15p">Mascota</th>
-                        <th class="wd-10p text-center">Tipo</th> <th class="wd-15p">Raza</th>
-                        <th class="wd-40p text-center">Opciones de Servicio</th>
-                        <th class="wd-15p text-center">Gestión</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (mysqli_num_rows($resultado) > 0): ?>
-                        <?php while($row = mysqli_fetch_assoc($resultado)): ?>
-                        <tr class="tx-inverse bg-white text-center">
-                            <td class="valign-middle font-weight-bold"><?php echo $row['id_canino']; ?></td>
-                            <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($row['nombre']); ?></strong></td>
-                            
-                            <td class="valign-middle font-weight-bold" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['tipo_mascota'] ?? 'Otro'); ?></td>
-                            
-                            <td class="valign-middle text-left"><?php echo htmlspecialchars($row['raza']); ?></td>
-                            <td class="valign-middle text-center">
-                                <div class="btn-group" role="group">
-                                    <a href="index.php?menu=mascotas&opc=info&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Info</a>
-                                    <a href="index.php?menu=mascotas&opc=qr&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">QR</a>
-                                    <a href="index.php?menu=servicios&opc=historial&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Historial</a>
-                                    <a href="index.php?menu=servicios&opc=agendam&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Citas</a>
-                                    <a href="index.php?menu=mascotas&opc=galeria&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Fotos</a>
-                                </div>
-                            </td>
-                            <td class="valign-middle text-center">
-                                <a href="index.php?menu=mascotas&opc=editar&id=<?php echo $row['id_canino']; ?>" class="btn btn-warning btn-icon btn-sm" style="border-radius: 6px;"><i class="fa fa-edit"></i></a>
-                                <a href="index.php?menu=mascotas&opc=eliminar&id=<?php echo $row['id_canino']; ?>" class="btn btn-danger btn-icon btn-sm mg-l-5" style="border-radius: 6px;" onclick="return confirm('¿Estás seguro de eliminar a esta mascota?')"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr><td colspan="6" class="text-center pd-y-40 text-muted font-weight-bold">No tienes mascotas registradas aún.</td></tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-          </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered mg-b-0">
+                        <thead class="thead-marino">
+                            <tr>
+                                <th class="wd-5p text-center">ID</th>
+                                <th class="wd-15p">Mascota</th>
+                                <th class="wd-10p text-center">Tipo</th> 
+                                <th class="wd-15p">Raza</th>
+                                <th class="wd-40p text-center">Opciones de Servicio</th>
+                                <th class="wd-15p text-center">Gestión</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (mysqli_num_rows($resultado) > 0): ?>
+                                <?php while($row = mysqli_fetch_assoc($resultado)): ?>
+                                    <tr class="tx-inverse bg-white text-center">
+                                        <td class="valign-middle font-weight-bold"><?php echo $row['id_canino']; ?></td>
+                                        <td class="valign-middle text-left"><strong style="color: #1e3a8a; font-size: 15px;"><?php echo htmlspecialchars($row['nombre']); ?></strong></td>
+                                        <td class="valign-middle font-weight-bold" style="color: #1e3a8a;"><?php echo htmlspecialchars($row['tipo_mascota'] ?? 'Otro'); ?></td>
+                                        <td class="valign-middle text-left"><?php echo htmlspecialchars($row['raza']); ?></td>
+                                        <td class="valign-middle text-center">
+                                            <div class="btn-group" role="group">
+                                                <a href="index.php?menu=mascotas&opc=info&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Info</a>
+                                                <a href="index.php?menu=mascotas&opc=qr&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">QR</a>
+                                                <a href="index.php?menu=servicios&opc=historial&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Historial</a>
+                                                <a href="index.php?menu=servicios&opc=agendam&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Citas</a>
+                                                <a href="index.php?menu=mascotas&opc=galeria&id=<?php echo $row['id_canino']; ?>" class="btn btn-outline-custom-service btn-sm">Fotos</a>
+                                            </div>
+                                        </td>
+                                        <td class="valign-middle text-center">
+                                            <a href="index.php?menu=mascotas&opc=editar&id=<?php echo $row['id_canino']; ?>" class="btn btn-warning btn-icon btn-sm" style="border-radius: 6px;"><i class="fa fa-edit"></i></a>
+                                            <a href="index.php?menu=mascotas&opc=eliminar&id=<?php echo $row['id_canino']; ?>" class="btn btn-danger btn-icon btn-sm mg-l-5" style="border-radius: 6px;" onclick="return confirm('¿Estás seguro de eliminar a esta mascota?')"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                                <tr><td colspan="6" class="text-center pd-y-40 text-muted font-weight-bold">No tienes mascotas registradas aún.</td></tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>

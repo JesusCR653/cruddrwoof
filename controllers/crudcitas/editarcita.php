@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             motivo_cita = '$motivo' 
             WHERE id_cita = '$id_cita'";
             
-    if(mysqli_query($conexion, $sql)) {
+    if (mysqli_query($conexion, $sql)) {
         echo "<script>alert('Cita actualizada correctamente'); window.location.href='index.php?menu=servicios&opc=listado_citas';</script>";
     } else {
         echo "Error al actualizar: " . mysqli_error($conexion);

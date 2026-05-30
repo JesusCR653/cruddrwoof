@@ -179,174 +179,180 @@ if ($perro == false) {
     <div class="br-logo"><a href="index.php"><span>DR.</span> WOOF<span>+</span></a></div>
 
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Inicio</span>
-          </div>
-        </a>
-        <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-person-outline tx-24"></i>
-            <span class="menu-item-label">Información Personal</span>
-          </div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-plus-outline tx-24"></i>
-            <span class="menu-item-label">Registro de mascota</span>
-          </div>
-        </a>
-        <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-paw tx-24"></i>
-            <span class="menu-item-label">Mis Mascotas</span>
-          </div>
-        </a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=panel&opc=bienvenida" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-home-outline tx-22"></i>
+                    <span class="menu-item-label">Inicio</span>
+                </div>
+            </a>
+            <a href="index.php?menu=personal&opc=perfil" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-person-outline tx-24"></i>
+                    <span class="menu-item-label">Información Personal</span>
+                </div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=registro" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-plus-outline tx-24"></i>
+                    <span class="menu-item-label">Registro de mascota</span>
+                </div>
+            </a>
+            <a href="index.php?menu=mascotas&opc=listado" class="br-menu-link active">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-paw tx-24"></i>
+                    <span class="menu-item-label">Mis Mascotas</span>
+                </div>
+            </a>
+        </div>
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
-      <div class="br-sideleft-menu">
-        <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-calendar-outline tx-24"></i>
-            <span class="menu-item-label">Agenda</span>
-          </div>
-        </a>
-        <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-alarm-outline tx-24"></i>
-            <span class="menu-item-label">Recordatorios</span>
-          </div>
-        </a>
-        <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="icon ion-ios-chatboxes-outline tx-24"></i>
-            <span class="menu-item-label">Comentarios</span>
-          </div>
-        </a>
-        <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
-  <div class="br-menu-item">
-    <i class="icon ion-ios-gear-outline tx-24"></i>
-    <span class="menu-item-label">Mantenimiento</span>
-  </div>
-</a>
-      </div>
+        <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20">Herramientas</label>
+        <div class="br-sideleft-menu">
+            <a href="index.php?menu=servicios&opc=agendag" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-calendar-outline tx-24"></i>
+                    <span class="menu-item-label">Agenda</span>
+                </div>
+            </a>
+            <a href="index.php?menu=servicios&opc=recordatorios" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-alarm-outline tx-24"></i>
+                    <span class="menu-item-label">Recordatorios</span>
+                </div>
+            </a>
+            <a href="index.php?menu=servicios&opc=comentarios" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-chatboxes-outline tx-24"></i>
+                    <span class="menu-item-label">Comentarios</span>
+                </div>
+            </a>
+            <a href="index.php?menu=servicios&opc=mantenimiento" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Mantenimiento</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="br-header">
-      <div class="br-header-left">
-        <div class="navicon-left hidden-md-down">
-          <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
-        </div>
-      </div>
-      <div class="br-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name"><?php echo $nombre_completo; ?></span>
-              <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
-            </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
-              <ul class="list-unstyled user-profile-nav">
-                <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
-                <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
-              </ul>
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down">
+                <a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
             </div>
-          </div>
-        </nav>
-      </div>
+        </div>
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><?php echo $nombre_completo; ?></span>
+                        <img src="public/img/<?php echo $foto_perfil; ?>" class="wd-32 rounded-circle mg-l-10" alt="Perfil">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href="index.php?menu=personal&opc=perfil"><i class="icon ion-ios-person"></i> Perfil</a></li>
+                            <li><a href="index.php?menu=sesion&opc=cerrar"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="br-mainpanel">
-      <div class="br-pageheader pd-y-15 pd-l-20">
-        <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
-          <span class="breadcrumb-item">Mascota</span>
-          <span class="breadcrumb-item active"><?php echo $perro['nombre']; ?></span>
-        </nav>
-      </div>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper shadow-base bd-0">
-          <div class="row align-items-center">
-
-            <div class="col-md-8">
-              <div class="form-layout form-layout-1">
-                <div class="row mg-b-25">
-                  
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label">Tipo de Mascota:</label>
-                      <input class="form-control" type="text" value="<?php echo htmlspecialchars($perro['tipo_mascota'] ?? 'Otro'); ?>" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label">Nombre de la mascota:</label>
-                      <input class="form-control tx-bold tx-inverse" type="text" value="<?php echo $perro['nombre']; ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mg-t-20">
-                    <div class="form-group">
-                      <label class="form-control-label">Raza:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['raza']; ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mg-t-20">
-                    <div class="form-group">
-                      <label class="form-control-label">Edad:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['edad']; ?> años" readonly>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mg-t-20">
-                    <div class="form-group">
-                      <label class="form-control-label">Sexo:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['sexo']; ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mg-t-20">
-                    <div class="form-group">
-                      <label class="form-control-label">Color:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['Color']; ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 mg-t-20">
-                    <div class="form-group">
-                      <label class="form-control-label">Peso:</label>
-                      <input class="form-control" type="text" value="<?php echo $perro['peso']; ?> kg" readonly>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="form-layout-footer text-left mg-t-20">
-                  <a href="index.php?menu=mascotas&opc=listado" class="btn btn-secondary pd-x-30">
-                    <i class="fa fa-arrow-left mg-r-5"></i> Regresar
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 text-center mg-t-30 mg-md-t-0">
-              <div class="card bd-0 shadow-base">
-                <img class="card-img-top img-fluid" 
-                     src="public/img/caninos/<?php echo $perro['fotoCan']; ?>" 
-                     alt="<?php echo $perro['nombre']; ?>"
-                     onerror="this.src='public/img/husky.png'">
-                <div class="card-body bg-gray-100">
-                  <p class="card-text tx-bold tx-inverse tx-uppercase tx-11">
-                    <?php echo strtoupper($perro['nombre']); ?>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <div class="br-pageheader pd-y-15 pd-l-20">
+            <nav class="breadcrumb pd-0 mg-0 tx-12">
+                <a class="breadcrumb-item" href="index.php">DR. WOOF</a>
+                <span class="breadcrumb-item">Mascota</span>
+                <span class="breadcrumb-item active"><?php echo $perro['nombre']; ?></span>
+            </nav>
         </div>
-      </div>
+
+        <div class="br-pagebody">
+            <div class="br-section-wrapper shadow-base bd-0">
+                <div class="row align-items-center">
+
+                    <div class="col-md-8">
+                        <div class="form-layout form-layout-1">
+                            <div class="row mg-b-25">
+                              
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Tipo de Mascota:</label>
+                                        <input class="form-control" type="text" value="<?php echo htmlspecialchars($perro['tipo_mascota'] ?? 'Otro'); ?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Nombre de la mascota:</label>
+                                        <input class="form-control tx-bold tx-inverse" type="text" value="<?php echo $perro['nombre']; ?>" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 mg-t-20">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Raza:</label>
+                                        <input class="form-control" type="text" value="<?php echo $perro['raza']; ?>" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 mg-t-20">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Edad:</label>
+                                        <input class="form-control" type="text" value="<?php echo $perro['edad']; ?> años" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 mg-t-20">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Sexo:</label>
+                                        <input class="form-control" type="text" value="<?php echo $perro['sexo']; ?>" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 mg-t-20">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Color:</label>
+                                        <input class="form-control" type="text" value="<?php echo $perro['Color']; ?>" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 mg-t-20">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Peso:</label>
+                                        <input class="form-control" type="text" value="<?php echo $perro['peso']; ?> kg" readonly>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-layout-footer text-left mg-t-20">
+                                <a href="index.php?menu=mascotas&opc=listado" class="btn btn-secondary pd-x-30">
+                                    <i class="fa fa-arrow-left mg-r-5"></i> Regresar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center mg-t-30 mg-md-t-0">
+                        <div class="card bd-0 shadow-base">
+                            <img class="card-img-top img-fluid" 
+                                 src="public/img/caninos/<?php echo $perro['fotoCan']; ?>" 
+                                 alt="<?php echo $perro['nombre']; ?>"
+                                 onerror="this.src='public/img/husky.png'">
+                            <div class="card-body bg-gray-100">
+                                <p class="card-text tx-bold tx-inverse tx-uppercase tx-11">
+                                    <?php echo strtoupper($perro['nombre']); ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="public/lib/jquery/jquery.js"></script>
